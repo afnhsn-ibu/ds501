@@ -9,6 +9,7 @@ Same shape as tools/build_deck.py: one Python data file in, finished HTML out.
 import argparse
 import html
 import json
+import shutil
 from pathlib import Path
 
 import yaml
@@ -17,6 +18,7 @@ ROOT = Path(__file__).resolve().parent.parent
 C = yaml.safe_load((ROOT / "course.yml").read_text(encoding="utf-8"))
 CO, WEEKS = C["course"], C["weeks"]
 REPO = CO["repo_slug"]
+RELEASED = int(CO.get("released_through", 0))
 
 NAV = [("index", "Schedule"), ("syllabus", "Syllabus"), ("project", "Project"),
        ("readings", "Papers"), ("resources", "Resources")]
@@ -133,6 +135,10 @@ li{margin:5px 0}
   text-decoration:none;font-family:"IBM Plex Mono",monospace;font-size:15px;
   padding:10px 20px;border-radius:999px}
 .colab:hover{background:var(--red);color:#fff}
+.colab.alt{background:transparent;color:var(--bordo);border:2px solid var(--bordo);margin-left:8px}
+.colab.alt:hover{background:var(--bordo);color:var(--on-dark)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .colab.alt{color:var(--gold);border-color:var(--gold)}}
+.soon{color:var(--muted);font-style:italic}
 .pager{display:flex;justify-content:space-between;gap:14px;margin-top:44px;
   border-top:1px solid var(--line);padding-top:20px;font-size:16px}
 
@@ -166,6 +172,14 @@ def colab(nb):
             f"/blob/main/notebooks/student/{nb}.ipynb")
 
 
+def released(w):
+    return w["num"] <= RELEASED
+
+
+def deck(w, ext):
+    return f"slides/{w['deck']}.{ext}" if w.get("deck") else None
+
+
 def nav(active, single):
     out = []
     for key, label in NAV:
@@ -195,8 +209,10 @@ def page_index(single):
             + "<br>".join(f'<span class="mono" style="color:var(--red)">{c}</span> {e(t)}'
                           for c, t in w["lessons"])
             + "</td>"
-            f'<td class="mats"><a href="{href}">Slides</a><a href="{href}">Reading</a>'
-            f'<a href="{colab(w["notebook"])}">Lab</a></td>'
+            + (f'<td class="mats"><a href="{deck(w, "pdf") or href}">Slides</a>'
+               f'<a href="{colab(w["notebook"])}">Lab</a></td>'
+               if released(w) else '<td class="mats"><span class="soon">Coming soon</span></td>')
+            +
             f'<td class="due">Lab [date]<br>Quiz [date]{extra}</td></tr>'
         )
     story = ["a question", "data", "understanding", "models", "communication", "responsibility"]
@@ -367,14 +383,23 @@ def page_week(w, single):
         f"<h2>Lessons</h2>{lessons}"
         f"<h2>Slides</h2>"
         f"<p>One deck covers all three lessons. The speaker notes are written as student "
-        f"reading text, so the deck and its notes together are the week’s handout. "
-        f"<i>[Deck link goes here once the hosting question is settled.]</i></p>"
+        f"reading text, so the deck and its notes together are the week’s handout.</p>"
+        + (f'<a class="colab" href="{deck(w, "pdf")}">View slides (PDF)</a>'
+           f'<a class="colab alt" href="{deck(w, "pptx")}" download>'
+           f'PowerPoint with speaker notes</a>'
+           if released(w) and w.get("deck") else
+           '<p class="soon">Slides are posted before the class.</p>')
+        +
         f"<h2>Practice</h2>"
         f'<div class="practice"><p><b>{e(w["practice"])}</b> — {e(w["dataset"])}</p>'
         f"<p>Work through the guided code, then the exercises marked ✏️. Every lab "
         f"produces one measured result you must report and interpret. Submit the notebook "
         f"with all cells executed.</p>"
-        f'<a class="colab" href="{colab(w["notebook"])}">Open the lab in Colab</a></div>'
+        + (f'<a class="colab" href="{colab(w["notebook"])}">Open the lab in Colab</a>'
+           f'<a class="colab alt" href="{CO["repo"]}/raw/main/notebooks/student/'
+           f'{w["notebook"]}.ipynb">Download .ipynb</a>'
+           if released(w) else '<p class="soon">The lab notebook is posted before the class.</p>')
+        + "</div>"
         f"<h2>Quiz</h2>"
         f"<p>15 multiple-choice questions, 25–30 minutes, covering lessons "
         f"{w['lessons'][0][0]} to {w['lessons'][2][0]}. Questions use the wording of the "
@@ -459,6 +484,17 @@ def main():
     (docs / "assets").mkdir(parents=True, exist_ok=True)
     (docs / "assets" / "ds501.css").write_text(CSS, encoding="utf-8")
     (docs / ".nojekyll").write_text("", encoding="utf-8")
+    # Published decks: copy slides/<deck>.pdf|.pptx for released weeks into docs/slides/.
+    out = docs / "slides"
+    shutil.rmtree(out, ignore_errors=True)
+    for w in WEEKS:
+        if released(w) and w.get("deck"):
+            out.mkdir(exist_ok=True)
+            for ext in ("pdf", "pptx"):
+                src = ROOT / deck(w, ext)
+                if not src.exists():
+                    raise SystemExit(f"missing {src.relative_to(ROOT)} for week {w['num']}")
+                shutil.copyfile(src, out / src.name)
     for key, (title, body) in build_bodies(False).items():
         active = "index" if key.startswith("week") else key
         (docs / f"{key}.html").write_text(shell(title, body, active, False), encoding="utf-8")

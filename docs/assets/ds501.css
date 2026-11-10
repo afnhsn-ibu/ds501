@@ -110,6 +110,10 @@ li{margin:5px 0}
   text-decoration:none;font-family:"IBM Plex Mono",monospace;font-size:15px;
   padding:10px 20px;border-radius:999px}
 .colab:hover{background:var(--red);color:#fff}
+.colab.alt{background:transparent;color:var(--bordo);border:2px solid var(--bordo);margin-left:8px}
+.colab.alt:hover{background:var(--bordo);color:var(--on-dark)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .colab.alt{color:var(--gold);border-color:var(--gold)}}
+.soon{color:var(--muted);font-style:italic}
 .pager{display:flex;justify-content:space-between;gap:14px;margin-top:44px;
   border-top:1px solid var(--line);padding-top:20px;font-size:16px}
 

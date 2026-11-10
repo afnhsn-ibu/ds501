@@ -10,6 +10,8 @@ course:
   orcid: "https://orcid.org/0000-0002-1177-1711"
   repo: "https://github.com/afnhsn-ibu/ds501"
   repo_slug: "afnhsn-ibu/ds501"
+  # Weeks up to this number show their slides and lab links; later weeks say "coming soon".
+  released_through: 5
   blurb: >-
     Twelve weeks that follow one path: a question, the data that answers it,
     the understanding you build from it, the models you fit, how you
@@ -54,6 +56,7 @@ weeks:
     practice: "A first look at real data"
     dataset: "Palmer Penguins"
     notebook: "W01_Lab_First_Look_at_Data"
+    deck: "DS501_W01_What_Is_Data_Science"
     required:
       - "Donoho 2017, 50 Years of Data Science (JCGS 26(4))"
       - "Breiman 2001, Statistical Modeling: The Two Cultures (Statistical Science 16(3))"
@@ -72,6 +75,7 @@ weeks:
     practice: "CRISP-DM walkthrough"
     dataset: "Telco churn"
     notebook: "W02_Lab_CRISP_DM_Walkthrough"
+    deck: "DS501_W02_Data_Science_Methodology"
     required:
       - "Wirth & Hipp 2000, CRISP-DM (PADD 2000)"
       - "Provost & Fawcett 2013, Data Science and its Relationship to Big Data and Data-Driven Decision Making (Big Data 1(1))"
@@ -88,7 +92,8 @@ weeks:
       - ["3-3", "Acquiring Data with Python"]
     practice: "Files, APIs, scraping and tidy data"
     dataset: "Open data portals"
-    notebook: "W03_Lab_Files_APIs_Scraping"
+    notebook: "W03_Lab_Acquiring_Data"
+    deck: "DS501_W03_Data_Sources_Formats_Acquisition"
     required:
       - "Wickham 2014, Tidy Data (J. Statistical Software 59(10))"
       - "Gebru et al. 2021, Datasheets for Datasets (CACM 64(12))"
@@ -104,7 +109,8 @@ weeks:
       - ["4-3", "NoSQL and Data Repositories"]
     practice: "SQL on a real database"
     dataset: "Chinook"
-    notebook: "W04_Lab_SQL_on_Chinook"
+    notebook: "W04_Lab_SQL_for_Data_Science"
+    deck: "DS501_W04_Databases_and_SQL"
     required:
       - "Codd 1970, A Relational Model of Data (CACM 13(6))"
       - "Cattell 2010, Scalable SQL and NoSQL Data Stores (SIGMOD Record 39(4))"
@@ -120,7 +126,8 @@ weeks:
       - ["5-3", "Exploratory Data Analysis"]
     practice: "Cleaning and exploratory analysis"
     dataset: "Messy Titanic"
-    notebook: "W05_Lab_Cleaning_and_EDA"
+    notebook: "W05_Lab_Data_Cleaning_and_EDA"
+    deck: "DS501_W05_Data_Cleaning_Wrangling_EDA"
     required:
       - "Kandel et al. 2011, Wrangler (CHI)"
       - "Rubin 1976, Inference and Missing Data (Biometrika 63(3))"
@@ -136,7 +143,7 @@ weeks:
       - ["6-3", "Visualising Distributions"]
     practice: "Robust statistics, the CLT and the bootstrap"
     dataset: "Simulated and real samples"
-    notebook: "W06_Lab_Describing_Data_CLT_Bootstrap"
+    notebook: "W06_Lab_Describing_Data_and_Sampling"
     required:
       - "Anscombe 1973, Graphs in Statistical Analysis (The American Statistician 27(1))"
       - "Efron 1979, Bootstrap Methods (Annals of Statistics 7(1))"
@@ -152,7 +159,7 @@ weeks:
       - ["7-3", "Comparing Groups and Experiments"]
     practice: "Confidence intervals, tests, an A/B test and power"
     dataset: "Experiment data"
-    notebook: "W07_Lab_Inference_and_AB_Testing"
+    notebook: "W07_Lab_Statistical_Inference"
     required:
       - "Wasserstein & Lazar 2016, The ASA Statement on p-Values (The American Statistician 70(2))"
       - "Kohavi et al. 2009, Controlled Experiments on the Web (DMKD 18)"
@@ -169,7 +176,7 @@ weeks:
       - ["8-3", "Data Storytelling and Reporting"]
     practice: "Interactive charts with Plotly"
     dataset: "Gapminder"
-    notebook: "W08_Lab_Visualization_with_Plotly"
+    notebook: "W08_Lab_Data_Visualization"
     required:
       - "Cleveland & McGill 1984, Graphical Perception (JASA 79(387))"
       - "Segel & Heer 2010, Narrative Visualization (IEEE TVCG 16(6))"
@@ -219,7 +226,7 @@ weeks:
       - ["11-3", "Generative AI for Data Science"]
     practice: "PySpark, and reviewing AI-written code"
     dataset: "Large tabular data"
-    notebook: "W11_Lab_PySpark_and_AI_Code_Review"
+    notebook: "W11_Lab_Spark_and_GenAI"
     required:
       - "Dean & Ghemawat 2004, MapReduce (OSDI)"
       - "Zaharia et al. 2016, Apache Spark: A Unified Engine (CACM 59(11))"
@@ -236,7 +243,7 @@ weeks:
       - ["12-3", "Project Presentations and Wrap-up"]
     practice: "Fairness audit and k-anonymity"
     dataset: "COMPAS"
-    notebook: "W12_Lab_Fairness_Audit_and_k_Anonymity"
+    notebook: "W12_Lab_Fairness_and_Privacy"
     required:
       - "Barocas & Selbst 2016, Big Data's Disparate Impact (California Law Review 104(3))"
       - "Chouldechova 2017, Fair Prediction with Disparate Impact (Big Data 5(2))"
