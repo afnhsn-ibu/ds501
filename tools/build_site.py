@@ -145,6 +145,7 @@ li{margin:5px 0}
 .soon{color:var(--muted);font-style:italic}
 .plinks{display:block;font-size:14px;margin-top:2px;color:var(--muted)}
 .plinks a{margin-right:2px}
+.plinks .free{color:var(--green-ink);font-weight:600}
 .check{list-style:none;padding-left:4px}
 .check li::before{content:"☐";margin-right:10px;color:var(--bordo)}
 code{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.88em;background:var(--chip);padding:1px 6px;border-radius:5px}
@@ -259,7 +260,13 @@ def page_syllabus(single):
     arows = "".join(
         f'<tr><td><b>{e(a["item"])}</b></td><td class="due">{e(a["weight"])}</td>'
         f'<td>{e(a["detail"])}</td></tr>' for a in C["assessment"])
-    books = "".join(f"<li>{e(b)}</li>" for b in C["books"])
+    books = "".join(
+        f'<li>{e(b["citation"])}'
+        f'<span class="plinks"><b>{e(b["weeks"])}</b>'
+        + (f' · <span class="free">{e(b["free"])}</span>' if b.get("free")
+           else ' · <span class="soon">IBU library access</span>')
+        + "".join(f' · <a href="{e(u)}">{e(t)}</a>' for t, u in b["links"])
+        + "</span></li>" for b in C["books"])
     return (
         f'<main><div class="wrap"><h2>Syllabus</h2>'
         f'<p>{e(CO["code"])} is a {e(CO["level"].lower())} course at {e(CO["institution"])}, '
@@ -288,7 +295,9 @@ def page_syllabus(single):
         f"costs you no marks. Omitting it does. Week 11 treats reviewing AI-written code "
         f"as a skill in its own right, including the failure modes to look for.</p>"
         f"<h2>Companion texts</h2><ul>{books}</ul>"
-        f"<p>None is required to buy. The relevant chapters are listed on each week’s page.</p>"
+        f"<p>None is required to buy. Two of the three are free to read online from their "
+        f"authors; the third is in the IBU library. The weeks next to each book show where "
+        f"it supports the course.</p>"
         f"<h2>Tools</h2>"
         f'<p>{e(CO["tools"])} Every notebook opens in Colab with no local setup.</p>'
         f"</div></main>"

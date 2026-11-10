@@ -116,6 +116,7 @@ li{margin:5px 0}
 .soon{color:var(--muted);font-style:italic}
 .plinks{display:block;font-size:14px;margin-top:2px;color:var(--muted)}
 .plinks a{margin-right:2px}
+.plinks .free{color:var(--green-ink);font-weight:600}
 .check{list-style:none;padding-left:4px}
 .check li::before{content:"☐";margin-right:10px;color:var(--bordo)}
 code{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.88em;background:var(--chip);padding:1px 6px;border-radius:5px}

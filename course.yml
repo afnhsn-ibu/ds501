@@ -41,9 +41,26 @@ milestones:
   12: "Report and presentation"
 
 books:
-  - "McKinney, Python for Data Analysis, 3rd ed. (2022) — weeks 3–5"
-  - "James, Witten, Hastie, Tibshirani & Taylor, An Introduction to Statistical Learning with Applications in Python (2023) — weeks 6–10"
-  - "Provost & Fawcett, Data Science for Business (2013) — weeks 1–2 and 9"
+  - citation: "McKinney, W. (2022). Python for Data Analysis: Data Wrangling with pandas, NumPy, and Jupyter (3rd ed.). O'Reilly Media. ISBN 978-1-098-10403-0."
+    weeks: "Weeks 3–5"
+    free: "Free online edition from the author"
+    links:
+      - ["Read free online", "https://wesmckinney.com/book/"]
+      - ["Code and data", "https://github.com/wesm/pydata-book"]
+      - ["Publisher page", "https://www.oreilly.com/library/view/python-for-data/9781098104023/"]
+  - citation: "James, G., Witten, D., Hastie, T., Tibshirani, R., & Taylor, J. (2023). An Introduction to Statistical Learning: with Applications in Python. Springer."
+    weeks: "Weeks 6–10"
+    free: "Free PDF from the authors"
+    links:
+      - ["Download free PDF", "https://www.statlearning.com/"]
+      - ["Python labs", "https://github.com/intro-stat-learning/ISLP_labs"]
+      - ["DOI 10.1007/978-3-031-38747-0", "https://doi.org/10.1007/978-3-031-38747-0"]
+  - citation: "Provost, F., & Fawcett, T. (2013). Data Science for Business: What You Need to Know about Data Mining and Data-Analytic Thinking. O'Reilly Media. ISBN 978-1-449-36132-7."
+    weeks: "Weeks 1–2 and 9"
+    free: null
+    links:
+      - ["Publisher page", "https://www.oreilly.com/library/view/data-science-for/9781449374273/"]
+      - ["Book website", "https://data-science-for-biz.com/"]
 
 weeks:
   - num: 1
