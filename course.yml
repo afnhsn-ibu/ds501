@@ -128,6 +128,7 @@ weeks:
     dataset: "Chinook"
     notebook: "W04_Lab_SQL_for_Data_Science"
     deck: "DS501_W04_Databases_and_SQL"
+    summaries: "DS501_W04_Reading_Summaries"
     required:
       - "Codd 1970, A Relational Model of Data (CACM 13(6))"
       - "Cattell 2010, Scalable SQL and NoSQL Data Stores (SIGMOD Record 39(4))"
@@ -145,6 +146,7 @@ weeks:
     dataset: "Messy Titanic"
     notebook: "W05_Lab_Data_Cleaning_and_EDA"
     deck: "DS501_W05_Data_Cleaning_Wrangling_EDA"
+    summaries: "DS501_W05_Reading_Summaries"
     required:
       - "Kandel et al. 2011, Wrangler (CHI)"
       - "Rubin 1976, Inference and Missing Data (Biometrika 63(3))"

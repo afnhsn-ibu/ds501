@@ -190,6 +190,17 @@ def deck(w, ext):
     return f"slides/{w['deck']}.{ext}" if w.get("deck") else None
 
 
+def summaries_html(w):
+    """Links to the week's reading-summary deck, if it has one and is released."""
+    if not (released(w) and w.get("summaries")):
+        return ""
+    base = f"slides/{w['summaries']}"
+    return (f'<p class="plinks" style="font-size:16px;margin-top:10px">'
+            f'<b>Reading summaries:</b> two slides per paper · '
+            f'<a href="{base}.pdf">View (PDF)</a> · '
+            f'<a href="{base}.pptx" download>PowerPoint with notes</a></p>')
+
+
 def nav(active, single):
     out = []
     for key, label in NAV:
@@ -398,7 +409,8 @@ def page_readings(single):
         out.append(
             f'<h3>Week {w["num"]} · {e(w["title"])}</h3>'
             f"<p><b>Required</b></p><ul>{req}</ul>"
-            f'<p style="color:var(--muted)"><b>Optional</b></p><ul>{opt}</ul>')
+            f'<p style="color:var(--muted)"><b>Optional</b></p><ul>{opt}</ul>'
+            + summaries_html(w))
     return (
         f'<main><div class="wrap"><h2>Papers to read</h2>'
         f"<p>Each week has two or three required papers and two or three optional ones. "
@@ -487,6 +499,7 @@ def page_week(w, single):
         f"Key Terms slides. <i>[Link]</i></p>"
         f"<h2>Papers</h2><p><b>Required</b></p><ul>{req}</ul>"
         f'<p style="color:var(--muted)"><b>Optional</b></p><ul>{opt}</ul>'
+        + summaries_html(w) +
         f"<h2>Due this week</h2>"
         f"<ul><li><b>Practice {n}:</b> [date]</li>"
         f"<li><b>Quiz {n}:</b> [date]</li>{msline}</ul>"
@@ -579,10 +592,11 @@ def main():
     out = docs / "slides"
     shutil.rmtree(out, ignore_errors=True)
     for w in WEEKS:
-        if released(w) and w.get("deck"):
+        names = [w[k] for k in ("deck", "summaries") if w.get(k)] if released(w) else []
+        for name in names:
             out.mkdir(exist_ok=True)
             for ext in ("pdf", "pptx"):
-                src = ROOT / deck(w, ext)
+                src = ROOT / f"slides/{name}.{ext}"
                 if not src.exists():
                     raise SystemExit(f"missing {src.relative_to(ROOT)} for week {w['num']}")
                 shutil.copyfile(src, out / src.name)

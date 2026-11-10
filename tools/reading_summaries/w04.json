@@ -1,0 +1,98 @@
+[
+ {
+  "label": "Codd 1970",
+  "kind": "Required",
+  "short_title": "Relations Protect Users From Storage Details",
+  "citation": "Codd, E. F. (1970). A relational model of data for large shared data banks. Communications of the ACM, 13(6), 377–387. https://doi.org/10.1145/362384.362685",
+  "problem": "In 1970, programs depended on how data was stored: record order, index chains, and tree or network access paths. When storage changed, programs broke. Codd asks how to shield users and programs from these internal details.",
+  "key_ideas": [
+   "Describe all data as relations: sets of rows with no meaningful row order and no duplicate rows",
+   "Primary keys identify rows; foreign keys refer to other relations by value, not by pointers",
+   "Normalization turns nested repeating groups into flat tables that carry the parent's key"
+  ],
+  "key_term": {"term": "Data independence", "definition": "Programs and users keep working when the storage order, indexes or access paths of the data change"},
+  "slide2_title": "Say What Data You Want, Not How to Reach It",
+  "findings": [
+   "Names three dependencies to remove: on stored ordering, on indexes, and on access paths",
+   "Proposes a high-level data language based on predicate logic, the idea that later led to SQL",
+   "Defines projection, join and restriction, and uses them to reason about redundancy and consistency"
+  ],
+  "course_link": "Chinook's tables (Artist, Album, Track, Invoice) follow this model: keys link rows, and your SQL from Python never mentions file layout or indexes. This is the core of lesson 4-1.",
+  "limitation": "The paper is theory: it does not cover implementation or a full query language. SQL later departed from it, e.g. by allowing duplicate rows.",
+  "note_question": "Take one Chinook query. Which storage details (row order, indexes, file layout) does it not depend on, and why does that help?",
+  "notes_slide1": "Codd wrote this paper at IBM in 1970, when most data systems stored records as trees or networks. Programs had to know these structures. They relied on the order in which records were stored, on specific index chains, and on the access paths from one record type to another. Codd gives a simple example with parts and projects: the same facts can be arranged in five different tree layouts, and a program written for one layout fails on most of the others. His answer is to describe data only by its natural structure, as relations. A relation is a set of rows; the order of rows does not matter and no two rows are identical. A primary key identifies each row, and a foreign key refers to rows in another relation by value, not by machine address. Normalization removes nested repeating groups by moving them into separate flat tables that carry the parent's key. This is the table design we use today.",
+  "notes_slide2": "The second half of the paper builds tools for working with relations. Because users see only relations, a request can state which data it wants, not how to navigate to it. Codd proposes a universal data sublanguage based on first-order predicate logic. Other languages could be measured against it, and it could be embedded in host programming languages. He does not design this language in detail; SQL grew later from this line of work. He defines operations on relations: permutation, projection (keep some columns and drop duplicate rows), natural join (combine two relations on a shared domain), composition and restriction. With these he defines when one relation can be derived from others, which lets him discuss redundancy precisely. A system can then hold constraint statements and check whether the stored data is consistent with them. He also warns about the connection trap: following pointer paths does not always produce the correct relation."
+ },
+ {
+  "label": "Cattell 2010",
+  "kind": "Required",
+  "short_title": "Comparing Scalable SQL and NoSQL Data Stores",
+  "citation": "Cattell, R. (2010). Scalable SQL and NoSQL data stores. ACM SIGMOD Record, 39(4), 12–27. https://doi.org/10.1145/1978915.1978919",
+  "problem": "Web applications with millions of users need many small reads and writes per second. Traditional databases scaled poorly across many servers, and dozens of new data stores appeared. Cattell surveys and compares over twenty of them.",
+  "key_ideas": [
+   "Groups stores by data model: key-value, document, extensible record (wide column), scalable relational",
+   "NoSQL stores scale out by partitioning (sharding) and replicating data over many servers",
+   "Most give up full ACID transactions for weaker, often eventual, consistency"
+  ],
+  "key_term": {"term": "Horizontal scaling", "definition": "Spreading data and load over many servers that share no RAM or disk, instead of using one bigger machine"},
+  "slide2_title": "No Single Data Store Is Best for Every Use",
+  "findings": [
+   "Key-value stores fit lookups by one key; document stores fit varied objects searched on many fields",
+   "Scalable SQL systems can compete if operations and transactions mostly stay on one node",
+   "Predicts NoSQL will last, new relational systems will grow, and products will consolidate"
+  ],
+  "course_link": "Gives lesson 4-3 its map of NoSQL store types. Compare the joins and transactions you use on Chinook with stores that offer only key lookups or single-record updates.",
+  "limitation": "A 2010 snapshot: many systems have since changed or disappeared, and the author notes that few independent benchmarks backed the scaling claims.",
+  "note_question": "For the Chinook music store, which data would you keep relational, and which might fit a key-value or document store? Why?",
+  "notes_slide1": "By 2010, websites with millions of users needed databases that handle huge numbers of small reads and writes, such as loading a profile or saving a post. Traditional relational systems could use more cores on one machine but scaled poorly across many machines. Many new systems, often called NoSQL, appeared to fill this gap. Cattell describes NoSQL by six features, including horizontal scaling of simple operations, replication and partitioning of data across servers, a simple call interface instead of SQL, a weaker concurrency model than ACID, and the ability to add new attributes to records at runtime. He traces their roots to memcached, to Amazon's Dynamo, which pioneered eventual consistency, and to Google's BigTable. He then sorts more than twenty systems into four groups by data model: key-value stores (such as Redis and Voldemort), document stores (such as MongoDB and CouchDB), extensible record stores (such as HBase and Cassandra), and new scalable relational systems (such as MySQL Cluster and VoltDB).",
+  "notes_slide2": "Cattell does not name a winner; he says no single data store is best for every use. A key-value store fits an application with one kind of object looked up by one key, for example a cached user page. A document store fits several kinds of objects that must be searched on many fields, if slightly out-of-date data is acceptable. Relational systems remain the better choice when data spans many tables, queries are complex, and transactions must be correct. He argues that relational systems can also scale if operations and transactions mostly touch one node, while NoSQL stores avoid cross-node work by making it hard or impossible. He predicts that NoSQL is not a passing fad, that new relational systems will also win market share, and that the many products will consolidate. He also admits a gap in the evidence: few benchmarks compared systems fairly, so he calls for common tests such as Yahoo's YCSB."
+ },
+ {
+  "label": "Brewer 2012",
+  "kind": "Optional",
+  "short_title": "CAP Is a Trade-off to Manage, Not Pick Two of Three",
+  "citation": "Brewer, E. (2012). CAP twelve years later: How the \"rules\" have changed. Computer, 45(2), 23–29. https://doi.org/10.1109/MC.2012.37",
+  "problem": "The CAP theorem was often read as: choose two of consistency, availability and partition tolerance. Brewer, who first proposed CAP, argues this reading is misleading and explains how designers should handle network partitions.",
+  "key_ideas": [
+   "Partitions are rare, so without one a system need not give up consistency or availability",
+   "C and A are not on/off; the choice can differ per operation, per data item, or per subsystem",
+   "Handle partitions in three steps: detect the partition, enter partition mode, then recover"
+  ],
+  "key_term": {"term": "Network partition", "definition": "A communication failure that splits a distributed system into groups of nodes that cannot reach each other"},
+  "slide2_title": "Plan How to Recover From Partitions",
+  "findings": [
+   "A partition is a time limit on communication: on timeout, cancel (less A) or go on (risk to C)",
+   "During a partition, delay or limit risky operations, e.g. cap ATM withdrawals, and compensate later",
+   "Version vectors and CRDTs help replicas merge their state after a partition ends"
+  ],
+  "course_link": "Explains the consistency trade-offs behind the NoSQL stores in lesson 4-3. Our Chinook lab runs SQLite on one machine, so it never faces this choice.",
+  "limitation": "An essay with examples, not a measured study: it gives design advice but no formal proofs or performance results for its techniques.",
+  "note_question": "An online music store's data centres lose contact. Should it keep selling? Which rule could break, and how would you fix it later?",
+  "notes_slide1": "Eric Brewer introduced the CAP idea around 2000: a networked system that shares data can offer at most two of consistency (C), availability (A) and tolerance to network partitions (P). Many NoSQL designers used it to justify dropping consistency. Twelve years later, Brewer says the two-of-three view is too simple. First, partitions are rare, so while the network works there is no reason to give up C or A. Second, the choice is not made once for a whole system; different operations or data can choose differently. Third, the properties are not on/off: availability ranges from 0 to 100 percent, and there are many levels of consistency. He also compares ACID with BASE (basically available, soft state, eventually consistent) and notes that real large systems mix both. Finally, he links CAP to latency: a partition is in effect a timeout, after which the program must decide whether to keep waiting or to continue.",
+  "notes_slide2": "Brewer's practical advice is to manage partitions explicitly. A system should detect that a partition has started, switch to a partition mode that limits some operations and records what happens, and run a recovery process when communication returns. Recovery has two tasks: bring the replicas back to one consistent state, and compensate for mistakes made during the partition. Designers should list the invariants their data must keep, such as an account balance never going below zero, and decide for each operation whether to allow, delay or limit it. In his ATM example, withdrawals are capped at a small amount during a partition, and fees and audits handle problems afterwards. Version vectors and commutative replicated data types (CRDTs) help merge state; Amazon's shopping cart merges two carts by union, which means deleted items can reappear. His conclusion is that designers should not blindly give up consistency or availability, but manage both."
+ },
+ {
+  "label": "Stonebraker & Pavlo 2024",
+  "kind": "Optional",
+  "short_title": "SQL and the Relational Model Keep Absorbing Rivals",
+  "citation": "Stonebraker, M., & Pavlo, A. (2024). What goes around comes around... and around... ACM SIGMOD Record, 53(2), 21–37. https://doi.org/10.1145/3685980.3685984",
+  "problem": "Since 2005, many systems tried to replace SQL or the relational model: MapReduce, key-value, document, column-family, text, array, vector and graph systems. The authors ask what happened to them over 20 years.",
+  "key_ideas": [
+   "Most non-relational systems stayed niche or are moving toward SQL and the relational model",
+   "Almost every major NoSQL system added a SQL-like language, and many added ACID transactions",
+   "The big changes were in how relational systems are built: column stores, cloud, data lakes"
+  ],
+  "key_term": {"term": "Lakehouse", "definition": "An engine that runs SQL and DataFrame work over open-format files, such as Parquet, kept in cloud object storage"},
+  "slide2_title": "New Data Models Rarely Replace SQL; SQL Absorbs Them",
+  "findings": [
+   "MapReduce and Hadoop faded; document stores and relational systems are converging",
+   "Relational systems added vector search fast, and SQL:2023 added property graph queries",
+   "Column storage now dominates analytics, and the cloud has reshaped how databases are built"
+  ],
+  "course_link": "Updates Cattell's 2010 picture for lesson 4-3 and supports lesson 4-2: SQL skills from the Chinook lab carry over to many modern systems. It also discusses pandas DataFrames.",
+  "limitation": "A strongly argued opinion paper by two relational-database researchers. Its predictions are judgements, not measured results.",
+  "note_question": "Cattell (2010) predicted NoSQL would last. What do Stonebraker and Pavlo say happened by 2024, and do you agree?",
+  "notes_slide1": "In 2005 Stonebraker co-wrote a review showing that, over the previous decades, the relational model and SQL had beaten every rival data model and absorbed their best ideas. This 2024 paper repeats the exercise for the last 20 years. The authors review eight families: MapReduce, key-value stores, document databases, column-family (wide-column) databases, text search engines, array databases, vector databases and graph databases. Their verdict is that most either serve narrow niches or are becoming relational. MapReduce and Hadoop faded in the 2010s, and SQL engines took their place. Document stores such as MongoDB were marketed as faster without SQL and joins, yet by the end of the 2010s almost every NoSQL system had added a SQL-like language, and many added ACID transactions. Many relational systems added vector search within about a year of ChatGPT, and SQL:2023 added property graph queries. Array databases for science remain a separate niche.",
+  "notes_slide2": "The second half looks at how database systems are built. Here the authors see real progress, driven mainly by changes in hardware. Data warehouses moved from row storage to column storage, which compresses better and processes whole columns at once. Cloud databases separate computing from storage, which lets them add compute nodes on demand. Data lakes keep files in open formats such as Parquet, and lakehouse engines run SQL and DataFrame work over them; the authors note that data scientists often use pandas in Python notebooks instead of SQL. NewSQL systems tried to combine NoSQL-style scaling with SQL and ACID transactions but saw limited adoption, while NoSQL vendors added transactions themselves. The authors doubt custom database hardware outside large cloud vendors and see no good use for blockchain databases. Their advice: learn from history, make databases easy to start with, and do not expect natural-language interfaces to replace SQL."
+ }
+]

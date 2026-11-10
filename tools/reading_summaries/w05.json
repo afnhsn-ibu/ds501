@@ -1,0 +1,98 @@
+[
+ {
+  "label": "Kandel et al. 2011",
+  "kind": "Required",
+  "short_title": "Wrangler: Data Cleaning by Example and Preview",
+  "citation": "Kandel, S., Paepcke, A., Hellerstein, J., & Heer, J. (2011). Wrangler: Interactive visual specification of data transformation scripts. In Proceedings of CHI '11 (pp. 3363–3372). ACM. https://doi.org/10.1145/1978942.1979444",
+  "problem": "Analysts spend much of their time reshaping data and fixing missing values, typos and odd formats. These steps are hard to specify (e.g. regular expressions), and manual edits in tools like Excel leave no reusable record.",
+  "key_ideas": [
+   "Select data in a table; the system suggests a ranked list of possible transforms",
+   "Each suggestion has a plain-language description and an in-place visual preview before you apply it",
+   "Every step is saved as a script that can be edited, annotated, exported as code and rerun on new data"
+  ],
+  "key_term": {"term": "Data wrangling", "definition": "Reformatting data values or layout, fixing wrong or missing values, and combining sources so analysis can begin"},
+  "slide2_title": "Cleaning Should Produce a Script, Not Just Clean Data",
+  "findings": [
+   "In a 12-person study, median task time in Wrangler was over twice as fast as in Excel on all three tasks",
+   "Users rated previews and suggestions as more useful than editing transform parameters directly",
+   "Users without a mental model of the transform (e.g. reshaping) got stuck in both tools"
+  ],
+  "course_link": "Wrangler's operators (split, extract, fill, delete, fold/unfold) match pandas steps in 5-2. In the Titanic lab, keep cleaning in a notebook script, not hand edits, so it can be rerun.",
+  "limitation": "Small study: 12 users, tiny tables (at most 30 rows, 4 columns), three tasks. Gains on large, real data were expected, not measured.",
+  "note_question": "Why do the authors say the output of wrangling is a script, not only clean data? How does this apply to your Titanic notebook?",
+  "notes_slide1": "This CHI 2011 paper starts from a common complaint: before any analysis, analysts must restructure data and deal with misspellings, missing values, duplicates and outliers. The authors cite an estimate that cleaning can take up to 80% of the time and cost in data warehousing projects. People usually write one-off Python or Perl scripts, or edit cells by hand in Excel. Both are slow, and hand edits leave no record. Wrangler is a browser tool built on a declarative transformation language. The language has transform classes such as map (delete, extract, split), lookups and joins, reshape (fold and unfold), and positional operations such as fill. The user clicks a row, a column or some text, and an inference engine proposes a ranked list of transforms. Each one is shown as an editable sentence and previewed in the table: red for rows to delete, yellow for changed values. A data quality meter above each column shows valid, type-mismatched and missing values.",
+  "notes_slide2": "The main message is about reproducibility. The authors argue that the real output of wrangling is an editable, auditable description of the steps, not only the cleaned table. Wrangler records each step in a history that can be annotated and exported as runnable code. The authors compared Wrangler with Excel. Twelve analysts and graduate students did three tasks: extracting values from text, filling missing values, and reshaping a table into a cross-tab. Median completion time with Wrangler was more than twice as fast for every task, and novice and expert Excel users both benefited. Users rated previews and suggestions far above direct parameter editing. One weakness showed up: when users did not understand the transform they needed, for example fold versus unfold, they got stuck in either tool. For our lab, think of each pandas line as one Wrangler step that you can read, check and rerun."
+ },
+ {
+  "label": "Rubin 1976",
+  "kind": "Required",
+  "short_title": "When Can We Ignore Why Data Are Missing",
+  "citation": "Rubin, D. B. (1976). Inference and missing data. Biometrika, 63(3), 581–592. https://doi.org/10.1093/biomet/63.3.581",
+  "problem": "Analysts often analyse only the values they have and ignore the process that made other values missing. Rubin asks when this is valid, and shows that the answer depends on the type of inference used.",
+  "key_ideas": [
+   "Treat missingness as random data: an indicator per value with its own probability model",
+   "Missing at random (MAR): missingness may depend on observed values, not on the missing ones",
+   "Observed at random (OAR) adds that missingness does not depend on the observed values either"
+  ],
+  "key_term": {"term": "Ignorable missingness", "definition": "When the missingness process can be left out of the model and inference from the observed data is still valid"},
+  "slide2_title": "Ignoring Missingness Is an Assumption, Not a Default",
+  "findings": [
+   "For likelihood and Bayesian inference, MAR plus distinct parameters lets us ignore the missingness process",
+   "For sampling-based (frequentist) inference, the data must be both MAR and observed at random",
+   "These ideas grew into the MCAR, MAR and MNAR labels used in later missing-data work"
+  ],
+  "course_link": "In 5-1 and the Titanic lab, ask why Age or Cabin is missing before you drop rows or fill values. dropna() and fillna() each assume a missingness mechanism.",
+  "limitation": "Mathematical and abstract. MAR cannot be tested from the observed data alone, so in practice it remains an assumption to argue for.",
+  "note_question": "For Titanic Age, is MCAR, MAR or MNAR most plausible? What would that mean for dropping rows versus filling the median?",
+  "notes_slide1": "Rubin's 1976 paper is the starting point of modern thinking about missing data. Before it, analysts usually analysed the values they had and ignored why the rest were missing. Rubin treats missingness as data in its own right: for each value there is an indicator saying whether it was observed, and this indicator follows a probability model, called the missingness process. He then defines two conditions. Data are missing at random (MAR) if the probability of the missingness pattern we saw does not depend on the values that are missing, though it may depend on observed values. Data are observed at random (OAR) if it also does not depend on the observed values. He adds a third condition, distinctness: the parameters of the missingness process and of the data model are not linked. Note that Rubin stated these conditions for the data actually observed, not as general labels for a whole dataset.",
+  "notes_slide2": "Rubin's main result is that whether we may ignore the missingness process depends on the type of inference. For likelihood-based and Bayesian inference, MAR together with distinctness is enough: we can base inference on the observed data alone. For sampling-distribution (frequentist) inference, we need more, both MAR and OAR. Later work, especially by Little and Rubin, turned these ideas into the labels used today. MCAR, missing completely at random, roughly combines MAR and OAR. MAR keeps its name. MNAR, missing not at random, covers cases where missingness depends on the missing value itself. The practical lesson is that ignoring missingness is an assumption, and that the observed data alone cannot confirm MAR. In the Titanic data, Age and Cabin have many gaps. Dropping rows, or filling with the median, quietly assumes a mechanism. Check whether missingness relates to observed columns such as class or survival before you choose a method."
+ },
+ {
+  "label": "Kim et al. 2003",
+  "kind": "Optional",
+  "short_title": "A Taxonomy of Dirty Data",
+  "citation": "Kim, W., Choi, B.-J., Hong, E.-K., Kim, S.-K., & Lee, D. (2003). A taxonomy of dirty data. Data Mining and Knowledge Discovery, 7(1), 81–99. https://doi.org/10.1023/A:1021564703268",
+  "problem": "Data mining and data warehouses depend on clean data, but there was no shared, complete list of the kinds of dirty data. Without one, it is hard to judge what a cleaning tool covers or misses.",
+  "key_ideas": [
+   "Classify dirty data in a hierarchy instead of a loose list of examples",
+   "Top split: missing data, wrong data, and data that is not wrong but still unusable",
+   "Link each type to how it can be prevented, detected or fixed, e.g. by database checks"
+  ],
+  "key_term": {"term": "Dirty data", "definition": "Data that is missing, wrong, or correct but unusable as stored, e.g. inconsistent formats across sources"},
+  "slide2_title": "Not All Dirty Data Is Missing or Wrong",
+  "findings": [
+   "Missing values are only one kind of dirty data; wrong values and unusable values need other methods",
+   "Some wrong data can be blocked by database constraints; much of it cannot and needs later checks",
+   "Correct values can still be unusable, e.g. different codes or spellings for the same thing"
+  ],
+  "course_link": "Use the taxonomy as a checklist for 5-1 and the lab: find missing values in messy Titanic, then wrong ones, then valid but inconsistent ones (e.g. mixed spellings).",
+  "limitation": "Built from a database and data-warehouse view; it lists problem types but gives no measured evidence of how often each occurs.",
+  "note_question": "Give one Titanic example for each top-level class: missing, wrong, and not wrong but unusable. How would you detect each in pandas?",
+  "notes_slide1": "Kim and co-authors wrote this paper for people who build data warehouses and run data mining. Their starting point is that results are only as good as the data, yet there was no agreed, complete classification of what makes data dirty. Without such a classification, it is hard to say which problems a cleaning tool handles and which it ignores. The paper therefore proposes a taxonomy, a hierarchy of dirty-data types. At the top level, the authors separate three situations. First, data can be missing. Second, data can be present but wrong. Third, data can be present and not wrong, yet still unusable, for example when the same entity is written in different ways in different sources, or a value is an unclear abbreviation. Lower levels of the hierarchy split these classes further; this summary stays at the top levels.",
+  "notes_slide2": "The taxonomy is useful because each class needs a different response. Missing values call for decisions about dropping or filling, which links back to Rubin. Wrong values need validation rules. Some can be stopped at entry by database integrity constraints, such as data types or allowed ranges, but many cannot and must be found later. Unusable but correct values need standardisation, such as mapping codes and spellings to one form. The authors use the taxonomy to ask which types can be prevented, detected or corrected, and how. For the Titanic lab, work through the three classes in order. Check missing values with isna(). Look for wrong values, such as impossible ages or fares. Then look for values that are valid but inconsistent, such as mixed spellings of the same category. Treat the taxonomy as a checklist rather than a complete list of every possible problem."
+ },
+ {
+  "label": "Tukey 1977",
+  "kind": "Optional",
+  "short_title": "Look at the Data First: Stem-and-Leaf Displays",
+  "citation": "Tukey, J. W. (1977). Exploratory data analysis (Chapter 1: Scratching down numbers). Addison-Wesley.",
+  "problem": "Analysts often jump to formal tests and models without first looking at the data. Lists of raw numbers hide the shape of a distribution, gaps and odd values.",
+  "key_ideas": [
+   "Exploratory analysis is detective work: look for clues before you confirm anything",
+   "Exploratory and confirmatory analysis are both needed; exploration comes first",
+   "Stem-and-leaf display: split numbers into stem and leaf to show shape and keep the values"
+  ],
+  "key_term": {"term": "Stem-and-leaf display", "definition": "A text chart: leading digits form the stems, the next digit of each value is written as a leaf beside its stem"},
+  "slide2_title": "A Quick Display Can Show What a Table of Numbers Hides",
+  "findings": [
+   "A stem-and-leaf shows a distribution's shape like a histogram while keeping the actual values",
+   "It makes clusters, gaps and unusual values easy to spot, and can be drawn by hand",
+   "Simple displays help decide which questions are worth testing formally later"
+  ],
+  "course_link": "This is the mindset of lesson 5-3. Before modelling survival, look at Titanic Age and Fare with describe(), histograms or a stem-and-leaf, and note gaps and odd values.",
+  "limitation": "Written for pencil-and-paper work on small data; stem-and-leaf displays become impractical for very large datasets.",
+  "note_question": "Draw a stem-and-leaf of 20 Titanic ages. What does it show that the mean and standard deviation do not?",
+  "notes_slide1": "John Tukey's 1977 book made exploratory data analysis widely known and set out much of its philosophy. Tukey compares exploratory analysis to detective work: the analyst looks for clues in the data before deciding what to believe. Confirmatory analysis, with formal tests and significance, plays a role more like a court that judges the evidence. Tukey argues that both are needed, but that exploration has been neglected, and that without it we may not even know which questions to test. Chapter 1, Scratching down numbers, starts with the simplest tools: writing numbers down so that their pattern becomes visible. Its main tool is the stem-and-leaf display. Each number is split into a stem, the leading digits, and a leaf, the next digit. Stems are listed in a column, and each leaf is written to the right of its stem. The book assumes only pencil and paper.",
+  "notes_slide2": "A stem-and-leaf display works like a histogram turned on its side, but with one advantage: the actual digits stay visible. You can see the shape of the distribution, where values cluster, where gaps are, and which values stand apart. You can also read off approximate values and count them, which a bar chart does not allow. The display can also be adjusted, for example by spreading each stem over more than one line when the data are crowded. The wider lesson is about attitude: look first, and be ready to be surprised, before you summarise or model. In lesson 5-3 we follow this approach with pandas and plots rather than pencil. For the Titanic data, look at the distributions of Age and Fare before you build any model. Ask what is typical, what is unusual, and whether any odd values are data errors that belong back in the cleaning step."
+ }
+]
