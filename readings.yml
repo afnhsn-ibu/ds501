@@ -1,0 +1,280 @@
+# Links for every paper in course.yml, keyed by the exact citation text used there.
+# pdf: only for openly licensed papers; the file lives in readings/ and is copied to the site.
+# Never add a pdf for a copyrighted paper - link it with doi / free_url instead.
+Donoho 2017, 50 Years of Data Science (JCGS 26(4)):
+  citation: Donoho, D. (2017). 50 years of data science. Journal of Computational and Graphical Statistics, 26(4),
+    745–766.
+  doi: 10.1080/10618600.2017.1384734
+  free_url: https://www.tandfonline.com/doi/full/10.1080/10618600.2017.1384734
+'Breiman 2001, Statistical Modeling: The Two Cultures (Statistical Science 16(3))':
+  citation: 'Breiman, L. (2001). Statistical modeling: The two cultures (with comments and a rejoinder by the author).
+    Statistical Science, 16(3), 199–231.'
+  doi: 10.1214/ss/1009213726
+  free_url: https://projecteuclid.org/journals/statistical-science/volume-16/issue-3/Statistical-Modeling--The-Two-Cultures-with-comments-and-a/10.1214/ss/1009213726.full
+Tukey 1962, The Future of Data Analysis (Ann. Math. Stat. 33(1)):
+  citation: Tukey, J. W. (1962). The future of data analysis. The Annals of Mathematical Statistics, 33(1), 1–67.
+  doi: 10.1214/aoms/1177704711
+  free_url: https://projecteuclid.org/journals/annals-of-mathematical-statistics/volume-33/issue-1/The-Future-of-Data-Analysis/10.1214/aoms/1177704711.full
+Cleveland 2001 (International Statistical Review 69(1)):
+  citation: 'Cleveland, W. S. (2001). Data science: An action plan for expanding the technical areas of the field
+    of statistics. International Statistical Review, 69(1), 21–26.'
+  doi: 10.1111/j.1751-5823.2001.tb00477.x
+Davenport & Patil 2012 (Harvard Business Review):
+  citation: 'Davenport, T. H., & Patil, D. J. (2012). Data scientist: The sexiest job of the 21st century. Harvard
+    Business Review, 90(10), 70–76.'
+  url: https://hbr.org/2012/10/data-scientist-the-sexiest-job-of-the-21st-century
+Keshav 2007, How to Read a Paper (SIGCOMM CCR 37(3)):
+  citation: Keshav, S. (2007). How to read a paper. ACM SIGCOMM Computer Communication Review, 37(3), 83–84.
+  doi: 10.1145/1273445.1273458
+  free_url: http://ccr.sigcomm.org/online/files/p83-keshavA.pdf
+Wirth & Hipp 2000, CRISP-DM (PADD 2000):
+  citation: 'Wirth, R., & Hipp, J. (2000). CRISP-DM: Towards a standard process model for data mining. In Proceedings
+    of the 4th International Conference on the Practical Applications of Knowledge Discovery and Data Mining (pp.
+    29–39).'
+Provost & Fawcett 2013, Data Science and its Relationship to Big Data and Data-Driven Decision Making (Big Data 1(1)):
+  citation: Provost, F., & Fawcett, T. (2013). Data science and its relationship to big data and data-driven decision
+    making. Big Data, 1(1), 51–59.
+  doi: 10.1089/big.2013.1508
+  free_url: https://journals.sagepub.com/doi/pdf/10.1089/big.2013.1508
+Fayyad, Piatetsky-Shapiro & Smyth 1996, From Data Mining to Knowledge Discovery (AI Magazine 17(3)):
+  citation: Fayyad, U., Piatetsky-Shapiro, G., & Smyth, P. (1996). From data mining to knowledge discovery in databases.
+    AI Magazine, 17(3), 37–54.
+  doi: 10.1609/aimag.v17i3.1230
+  free_url: https://ojs.aaai.org/aimagazine/index.php/aimagazine/article/view/1230
+Martínez-Plumed et al. 2021, CRISP-DM Twenty Years Later (IEEE TKDE 33(8)):
+  citation: 'Martínez-Plumed, F., Contreras-Ochando, L., Ferri, C., Hernández-Orallo, J., Kull, M., Lachiche, N.,
+    Ramírez-Quintana, M. J., & Flach, P. (2021). CRISP-DM twenty years later: From data mining processes to data
+    science trajectories. IEEE Transactions on Knowledge and Data Engineering, 33(8), 3048–3061.'
+  doi: 10.1109/TKDE.2019.2962680
+  free_url: http://hdl.handle.net/10251/184751
+Sculley et al. 2015, Hidden Technical Debt in ML Systems (NeurIPS):
+  citation: Sculley, D., Holt, G., Golovin, D., Davydov, E., Phillips, T., Ebner, D., Chaudhary, V., Young, M.,
+    Crespo, J.-F., & Dennison, D. (2015). Hidden technical debt in machine learning systems. In Advances in Neural
+    Information Processing Systems 28 (pp. 2503–2511).
+  url: https://proceedings.neurips.cc/paper/2015/hash/86df7dcfd896fcaf2674f757a2463eba-Abstract.html
+  free_url: https://proceedings.neurips.cc/paper_files/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf
+Wickham 2014, Tidy Data (J. Statistical Software 59(10)):
+  citation: Wickham, H. (2014). Tidy data. Journal of Statistical Software, 59(10), 1–23.
+  doi: 10.18637/jss.v059.i10
+  free_url: https://www.jstatsoft.org/article/view/v059i10
+  pdf: W03_Wickham_2014_Tidy_Data.pdf
+  license: CC BY 3.0
+Gebru et al. 2021, Datasheets for Datasets (CACM 64(12)):
+  citation: Gebru, T., Morgenstern, J., Vecchione, B., Vaughan, J. W., Wallach, H., Daumé III, H., & Crawford, K.
+    (2021). Datasheets for datasets. Communications of the ACM, 64(12), 86–92.
+  doi: 10.1145/3458723
+  free_url: https://arxiv.org/abs/1803.09010
+Wilkinson et al. 2016, FAIR Principles (Scientific Data 3):
+  citation: Wilkinson, M. D., Dumontier, M., Aalbersberg, I. J., et al. (2016). The FAIR Guiding Principles for
+    scientific data management and stewardship. Scientific Data, 3, 160018.
+  doi: 10.1038/sdata.2016.18
+  free_url: https://www.nature.com/articles/sdata201618
+  pdf: W03_Wilkinson_2016_FAIR_Principles.pdf
+  license: CC BY 4.0
+Broman & Woo 2018, Data Organization in Spreadsheets (The American Statistician 72(1)):
+  citation: Broman, K. W., & Woo, K. H. (2018). Data organization in spreadsheets. The American Statistician, 72(1),
+    2–10.
+  doi: 10.1080/00031305.2017.1375989
+  free_url: https://kbroman.org/Paper_DataOrg/
+  pdf: W03_Broman_Woo_2018_Data_Organization_in_Spreadsheets.pdf
+  license: CC BY 3.0, authors' manuscript
+Codd 1970, A Relational Model of Data (CACM 13(6)):
+  citation: Codd, E. F. (1970). A relational model of data for large shared data banks. Communications of the ACM,
+    13(6), 377–387.
+  doi: 10.1145/362384.362685
+  free_url: https://dl.acm.org/doi/pdf/10.1145/362384.362685
+Cattell 2010, Scalable SQL and NoSQL Data Stores (SIGMOD Record 39(4)):
+  citation: Cattell, R. (2010). Scalable SQL and NoSQL data stores. ACM SIGMOD Record, 39(4), 12–27.
+  doi: 10.1145/1978915.1978919
+  free_url: https://sigmodrecord.org/publications/sigmodRecord/1012/pdfs/04.surveys.cattell.pdf
+Brewer 2012, CAP Twelve Years Later (IEEE Computer 45(2)):
+  citation: 'Brewer, E. (2012). CAP twelve years later: How the "rules" have changed. Computer, 45(2), 23–29.'
+  doi: 10.1109/MC.2012.37
+Stonebraker & Pavlo 2024, What Goes Around Comes Around… And Around (SIGMOD Record 53(2)):
+  citation: Stonebraker, M., & Pavlo, A. (2024). What goes around comes around... and around... ACM SIGMOD Record,
+    53(2), 21–37.
+  doi: 10.1145/3685980.3685984
+  free_url: https://db.cs.cmu.edu/papers/2024/whatgoesaround-sigmodrec2024.pdf
+Kandel et al. 2011, Wrangler (CHI):
+  citation: 'Kandel, S., Paepcke, A., Hellerstein, J., & Heer, J. (2011). Wrangler: Interactive visual specification
+    of data transformation scripts. In Proceedings of the SIGCHI Conference on Human Factors in Computing Systems
+    (CHI ''11) (pp. 3363–3372). ACM.'
+  doi: 10.1145/1978942.1979444
+  free_url: https://idl.cs.washington.edu/files/2011-Wrangler-CHI.pdf
+Rubin 1976, Inference and Missing Data (Biometrika 63(3)):
+  citation: Rubin, D. B. (1976). Inference and missing data. Biometrika, 63(3), 581–592.
+  doi: 10.1093/biomet/63.3.581
+Kim et al. 2003, A Taxonomy of Dirty Data (DMKD 7):
+  citation: Kim, W., Choi, B.-J., Hong, E.-K., Kim, S.-K., & Lee, D. (2003). A taxonomy of dirty data. Data Mining
+    and Knowledge Discovery, 7(1), 81–99.
+  doi: 10.1023/A:1021564703268
+Tukey 1977, Exploratory Data Analysis, ch. 1:
+  citation: Tukey, J. W. (1977). Exploratory data analysis (Ch. 1, Scratching down numbers). Addison-Wesley. ISBN
+    978-0-201-07616-5.
+  url: https://openlibrary.org/isbn/0201076160
+Anscombe 1973, Graphs in Statistical Analysis (The American Statistician 27(1)):
+  citation: Anscombe, F. J. (1973). Graphs in statistical analysis. The American Statistician, 27(1), 17–21.
+  doi: 10.1080/00031305.1973.10478966
+Efron 1979, Bootstrap Methods (Annals of Statistics 7(1)):
+  citation: 'Efron, B. (1979). Bootstrap methods: Another look at the jackknife. The Annals of Statistics, 7(1),
+    1–26.'
+  doi: 10.1214/aos/1176344552
+  free_url: https://projecteuclid.org/journals/annals-of-statistics/volume-7/issue-1/Bootstrap-Methods-Another-Look-at-the-Jackknife/10.1214/aos/1176344552.pdf
+Matejka & Fitzmaurice 2017, Same Stats, Different Graphs (CHI):
+  citation: 'Matejka, J., & Fitzmaurice, G. (2017). Same stats, different graphs: Generating datasets with varied
+    appearance and identical statistics through simulated annealing. In Proceedings of CHI ''17 (pp. 1290–1294).
+    ACM.'
+  doi: 10.1145/3025453.3025912
+  free_url: https://www.research.autodesk.com/app/uploads/2023/03/same-stats-different-graphs.pdf_rec2hRjLLGgM7Cn2T.pdf
+Bickel, Hammel & O'Connell 1975, Sex Bias in Graduate Admissions (Science 187):
+  citation: 'Bickel, P. J., Hammel, E. A., & O''Connell, J. W. (1975). Sex bias in graduate admissions: Data from
+    Berkeley. Science, 187(4175), 398–404.'
+  doi: 10.1126/science.187.4175.398
+Wasserstein & Lazar 2016, The ASA Statement on p-Values (The American Statistician 70(2)):
+  citation: 'Wasserstein, R. L., & Lazar, N. A. (2016). The ASA statement on p-values: Context, process, and purpose.
+    The American Statistician, 70(2), 129–133.'
+  doi: 10.1080/00031305.2016.1154108
+  free_url: https://www.tandfonline.com/doi/pdf/10.1080/00031305.2016.1154108
+Kohavi et al. 2009, Controlled Experiments on the Web (DMKD 18):
+  citation: 'Kohavi, R., Longbotham, R., Sommerfield, D., & Henne, R. M. (2009). Controlled experiments on the web:
+    Survey and practical guide. Data Mining and Knowledge Discovery, 18(1), 140–181.'
+  doi: 10.1007/s10618-008-0114-1
+  free_url: https://link.springer.com/content/pdf/10.1007/s10618-008-0114-1.pdf
+Greenland et al. 2016, Statistical Tests, P Values … Misinterpretations (Eur. J. Epidemiology 31):
+  citation: 'Greenland, S., Senn, S. J., Rothman, K. J., Carlin, J. B., Poole, C., Goodman, S. N., & Altman, D.
+    G. (2016). Statistical tests, P values, confidence intervals, and power: A guide to misinterpretations. European
+    Journal of Epidemiology, 31(4), 337–350.'
+  doi: 10.1007/s10654-016-0149-3
+  free_url: https://link.springer.com/content/pdf/10.1007/s10654-016-0149-3.pdf
+  pdf: W07_Greenland_2016_Statistical_Tests_P_Values.pdf
+  license: CC BY 4.0
+Ioannidis 2005 (PLoS Medicine 2(8)):
+  citation: Ioannidis, J. P. A. (2005). Why most published research findings are false. PLoS Medicine, 2(8), e124.
+  doi: 10.1371/journal.pmed.0020124
+  free_url: https://journals.plos.org/plosmedicine/article/file?id=10.1371/journal.pmed.0020124&type=printable
+  pdf: W07_Ioannidis_2005_Most_Published_Findings_False.pdf
+  license: CC BY
+Simmons, Nelson & Simonsohn 2011 (Psychological Science 22(11)):
+  citation: 'Simmons, J. P., Nelson, L. D., & Simonsohn, U. (2011). False-positive psychology: Undisclosed flexibility
+    in data collection and analysis allows presenting anything as significant. Psychological Science, 22(11), 1359–1366.'
+  doi: 10.1177/0956797611417632
+Cleveland & McGill 1984, Graphical Perception (JASA 79(387)):
+  citation: 'Cleveland, W. S., & McGill, R. (1984). Graphical perception: Theory, experimentation, and application
+    to the development of graphical methods. Journal of the American Statistical Association, 79(387), 531–554.'
+  doi: 10.1080/01621459.1984.10478080
+Segel & Heer 2010, Narrative Visualization (IEEE TVCG 16(6)):
+  citation: 'Segel, E., & Heer, J. (2010). Narrative visualization: Telling stories with data. IEEE Transactions
+    on Visualization and Computer Graphics, 16(6), 1139–1148.'
+  doi: 10.1109/TVCG.2010.179
+  free_url: https://idl.cs.washington.edu/files/2010-Narrative-InfoVis.pdf
+Wickham 2010, A Layered Grammar of Graphics (JCGS 19(1)):
+  citation: Wickham, H. (2010). A layered grammar of graphics. Journal of Computational and Graphical Statistics,
+    19(1), 3–28.
+  doi: 10.1198/jcgs.2009.07098
+  free_url: https://vita.had.co.nz/papers/layered-grammar.pdf
+Heer & Bostock 2010, Crowdsourcing Graphical Perception (CHI):
+  citation: 'Heer, J., & Bostock, M. (2010). Crowdsourcing graphical perception: Using Mechanical Turk to assess
+    visualization design. In Proceedings of CHI ''10 (pp. 203–212). ACM.'
+  doi: 10.1145/1753326.1753357
+  free_url: https://idl.cs.washington.edu/files/2010-MTurk-CHI.pdf
+Borkin et al. 2013, What Makes a Visualization Memorable? (IEEE TVCG 19(12)):
+  citation: Borkin, M. A., Vo, A. A., Bylinskii, Z., Isola, P., Sunkavalli, S., Oliva, A., & Pfister, H. (2013).
+    What makes a visualization memorable? IEEE Transactions on Visualization and Computer Graphics, 19(12), 2306–2315.
+  doi: 10.1109/TVCG.2013.234
+  free_url: https://vcg.seas.harvard.edu/publications/20130101-what-makes-a-visualization-memorable/paper
+Domingos 2012, A Few Useful Things to Know about Machine Learning (CACM 55(10)):
+  citation: Domingos, P. (2012). A few useful things to know about machine learning. Communications of the ACM,
+    55(10), 78–87.
+  doi: 10.1145/2347736.2347755
+  free_url: https://homes.cs.washington.edu/~pedrod/papers/cacm12.pdf
+Shmueli 2010, To Explain or to Predict? (Statistical Science 25(3)):
+  citation: Shmueli, G. (2010). To explain or to predict? Statistical Science, 25(3), 289–310.
+  doi: 10.1214/10-STS330
+  free_url: https://arxiv.org/abs/1101.0891
+Hand 2006, Classifier Technology and the Illusion of Progress (Statistical Science 21(1)):
+  citation: Hand, D. J. (2006). Classifier technology and the illusion of progress. Statistical Science, 21(1),
+    1–14.
+  doi: 10.1214/088342306000000060
+  free_url: https://arxiv.org/abs/math/0606441
+Breiman 2001, Random Forests (Machine Learning 45):
+  citation: Breiman, L. (2001). Random forests. Machine Learning, 45(1), 5–32.
+  doi: 10.1023/A:1010933404324
+  free_url: https://www.stat.berkeley.edu/~breiman/randomforest2001.pdf
+Kohavi 1995, Cross-Validation and Bootstrap for Accuracy Estimation (IJCAI):
+  citation: Kohavi, R. (1995). A study of cross-validation and bootstrap for accuracy estimation and model selection.
+    In Proceedings of IJCAI-95, Vol. 2 (pp. 1137–1144). Morgan Kaufmann.
+  url: https://www.ijcai.org/proceedings/1995/147
+  free_url: https://ijcai.org/proceedings/1995/0147.pdf
+Saito & Rehmsmeier 2015, Precision-Recall vs ROC (PLoS ONE 10(3)):
+  citation: Saito, T., & Rehmsmeier, M. (2015). The precision-recall plot is more informative than the ROC plot
+    when evaluating binary classifiers on imbalanced datasets. PLOS ONE, 10(3), e0118432.
+  doi: 10.1371/journal.pone.0118432
+  free_url: https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0118432&type=printable
+  pdf: W10_Saito_Rehmsmeier_2015_Precision_Recall_vs_ROC.pdf
+  license: CC BY 4.0
+'Jain 2010, Data Clustering: 50 Years Beyond K-means (Pattern Recognition Letters 31(8))':
+  citation: 'Jain, A. K. (2010). Data clustering: 50 years beyond K-means. Pattern Recognition Letters, 31(8), 651–666.'
+  doi: 10.1016/j.patrec.2009.09.011
+Kaufman et al. 2012, Leakage in Data Mining (ACM TKDD 6(4)):
+  citation: 'Kaufman, S., Rosset, S., Perlich, C., & Stitelman, O. (2012). Leakage in data mining: Formulation,
+    detection, and avoidance. ACM Transactions on Knowledge Discovery from Data, 6(4), 1–21.'
+  doi: 10.1145/2382577.2382579
+'Jolliffe & Cadima 2016, PCA: A Review (Phil. Trans. R. Soc. A 374)':
+  citation: 'Jolliffe, I. T., & Cadima, J. (2016). Principal component analysis: A review and recent developments.
+    Philosophical Transactions of the Royal Society A, 374(2065), 20150202.'
+  doi: 10.1098/rsta.2015.0202
+  free_url: https://pmc.ncbi.nlm.nih.gov/articles/PMC4792409/
+Dean & Ghemawat 2004, MapReduce (OSDI):
+  citation: 'Dean, J., & Ghemawat, S. (2004). MapReduce: Simplified data processing on large clusters. In Proceedings
+    of OSDI ''04 (pp. 137–150). USENIX Association.'
+  url: https://www.usenix.org/conference/osdi-04/mapreduce-simplified-data-processing-large-clusters
+  free_url: https://www.usenix.org/legacy/events/osdi04/tech/full_papers/dean/dean.pdf
+'Zaharia et al. 2016, Apache Spark: A Unified Engine (CACM 59(11))':
+  citation: 'Zaharia, M., Xin, R. S., Wendell, P., Das, T., Armbrust, M., Dave, A., Meng, X., Rosen, J., Venkataraman,
+    S., Franklin, M. J., Ghodsi, A., Gonzalez, J., Shenker, S., & Stoica, I. (2016). Apache Spark: A unified engine
+    for big data processing. Communications of the ACM, 59(11), 56–65.'
+  doi: 10.1145/2934664
+  free_url: https://people.eecs.berkeley.edu/~matei/papers/2016/cacm_apache_spark.pdf
+Armbrust et al. 2021, Lakehouse (CIDR):
+  citation: 'Armbrust, M., Ghodsi, A., Xin, R., & Zaharia, M. (2021). Lakehouse: A new generation of open platforms
+    that unify data warehousing and advanced analytics. In Proceedings of CIDR ''21.'
+  url: https://www.cidrdb.org/cidr2021/
+  free_url: https://www.cidrdb.org/cidr2021/papers/cidr2021_paper17.pdf
+Ghemawat et al. 2003, GFS (SOSP):
+  citation: Ghemawat, S., Gobioff, H., & Leung, S.-T. (2003). The Google file system. In Proceedings of SOSP '03
+    (pp. 29–43). ACM.
+  doi: 10.1145/945445.945450
+  free_url: https://research.google.com/archive/gfs-sosp2003.pdf
+Bommasani et al. 2021, Foundation Models (arXiv:2108.07258):
+  citation: Bommasani, R., Hudson, D. A., Adeli, E., et al. (2021). On the opportunities and risks of foundation
+    models. arXiv:2108.07258.
+  doi: 10.48550/arXiv.2108.07258
+  free_url: https://arxiv.org/abs/2108.07258
+Barocas & Selbst 2016, Big Data's Disparate Impact (California Law Review 104(3)):
+  citation: Barocas, S., & Selbst, A. D. (2016). Big data's disparate impact. California Law Review, 104(3), 671–732.
+  doi: 10.15779/Z38BG31
+  free_url: https://lawcat.berkeley.edu/record/1127463/files/104CalifLRev671.pdf
+Chouldechova 2017, Fair Prediction with Disparate Impact (Big Data 5(2)):
+  citation: 'Chouldechova, A. (2017). Fair prediction with disparate impact: A study of bias in recidivism prediction
+    instruments. Big Data, 5(2), 153–163.'
+  doi: 10.1089/big.2016.0047
+  free_url: https://arxiv.org/abs/1610.07524
+Mitchell et al. 2019, Model Cards (FAT*):
+  citation: Mitchell, M., Wu, S., Zaldivar, A., Barnes, P., Vasserman, L., Hutchinson, B., Spitzer, E., Raji, I.
+    D., & Gebru, T. (2019). Model cards for model reporting. In Proceedings of FAT* '19 (pp. 220–229). ACM.
+  doi: 10.1145/3287560.3287596
+  free_url: https://arxiv.org/abs/1810.03993
+Sweeney 2002, k-Anonymity (IJUFKS 10(5)):
+  citation: 'Sweeney, L. (2002). k-anonymity: A model for protecting privacy. International Journal of Uncertainty,
+    Fuzziness and Knowledge-Based Systems, 10(5), 557–570.'
+  doi: 10.1142/S0218488502001648
+  free_url: https://dataprivacylab.org/dataprivacy/projects/kanonymity/kanonymity.pdf
+Narayanan & Shmatikov 2008, De-anonymization of Large Sparse Datasets (IEEE S&P):
+  citation: Narayanan, A., & Shmatikov, V. (2008). Robust de-anonymization of large sparse datasets. In 2008 IEEE
+    Symposium on Security and Privacy (pp. 111–125). IEEE.
+  doi: 10.1109/SP.2008.33
+  free_url: https://www.cs.cornell.edu/~shmat/shmat_oak08netflix.pdf
+Angwin et al. 2016, Machine Bias (ProPublica):
+  citation: Angwin, J., Larson, J., Mattu, S., & Kirchner, L. (2016, May 23). Machine bias. ProPublica.
+  url: https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing
+  free_url: https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing

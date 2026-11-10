@@ -20,6 +20,9 @@ C = yaml.safe_load((ROOT / "course.yml").read_text(encoding="utf-8"))
 CO, WEEKS = C["course"], C["weeks"]
 REPO = CO["repo_slug"]
 RELEASED = int(CO.get("released_through", 0))
+# readings.yml: one entry per paper, keyed by the citation text used in course.yml.
+_RP = ROOT / "readings.yml"
+PAPERS = (yaml.safe_load(_RP.read_text(encoding="utf-8")) or {}) if _RP.exists() else {}
 
 NAV = [("index", "Schedule"), ("syllabus", "Syllabus"), ("project", "Project"),
        ("readings", "Papers"), ("resources", "Resources")]
@@ -140,6 +143,8 @@ li{margin:5px 0}
 .colab.alt:hover{background:var(--bordo);color:var(--on-dark)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .colab.alt{color:var(--gold);border-color:var(--gold)}}
 .soon{color:var(--muted);font-style:italic}
+.plinks{display:block;font-size:14px;margin-top:2px;color:var(--muted)}
+.plinks a{margin-right:2px}
 .check{list-style:none;padding-left:4px}
 .check li::before{content:"☐";margin-right:10px;color:var(--bordo)}
 code{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.88em;background:var(--chip);padding:1px 6px;border-radius:5px}
@@ -334,6 +339,27 @@ def md_to_html(text):
 TEMPLATE_NB = "notebooks/project/DS501_Project_Notebook_Template.ipynb"
 
 
+def paper_li(key):
+    """One reading-list entry: the citation plus its PDF / free copy / DOI links."""
+    p = PAPERS.get(key)
+    if not p:
+        return f"<li>{e(key)}</li>"
+    links = []
+    if p.get("pdf"):
+        lic = f" ({e(p['license'])})" if p.get("license") else ""
+        links.append(f'<a href="readings/{e(p["pdf"])}">PDF{lic}</a>')
+    if p.get("free_url"):
+        links.append(f'<a href="{e(p["free_url"])}">Free full text</a>')
+    if p.get("doi"):
+        links.append(f'<a href="https://doi.org/{e(p["doi"])}">DOI {e(p["doi"])}</a>')
+    elif p.get("url"):
+        links.append(f'<a href="{e(p["url"])}">Publisher page</a>')
+    if not p.get("pdf") and not p.get("free_url"):
+        links.append('<span class="soon">IBU library access</span>')
+    return (f'<li>{e(p.get("citation", key))}'
+            f'<span class="plinks">{" · ".join(links)}</span></li>')
+
+
 def page_project(single):
     handbook = md_to_html((ROOT / "project" / "handbook.md").read_text(encoding="utf-8"))
     return (
@@ -358,8 +384,8 @@ def page_project(single):
 def page_readings(single):
     out = []
     for w in WEEKS:
-        req = "".join(f"<li>{e(r)}</li>" for r in w["required"])
-        opt = "".join(f"<li>{e(r)}</li>" for r in w["optional"])
+        req = "".join(paper_li(r) for r in w["required"])
+        opt = "".join(paper_li(r) for r in w["optional"])
         out.append(
             f'<h3>Week {w["num"]} · {e(w["title"])}</h3>'
             f"<p><b>Required</b></p><ul>{req}</ul>"
@@ -374,8 +400,11 @@ def page_readings(single):
         f"method. Use the first pass on every paper here, and all three on the ones you "
         f"cite in your project.</p></div>"
         + "".join(out)
-        + "<p>Page numbers and IBU library links are added before the syllabus is "
-          "published.</p></div></main>"
+        + "<p><b>Finding the papers.</b> <i>PDF</i> links are openly licensed copies kept "
+          "on this site. <i>Free full text</i> links go to a legal free copy on the "
+          "publisher’s, author’s or arXiv site. Papers marked <i>IBU library access</i> "
+          "have no legal free copy: open the DOI link from the university network or ask "
+          "the IBU library.</p></div></main>"
     )
 
 
@@ -411,8 +440,8 @@ def page_week(w, single):
     lessons = "".join(
         f'<div class="lesson"><span class="c">{c}</span><span>{e(t)}</span></div>'
         for c, t in w["lessons"])
-    req = "".join(f"<li>{e(r)}</li>" for r in w["required"])
-    opt = "".join(f"<li>{e(r)}</li>" for r in w["optional"])
+    req = "".join(paper_li(r) for r in w["required"])
+    opt = "".join(paper_li(r) for r in w["optional"])
     ms = C["milestones"].get(n)
     msline = f"<li><b>Project milestone:</b> {e(ms)} — [date]</li>" if ms else ""
     prev = (f'<a href="{link(f"week{n-1:02d}", single)}">← Week {n-1}: '
@@ -527,6 +556,16 @@ def main():
     (docs / "assets").mkdir(parents=True, exist_ok=True)
     (docs / "assets" / "ds501.css").write_text(CSS, encoding="utf-8")
     (docs / ".nojekyll").write_text("", encoding="utf-8")
+    # Openly licensed papers: copy readings/<file>.pdf into docs/readings/.
+    rout = docs / "readings"
+    shutil.rmtree(rout, ignore_errors=True)
+    for key, pp in PAPERS.items():
+        if pp.get("pdf"):
+            src = ROOT / "readings" / pp["pdf"]
+            if not src.exists():
+                raise SystemExit(f"missing readings/{pp['pdf']} for {key}")
+            rout.mkdir(exist_ok=True)
+            shutil.copyfile(src, rout / src.name)
     # Published decks: copy slides/<deck>.pdf|.pptx for released weeks into docs/slides/.
     out = docs / "slides"
     shutil.rmtree(out, ignore_errors=True)
