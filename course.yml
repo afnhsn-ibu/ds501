@@ -1,0 +1,247 @@
+course:
+  code: "DS 501"
+  title: "Introduction to Data Science"
+  institution: "International Balkan University"
+  city: "Skopje"
+  level: "Graduate (Master's)"
+  semester: "2026–27 Fall"
+  instructor: "Dr. Afan HASAN"
+  instructor_page: "https://aps.hello.ibu.edu.mk/afan.hasan/"
+  orcid: "https://orcid.org/0000-0002-1177-1711"
+  repo: "https://github.com/afnhsn-ibu/ds501"
+  repo_slug: "afnhsn-ibu/ds501"
+  blurb: >-
+    Twelve weeks that follow one path: a question, the data that answers it,
+    the understanding you build from it, the models you fit, how you
+    communicate the result, and what you owe the people in the data.
+  meeting: "One session of about three hours each week: three 45-minute lessons and a practice."
+  tools: "Python 3 in Google Colab, pandas, NumPy, matplotlib, Plotly, SciPy, statsmodels, scikit-learn, SQLite, PySpark."
+
+assessment:
+  - item: "Practice (labs)"
+    weight: "[__%]"
+    detail: "12 labs, 10 points each, finished as homework."
+  - item: "Quizzes"
+    weight: "[__%]"
+    detail: "12 quizzes, 15 MCQ (+1 applied question from Week 2), 25–30 minutes."
+  - item: "Course project"
+    weight: "[__%]"
+    detail: "Proposal, progress check, report and presentation."
+  - item: "Participation"
+    weight: "[__%]"
+    detail: "Scenario work in pairs and Check Your Understanding votes."
+
+milestones:
+  3: "Topic and question"
+  5: "Data audit"
+  7: "Proposal"
+  10: "Progress check"
+  12: "Report and presentation"
+
+books:
+  - "McKinney, Python for Data Analysis, 3rd ed. (2022) — weeks 3–5"
+  - "James, Witten, Hastie, Tibshirani & Taylor, An Introduction to Statistical Learning with Applications in Python (2023) — weeks 6–10"
+  - "Provost & Fawcett, Data Science for Business (2013) — weeks 1–2 and 9"
+
+weeks:
+  - num: 1
+    title: "What Is Data Science?"
+    purpose: "What the field is, how it differs from statistics and AI, and who does the work."
+    lessons:
+      - ["1-1", "Introduction to Data Science"]
+      - ["1-2", "The Data Science Process and Types of Data"]
+      - ["1-3", "The Data Scientist and the Data Team"]
+    practice: "A first look at real data"
+    dataset: "Palmer Penguins"
+    notebook: "W01_Lab_First_Look_at_Data"
+    required:
+      - "Donoho 2017, 50 Years of Data Science (JCGS 26(4))"
+      - "Breiman 2001, Statistical Modeling: The Two Cultures (Statistical Science 16(3))"
+    optional:
+      - "Tukey 1962, The Future of Data Analysis (Ann. Math. Stat. 33(1))"
+      - "Cleveland 2001 (International Statistical Review 69(1))"
+      - "Davenport & Patil 2012 (Harvard Business Review)"
+      - "Keshav 2007, How to Read a Paper (SIGCOMM CCR 37(3))"
+  - num: 2
+    title: "Data Science Methodology"
+    purpose: "A repeatable process from business question to deployment and feedback."
+    lessons:
+      - ["2-1", "From Problem to Data Collection"]
+      - ["2-2", "From Understanding to Feedback"]
+      - ["2-3", "CRISP-DM and Other Process Models"]
+    practice: "CRISP-DM walkthrough"
+    dataset: "Telco churn"
+    notebook: "W02_Lab_CRISP_DM_Walkthrough"
+    required:
+      - "Wirth & Hipp 2000, CRISP-DM (PADD 2000)"
+      - "Provost & Fawcett 2013, Data Science and its Relationship to Big Data and Data-Driven Decision Making (Big Data 1(1))"
+    optional:
+      - "Fayyad, Piatetsky-Shapiro & Smyth 1996, From Data Mining to Knowledge Discovery (AI Magazine 17(3))"
+      - "Martínez-Plumed et al. 2021, CRISP-DM Twenty Years Later (IEEE TKDE 33(8))"
+      - "Sculley et al. 2015, Hidden Technical Debt in ML Systems (NeurIPS)"
+  - num: 3
+    title: "Data Sources, Formats and Acquisition"
+    purpose: "Where data comes from, what shape it arrives in, and how to get it into Python."
+    lessons:
+      - ["3-1", "Data Sources and Collection"]
+      - ["3-2", "Formats, Metadata and Tidy Data"]
+      - ["3-3", "Acquiring Data with Python"]
+    practice: "Files, APIs, scraping and tidy data"
+    dataset: "Open data portals"
+    notebook: "W03_Lab_Files_APIs_Scraping"
+    required:
+      - "Wickham 2014, Tidy Data (J. Statistical Software 59(10))"
+      - "Gebru et al. 2021, Datasheets for Datasets (CACM 64(12))"
+    optional:
+      - "Wilkinson et al. 2016, FAIR Principles (Scientific Data 3)"
+      - "Broman & Woo 2018, Data Organization in Spreadsheets (The American Statistician 72(1))"
+  - num: 4
+    title: "Databases and SQL"
+    purpose: "Relational thinking, the query language, and where NoSQL fits."
+    lessons:
+      - ["4-1", "Relational Databases"]
+      - ["4-2", "SQL for Data Science"]
+      - ["4-3", "NoSQL and Data Repositories"]
+    practice: "SQL on a real database"
+    dataset: "Chinook"
+    notebook: "W04_Lab_SQL_on_Chinook"
+    required:
+      - "Codd 1970, A Relational Model of Data (CACM 13(6))"
+      - "Cattell 2010, Scalable SQL and NoSQL Data Stores (SIGMOD Record 39(4))"
+    optional:
+      - "Brewer 2012, CAP Twelve Years Later (IEEE Computer 45(2))"
+      - "Stonebraker & Pavlo 2024, What Goes Around Comes Around… And Around (SIGMOD Record 53(2))"
+  - num: 5
+    title: "Data Cleaning, Wrangling and EDA"
+    purpose: "Most of the work: making a messy table trustworthy, then looking at it properly."
+    lessons:
+      - ["5-1", "Data Quality and Cleaning"]
+      - ["5-2", "Data Wrangling with pandas"]
+      - ["5-3", "Exploratory Data Analysis"]
+    practice: "Cleaning and exploratory analysis"
+    dataset: "Messy Titanic"
+    notebook: "W05_Lab_Cleaning_and_EDA"
+    required:
+      - "Kandel et al. 2011, Wrangler (CHI)"
+      - "Rubin 1976, Inference and Missing Data (Biometrika 63(3))"
+    optional:
+      - "Kim et al. 2003, A Taxonomy of Dirty Data (DMKD 7)"
+      - "Tukey 1977, Exploratory Data Analysis, ch. 1"
+  - num: 6
+    title: "Describing Data and Probability"
+    purpose: "Summaries that survive outliers, and why sampling works at all."
+    lessons:
+      - ["6-1", "Describing Data"]
+      - ["6-2", "Probability and Sampling"]
+      - ["6-3", "Visualising Distributions"]
+    practice: "Robust statistics, the CLT and the bootstrap"
+    dataset: "Simulated and real samples"
+    notebook: "W06_Lab_Describing_Data_CLT_Bootstrap"
+    required:
+      - "Anscombe 1973, Graphs in Statistical Analysis (The American Statistician 27(1))"
+      - "Efron 1979, Bootstrap Methods (Annals of Statistics 7(1))"
+    optional:
+      - "Matejka & Fitzmaurice 2017, Same Stats, Different Graphs (CHI)"
+      - "Bickel, Hammel & O'Connell 1975, Sex Bias in Graduate Admissions (Science 187)"
+  - num: 7
+    title: "Statistical Inference"
+    purpose: "What an interval and a p-value do and do not tell you, and how to run a fair test."
+    lessons:
+      - ["7-1", "Estimation and Confidence Intervals"]
+      - ["7-2", "Hypothesis Testing and p-values"]
+      - ["7-3", "Comparing Groups and Experiments"]
+    practice: "Confidence intervals, tests, an A/B test and power"
+    dataset: "Experiment data"
+    notebook: "W07_Lab_Inference_and_AB_Testing"
+    required:
+      - "Wasserstein & Lazar 2016, The ASA Statement on p-Values (The American Statistician 70(2))"
+      - "Kohavi et al. 2009, Controlled Experiments on the Web (DMKD 18)"
+    optional:
+      - "Greenland et al. 2016, Statistical Tests, P Values … Misinterpretations (Eur. J. Epidemiology 31)"
+      - "Ioannidis 2005 (PLoS Medicine 2(8))"
+      - "Simmons, Nelson & Simonsohn 2011 (Psychological Science 22(11))"
+  - num: 8
+    title: "Data Visualization and Communication"
+    purpose: "Charts people read correctly, and the story that goes around them."
+    lessons:
+      - ["8-1", "Principles of Data Visualization"]
+      - ["8-2", "Dashboards and Interactive Visualization"]
+      - ["8-3", "Data Storytelling and Reporting"]
+    practice: "Interactive charts with Plotly"
+    dataset: "Gapminder"
+    notebook: "W08_Lab_Visualization_with_Plotly"
+    required:
+      - "Cleveland & McGill 1984, Graphical Perception (JASA 79(387))"
+      - "Segel & Heer 2010, Narrative Visualization (IEEE TVCG 16(6))"
+    optional:
+      - "Wickham 2010, A Layered Grammar of Graphics (JCGS 19(1))"
+      - "Heer & Bostock 2010, Crowdsourcing Graphical Perception (CHI)"
+      - "Borkin et al. 2013, What Makes a Visualization Memorable? (IEEE TVCG 19(12))"
+  - num: 9
+    title: "Machine Learning: Regression and Classification"
+    purpose: "Fitting a model that predicts, and knowing what it is for."
+    lessons:
+      - ["9-1", "Introduction to Machine Learning"]
+      - ["9-2", "Linear Regression"]
+      - ["9-3", "Classification"]
+    practice: "Regression and classification end to end"
+    dataset: "Diamonds and Titanic"
+    notebook: "W09_Lab_Regression_and_Classification"
+    required:
+      - "Domingos 2012, A Few Useful Things to Know about Machine Learning (CACM 55(10))"
+      - "Shmueli 2010, To Explain or to Predict? (Statistical Science 25(3))"
+    optional:
+      - "Hand 2006, Classifier Technology and the Illusion of Progress (Statistical Science 21(1))"
+      - "Breiman 2001, Random Forests (Machine Learning 45)"
+  - num: 10
+    title: "Evaluation, Clustering and Dimensionality Reduction"
+    purpose: "Measuring a model honestly, and finding structure without labels."
+    lessons:
+      - ["10-1", "Model Evaluation and Validation"]
+      - ["10-2", "Unsupervised Learning: Clustering"]
+      - ["10-3", "Dimensionality Reduction and Feature Engineering"]
+    practice: "Pipelines, ROC/PR, k-means and PCA"
+    dataset: "Mixed"
+    notebook: "W10_Lab_Evaluation_Clustering_PCA"
+    required:
+      - "Kohavi 1995, Cross-Validation and Bootstrap for Accuracy Estimation (IJCAI)"
+      - "Saito & Rehmsmeier 2015, Precision-Recall vs ROC (PLoS ONE 10(3))"
+      - "Jain 2010, Data Clustering: 50 Years Beyond K-means (Pattern Recognition Letters 31(8))"
+    optional:
+      - "Kaufman et al. 2012, Leakage in Data Mining (ACM TKDD 6(4))"
+      - "Jolliffe & Cadima 2016, PCA: A Review (Phil. Trans. R. Soc. A 374)"
+  - num: 11
+    title: "Big Data, Spark and Generative AI"
+    purpose: "What changes when the data no longer fits, and how to use a model that writes code."
+    lessons:
+      - ["11-1", "Big Data and Distributed Computing"]
+      - ["11-2", "Spark, Warehouses, Lakes and ETL"]
+      - ["11-3", "Generative AI for Data Science"]
+    practice: "PySpark, and reviewing AI-written code"
+    dataset: "Large tabular data"
+    notebook: "W11_Lab_PySpark_and_AI_Code_Review"
+    required:
+      - "Dean & Ghemawat 2004, MapReduce (OSDI)"
+      - "Zaharia et al. 2016, Apache Spark: A Unified Engine (CACM 59(11))"
+      - "Armbrust et al. 2021, Lakehouse (CIDR)"
+    optional:
+      - "Ghemawat et al. 2003, GFS (SOSP)"
+      - "Bommasani et al. 2021, Foundation Models (arXiv:2108.07258)"
+  - num: 12
+    title: "Ethics, Fairness and Wrap-up"
+    purpose: "Privacy, fairness and what you are accountable for. Final presentations."
+    lessons:
+      - ["12-1", "Data Ethics and Privacy"]
+      - ["12-2", "Algorithmic Fairness and Responsible AI"]
+      - ["12-3", "Project Presentations and Wrap-up"]
+    practice: "Fairness audit and k-anonymity"
+    dataset: "COMPAS"
+    notebook: "W12_Lab_Fairness_Audit_and_k_Anonymity"
+    required:
+      - "Barocas & Selbst 2016, Big Data's Disparate Impact (California Law Review 104(3))"
+      - "Chouldechova 2017, Fair Prediction with Disparate Impact (Big Data 5(2))"
+      - "Mitchell et al. 2019, Model Cards (FAT*)"
+    optional:
+      - "Sweeney 2002, k-Anonymity (IJUFKS 10(5))"
+      - "Narayanan & Shmatikov 2008, De-anonymization of Large Sparse Datasets (IEEE S&P)"
+      - "Angwin et al. 2016, Machine Bias (ProPublica)"
