@@ -9,6 +9,7 @@ Same shape as tools/build_deck.py: one Python data file in, finished HTML out.
 import argparse
 import html
 import json
+import re
 import shutil
 from pathlib import Path
 
@@ -139,6 +140,9 @@ li{margin:5px 0}
 .colab.alt:hover{background:var(--bordo);color:var(--on-dark)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .colab.alt{color:var(--gold);border-color:var(--gold)}}
 .soon{color:var(--muted);font-style:italic}
+.check{list-style:none;padding-left:4px}
+.check li::before{content:"☐";margin-right:10px;color:var(--bordo)}
+code{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.88em;background:var(--chip);padding:1px 6px;border-radius:5px}
 .pager{display:flex;justify-content:space-between;gap:14px;margin-top:44px;
   border-top:1px solid var(--line);padding-top:20px;font-size:16px}
 
@@ -286,28 +290,67 @@ def page_syllabus(single):
     )
 
 
+def md_inline(t):
+    t = e(t)
+    t = re.sub(r"`([^`]+)`", r"<code>\1</code>", t)
+    t = re.sub(r"\*\*([^*]+)\*\*", r"<b>\1</b>", t)
+    return re.sub(r"\[([^\]]+)\]\(([^)\s]+)\)", r'<a href="\2">\1</a>', t)
+
+
+def md_to_html(text):
+    """The small Markdown subset project/handbook.md uses: ## and ### headings,
+    paragraphs, - and 1. lists, - [ ] checklists, pipe tables, **bold**, `code`, links."""
+    out = []
+    for block in re.split(r"\n\s*\n", text.strip()):
+        lines = block.strip().splitlines()
+        first = lines[0]
+        if first.startswith("# "):
+            continue  # the page supplies its own title
+        if first.startswith("### "):
+            out.append(f"<h3>{md_inline(first[4:])}</h3>")
+        elif first.startswith("## "):
+            out.append(f"<h2>{md_inline(first[3:])}</h2>")
+        elif all(l.startswith("|") for l in lines):
+            rows = [[c.strip() for c in l.strip().strip("|").split("|")]
+                    for l in lines if not re.fullmatch(r"[|\s:-]+", l)]
+            head = "".join(f"<th>{md_inline(c)}</th>" for c in rows[0])
+            body = "".join("<tr>" + "".join(f"<td>{md_inline(c)}</td>" for c in r) + "</tr>"
+                           for r in rows[1:])
+            out.append(f'<div class="tablewrap"><table class="sched"><tr>{head}</tr>'
+                       f"{body}</table></div>")
+        elif all(l.startswith("- [ ] ") for l in lines):
+            out.append('<ul class="check">'
+                       + "".join(f"<li>{md_inline(l[6:])}</li>" for l in lines) + "</ul>")
+        elif all(l.startswith("- ") for l in lines):
+            out.append("<ul>" + "".join(f"<li>{md_inline(l[2:])}</li>" for l in lines) + "</ul>")
+        elif all(re.match(r"\d+\. ", l) for l in lines):
+            out.append("<ol>" + "".join(
+                f"<li>{md_inline(l.split('. ', 1)[1])}</li>" for l in lines) + "</ol>")
+        else:
+            out.append(f"<p>{md_inline(' '.join(lines))}</p>")
+    return "".join(out)
+
+
+TEMPLATE_NB = "notebooks/project/DS501_Project_Notebook_Template.ipynb"
+
+
 def page_project(single):
-    ms = "".join(
-        f'<tr><td class="wk">Week {k}</td><td><b>{e(v)}</b></td></tr>'
-        for k, v in sorted(C["milestones"].items()))
+    handbook = md_to_html((ROOT / "project" / "handbook.md").read_text(encoding="utf-8"))
     return (
-        f'<main><div class="wrap"><h2>Course project</h2>'
+        f'<main><div class="wrap"><h2>Course project handbook</h2>'
         f"<p>You work on one dataset and one question for the whole semester and present "
         f"the result in Week 12. The project is individual. The point is not a high score "
         f"on a benchmark; it is a defensible answer to a real question, with the "
         f"uncertainty stated honestly.</p>"
-        f"<h2>Milestones</h2>"
-        f'<div class="tablewrap"><table class="sched">'
-        f'<tr><th style="width:16%">Week</th><th>Milestone</th></tr>{ms}</table></div>'
-        f"<h2>Choosing a question</h2>"
-        f"<p>Good questions here are small, local and answerable. Skopje air quality, a "
-        f"North Macedonian open dataset, public transport, or something from your own "
-        f"field of work. A question that needs data you cannot get is not a project.</p>"
-        f'<div class="mistake"><p><b>Common mistake:</b> choosing the dataset first and '
-        f"then hunting for a question inside it.</p></div>"
-        f"<h2>Handbook</h2>"
-        f"<p>The full brief, the marking guide and the notebook template are in the "
-        f"<i>DS 501 Course Project Handbook</i>. [Link]</p>"
+        f'<div class="practice"><p><b>Starter notebook</b> — '
+        f"<code>DS501_Project_Notebook_Template.ipynb</code></p>"
+        f"<p>Start your project from this notebook and keep its CRISP-DM section headings. "
+        f"In Colab, use <i>File → Save a copy in Drive</i> before you edit.</p>"
+        f'<a class="colab" href="https://colab.research.google.com/github/{REPO}/blob/main/'
+        f'{TEMPLATE_NB}">Open the template in Colab</a>'
+        f'<a class="colab alt" href="{CO["repo"]}/raw/main/{TEMPLATE_NB}">Download .ipynb</a>'
+        f"</div>"
+        f"{handbook}"
         f"</div></main>"
     )
 

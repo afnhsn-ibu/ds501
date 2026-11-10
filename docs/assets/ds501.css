@@ -114,6 +114,9 @@ li{margin:5px 0}
 .colab.alt:hover{background:var(--bordo);color:var(--on-dark)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .colab.alt{color:var(--gold);border-color:var(--gold)}}
 .soon{color:var(--muted);font-style:italic}
+.check{list-style:none;padding-left:4px}
+.check li::before{content:"☐";margin-right:10px;color:var(--bordo)}
+code{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.88em;background:var(--chip);padding:1px 6px;border-radius:5px}
 .pager{display:flex;justify-content:space-between;gap:14px;margin-top:44px;
   border-top:1px solid var(--line);padding-top:20px;font-size:16px}
 
