@@ -1,9 +1,14 @@
-// Build a DS 501 "reading summaries" deck: title slide, two slides per paper, closing slide.
-// Usage: node build_readings_deck.js <content.json> <weekNum> <weekTitle> <out.pptx>
+// Build DS 501 reading-summary slides: two slides per paper.
+// Usage: node build_readings_deck.js <content.json> <weekNum> <weekTitle> <out.pptx> [embedStart embedTotal]
+// Without the embed arguments it builds a stand-alone deck (title slide, paper slides, closing slide).
+// With them it builds only the paper slides, footed "DS 501 · Week N · Papers to Read" and numbered
+// embedStart.. of embedTotal, ready to be inserted into the weekly deck's "Papers to Read" section
+// (see merge_into_weekly.ps1).
 const fs = require("fs");
 const pptxgen = require("pptxgenjs");
 
-const [, , contentPath, weekNum, weekTitle, outPath] = process.argv;
+const [, , contentPath, weekNum, weekTitle, outPath, embedStart, embedTotal] = process.argv;
+const EMBED = embedStart !== undefined;
 const papers = JSON.parse(fs.readFileSync(contentPath, "utf8"));
 const W = parseInt(weekNum, 10);
 
@@ -23,14 +28,14 @@ pres.title = `DS 501 · Week ${W} · Reading Summaries`;
 pres.theme = { headFontFace: SANS, bodyFontFace: SANS };
 
 const SW = 13.333, MX = 0.89, CW = SW - 2 * MX; // margins as in the weekly decks
-const total = 2 + papers.length * 2;
-let n = 0;
+const total = EMBED ? parseInt(embedTotal, 10) : 2 + papers.length * 2;
+let n = EMBED ? parseInt(embedStart, 10) - 1 : 0;
 
 function tb(slide, text, o) { slide.addText(text, Object.assign({ isTextBox: true, margin: 0, fontFace: SANS }, o)); }
 
 function footer(slide) {
   n += 1;
-  tb(slide, `DS 501 · Week ${W} · Reading summaries`, { x: MX, y: 6.95, w: 7, h: 0.3, fontSize: 11, color: K.muted, charSpacing: 0.5 });
+  tb(slide, `DS 501 · Week ${W} · ${EMBED ? "Papers to Read" : "Reading summaries"}`, { x: MX, y: 6.95, w: 7, h: 0.3, fontSize: 11, color: K.muted, charSpacing: 0.5 });
   tb(slide, `${n} / ${total}`, { x: SW - MX - 1.5, y: 6.95, w: 1.5, h: 0.3, fontSize: 11, color: K.muted, align: "right" });
   slide.addShape(pres.shapes.RECTANGLE, { x: 0, y: 7.42, w: SW, h: 0.08, fill: { color: K.line }, line: { type: "none" } });
   slide.addShape(pres.shapes.RECTANGLE, { x: 0, y: 7.42, w: SW * n / total, h: 0.08, fill: { color: K.red }, line: { type: "none" } });
@@ -56,7 +61,7 @@ function capLabel(slide, text, x, y, w, color) {
 }
 
 // ---------------------------------------------------------------- title slide
-{
+if (!EMBED) {
   const s = pres.addSlide(); s.background = { color: K.bordo };
   n += 1;
   tb(s, "DS 501 · INTRODUCTION TO DATA SCIENCE", { x: MX, y: 0.8, w: 7, h: 0.3, fontFace: MONO, fontSize: 14, color: K.gold, charSpacing: 1.5 });
@@ -148,7 +153,7 @@ for (const p of papers) {
 }
 
 // ---------------------------------------------------------------- closing slide
-{
+if (!EMBED) {
   const s = pres.addSlide(); s.background = { color: K.bordo };
   tb(s, `DS 501 · WEEK ${W} · READING SUMMARIES`, { x: MX, y: 0.8, w: 8, h: 0.3, fontFace: MONO, fontSize: 14, color: K.gold, charSpacing: 1.5 });
   tb(s, "Writing Your Half-Page Note", { x: MX, y: 1.4, w: CW, h: 0.8, fontSize: 38, bold: true, color: K.onDark, charSpacing: 1 });

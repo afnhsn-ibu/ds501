@@ -191,14 +191,14 @@ def deck(w, ext):
 
 
 def summaries_html(w):
-    """Links to the week's reading-summary deck, if it has one and is released."""
-    if not (released(w) and w.get("summaries")):
+    """Pointer to the reading summaries inside the week's deck ("Papers to Read" section)."""
+    if not (released(w) and w.get("reading_summaries") and w.get("deck")):
         return ""
-    base = f"slides/{w['summaries']}"
     return (f'<p class="plinks" style="font-size:16px;margin-top:10px">'
-            f'<b>Reading summaries:</b> two slides per paper · '
-            f'<a href="{base}.pdf">View (PDF)</a> · '
-            f'<a href="{base}.pptx" download>PowerPoint with notes</a></p>')
+            f'<b>Reading summaries:</b> two slides per paper, in the <i>Papers to Read</i> '
+            f"section at the end of this week's slides · "
+            f'<a href="{deck(w, "pdf")}">View (PDF)</a> · '
+            f'<a href="{deck(w, "pptx")}" download>PowerPoint with notes</a></p>')
 
 
 def nav(active, single):
@@ -592,7 +592,7 @@ def main():
     out = docs / "slides"
     shutil.rmtree(out, ignore_errors=True)
     for w in WEEKS:
-        names = [w[k] for k in ("deck", "summaries") if w.get(k)] if released(w) else []
+        names = [w["deck"]] if released(w) and w.get("deck") else []
         for name in names:
             out.mkdir(exist_ok=True)
             for ext in ("pdf", "pptx"):
