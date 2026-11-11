@@ -1,0 +1,98 @@
+[
+ {
+  "label": "Wickham 2014",
+  "kind": "Required",
+  "short_title": "Tidy Data: Match a Table's Layout to Its Meaning",
+  "citation": "Wickham, H. (2014). Tidy data. Journal of Statistical Software, 59(10), 1–23. https://doi.org/10.18637/jss.v059.i10",
+  "problem": "Analysts spend much of their time preparing data, yet there was little research on how to do it well. The same values can be laid out in many ways. Wickham asks which layout makes analysis easiest.",
+  "key_ideas": [
+   "Every value belongs to a variable (one attribute) and to an observation (one unit)",
+   "Tidy: each variable a column, each observation a row, each type of unit a table",
+   "A few operations (melt, string splitting and cast) can tidy most messy datasets"
+  ],
+  "key_term": {"term": "Observational unit", "definition": "The kind of thing that is measured, such as a person, a song or a day; each kind gets its own table"},
+  "slide2_title": "Five Common Messy Layouts, Each With a Standard Fix",
+  "findings": [
+   "Pew income-by-religion table: the headers are income values, so melting gives religion, income, freq",
+   "WHO tuberculosis data: headers like m1524 hold sex and age; melt, then split the column in two",
+   "Weather data: days spread over columns, tmin and tmax in rows; melt, then cast back to columns"
+  ],
+  "course_link": "Lesson 3-2 teaches his three rules and five problems with their pandas fixes. In Practice 3 you melt the wide quiz table (quiz_w1 to quiz_w3) into 12 tidy rows.",
+  "limitation": "Examples and code use R (reshape2, plyr), so pandas names differ. The rules come from his own experience, not from tests with users.",
+  "note_question": "Take the Skopje weather data from Practice 3. What is one observation? Is the monthly table also tidy, and for which question?",
+  "notes_slide1": "Wickham starts from a familiar complaint: much of data analysis is spent cleaning and preparing data, and this work is repeated as new problems appear. He focuses on one part of cleaning, which he calls tidying: giving a dataset a structure that makes analysis easy. He first separates layout from meaning. The same experiment can be shown as a table or as its transpose; the rows and columns differ, but the data is the same. Every value belongs to a variable, which measures one attribute such as height or temperature, and to an observation, which collects all values measured on one unit, such as a person or a day. In tidy data, each variable forms a column, each observation forms a row, and each type of observational unit forms a table. Wickham notes that this is Codd's third normal form, stated in the language of statisticians. He also shows that missing values need thought: some must be kept, others can be dropped.",
+  "notes_slide2": "Section 3 describes the five most common ways real datasets break the rules: column headers are values, not variable names; several variables are stored in one column; variables are stored in both rows and columns; several types of observational unit share one table; and one type of unit is spread over several tables or files. Each problem is shown with a real dataset. A Pew Research table has one column per income band, so melting turns those headers into an income variable. WHO tuberculosis counts use headers such as m1524, which must be melted and then split into sex and age. A Mexican weather station records days in columns and minimum and maximum temperature in rows, so it needs melting and then casting. Billboard chart data repeats song details every week and is split into a song table and a rank table, much like database normalization. Files split by year are combined, with a column that records each file's name."
+ },
+ {
+  "label": "Gebru et al. 2021",
+  "kind": "Required",
+  "short_title": "Every Dataset Should Come With a Datasheet",
+  "citation": "Gebru, T., Morgenstern, J., Vecchione, B., Vaughan, J. W., Wallach, H., Daumé III, H., & Crawford, K. (2021). Datasheets for datasets. Communications of the ACM, 64(12), 86–92. https://doi.org/10.1145/3458723",
+  "problem": "A model's behaviour depends on its training data, and mismatches or biases in that data can cause harm. Yet there was no standard process for documenting machine learning datasets. The authors propose one.",
+  "key_ideas": [
+   "Like an electronic part, every dataset should come with a datasheet describing it",
+   "The questions follow the dataset's life: motivation, composition, collection, uses, upkeep",
+   "Answering is meant to be manual, so that creators reflect instead of filling forms automatically"
+  ],
+  "key_term": {"term": "Datasheet", "definition": "A document that answers standard questions on a dataset's purpose, contents, collection, uses and maintenance"},
+  "slide2_title": "Read the Questions Before Collecting; Answer After",
+  "findings": [
+   "The questions were refined over about two years, with product teams, researchers and lawyers",
+   "Legal and ethical questions got better answers inside each stage than in one separate section",
+   "Microsoft, Google and IBM began pilots; related ideas include model cards and data cards"
+  ],
+  "course_link": "Lesson 3-1 says read the documentation before the data. A datasheet is that documentation; its collection questions also fit the sources you call in Practice 3.",
+  "limitation": "Not a full fix for bias: creators cannot foresee every use, data that changes often is hard to cover, and writing one takes time.",
+  "note_question": "Why do the authors say datasheets should not be generated automatically? Do you agree? Use one of their questions as an example.",
+  "notes_slide1": "Every machine learning model is trained and tested on data, and the data shapes how the model behaves. A model may fail when it is used in a setting that differs from its training data, or it may repeat unwanted social biases in that data. The authors note that data provenance had been studied in the database community, but machine learning had no standard way to document datasets. They borrow an idea from electronics, where every component comes with a datasheet listing its characteristics, test results and recommended use. A datasheet for a dataset has two main audiences. For dataset creators, it encourages careful reflection on how the data was created, distributed and maintained, including risks. For dataset consumers, it gives the information needed to choose a suitable dataset and avoid misuse. The questions are not meant to be prescriptive; they can be adapted to a domain or organisation, and questions that do not apply can be skipped.",
+  "notes_slide2": "The questions are grouped by the stages of a dataset's life: motivation, composition, collection process, preprocessing, cleaning and labelling, uses, distribution, and maintenance. Examples include: for what purpose was the dataset created, and who funded it? Is it a sample, and is it representative? Can individuals be identified? Did people consent? Was the raw data saved? Which tasks should it not be used for? Creators should read the composition and collection questions before collecting any data and answer them afterwards. The authors tested early versions by writing datasheets for two existing datasets, then by working with product teams at two large technology companies and with lawyers. One lesson was that legal and ethical questions were answered more often when placed inside each stage. They also admit limits: datasheets do not solve bias on their own, creators cannot predict every use, and the work takes time. They believe the benefits outweigh the costs."
+ },
+ {
+  "label": "Wilkinson et al. 2016",
+  "kind": "Optional",
+  "short_title": "FAIR Data Serves Machines as Well as People",
+  "citation": "Wilkinson, M. D., Dumontier, M., Aalbersberg, I. J., et al. (2016). The FAIR Guiding Principles for scientific data management and stewardship. Scientific Data, 3, 160018. https://doi.org/10.1038/sdata.2016.18",
+  "problem": "Research data sits in many repositories with weak descriptions, so finding and combining it can take weeks of expert work. The authors propose shared principles that make data easier to find and reuse.",
+  "key_ideas": [
+   "Findable: a unique, persistent identifier (e.g. a DOI) and rich metadata in a searchable index",
+   "Accessible and Interoperable: open protocols, shared vocabularies, links to related data",
+   "Reusable: a clear usage licence, detailed provenance and community standards"
+  ],
+  "key_term": {"term": "Machine-actionable", "definition": "Described well enough that software can find, judge and use data it has never seen before"},
+  "slide2_title": "FAIR Is a Goal to Approach, Not a Standard",
+  "findings": [
+   "The principles grew from a 2014 workshop in Leiden and were refined by a FORCE11 working group",
+   "They name no technology and can be adopted step by step, in any combination",
+   "Sensitive data can still be fairly FAIR: publish rich metadata and clear rules for access"
+  ],
+  "course_link": "Links to lesson 3-2's metadata and lesson 3-3's rule to record source, date and licence. The World Bank and Open-Meteo APIs in Practice 3 are examples of access by protocol.",
+  "limitation": "High-level by design: it names no technology and gives no concrete checklist, and most of its examples come from the life sciences.",
+  "note_question": "Check the World Bank data from Practice 3 against F, A, I and R. Which principle does it meet best, and which least well?",
+  "notes_slide1": "This short Comment is the first formal publication of the FAIR principles. The authors argue that good data management is not a goal in itself but the path to discovery and reuse. Many general-purpose repositories accept data in any format with few requirements on its description, so the data landscape is becoming more scattered. Their example is a biologist who wants to compare her own results with published data: where should she search, in what format will the data be, can it be combined with her files, and may she use it? They say such work often takes weeks or months of specialist effort, not because technology is missing, but because data is not created and preserved with enough care. A special focus is on machines. People can read context, but they cannot work at the scale of modern science, so they rely on software. FAIR therefore aims to make data machine-actionable as well as readable by people.",
+  "notes_slide2": "Box 2 lists fifteen short principles in four groups. Findable: data and metadata get a globally unique and persistent identifier, rich metadata, and an entry in a searchable resource. Accessible: they can be retrieved by identifier through an open, free protocol, with login where needed, and the metadata stays available even if the data is removed. Interoperable: they use a shared, formal language and vocabularies and include references to other data. Reusable: they carry many accurate attributes, a clear usage licence, detailed provenance and domain standards. The principles do not prescribe any technology and are not a standard; providers can adopt them gradually. Data and metadata are treated separately, so personal data can stay restricted while its metadata is public. The paper describes repositories that already apply parts of FAIR, such as Dataverse, which gives each dataset a DOI and keeps metadata public even when data is restricted, and UniProt."
+ },
+ {
+  "label": "Broman & Woo 2018",
+  "kind": "Optional",
+  "short_title": "Spreadsheet Rules That Keep Data Easy to Analyse",
+  "citation": "Broman, K. W., & Woo, K. H. (2018). Data organization in spreadsheets. The American Statistician, 72(1), 2–10. https://doi.org/10.1080/00031305.2017.1375989",
+  "problem": "Researchers use spreadsheets for data entry, storage, analysis and graphs, and errors are common. The authors give practical rules for organising spreadsheet data so that both people and programs can read it.",
+  "key_ideas": [
+   "Be consistent: the same codes, names, missing-value code, file names and date format",
+   "One thing per cell, one header row, and the data as a single rectangle",
+   "Keep the raw file pristine: no calculations, no colour as data, and a plain-text copy"
+  ],
+  "key_term": {"term": "Data dictionary", "definition": "A separate table that explains each variable: its exact name, meaning, units and expected values"},
+  "slide2_title": "Organise Data for the Computer From the Start",
+  "findings": [
+   "Cites Panko (2008): in 13 audits of real spreadsheets, on average 88% contained errors",
+   "Cites a study finding that about 20% of gene lists in journal files had names mangled by Excel",
+   "Rearrange existing files with code, not copy-and-paste, so that every step is recorded"
+  ],
+  "course_link": "Gives practical rules for workbooks like the Finance file in lesson 3-2, and a model for the data dictionary you write for the Skopje weather table in Practice 3.",
+  "limitation": "Advice from experience, not a tested study. It targets research data entry, and some points, e.g. never leaving cells blank, are disputed.",
+  "note_question": "The authors want every empty cell filled with a code such as NA; others prefer blanks. Which would you choose, and why?",
+  "notes_slide1": "Spreadsheets are everywhere in research, and so are their errors. The authors cite an audit study in which, on average, 88% of real spreadsheets contained errors, and they show how Excel turns some gene names into dates. Their view is that spreadsheets are best for entering and storing data, while analysis and graphs should happen elsewhere, or at least in a copy. The first rule is to be consistent. Use one code for each category, not \"M\", \"male\" and \"Male\". Use one fixed code for missing values, never a number like -999. Keep variable names, subject identifiers, file names and layouts the same across files. Write dates as YYYY-MM-DD, the ISO 8601 standard, because Excel stores dates as day counts and may change them. Choose short but meaningful names without spaces or special characters. Watch for extra spaces inside cells, which a computer treats as different values.",
+  "notes_slide2": "The second group of rules is about layout. Put just one thing in each cell: not \"45 g\" but 45 in a column whose name or dictionary gives the unit, and notes in their own column. Do not merge cells. Arrange the data as a single rectangle, with subjects as rows, variables as columns and one header row; if that is impossible, use several rectangles, each in its own file. The authors link this to Wickham's tidy data. Write a data dictionary that explains every variable. Keep calculations and graphs out of the raw file, and do not use colour or highlighting as data; add an indicator column instead. Make backups, keep old versions and write-protect finished files. Use data validation to catch entry errors, and save a copy as plain text (CSV), which needs no special software. Finally, apply the rules to new projects, and fix old files with a script, not by hand."
+ }
+]

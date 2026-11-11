@@ -1,0 +1,122 @@
+[
+ {
+  "label": "Donoho 2017",
+  "kind": "Required",
+  "short_title": "Greater Data Science Has Six Divisions",
+  "citation": "Donoho, D. (2017). 50 years of data science. Journal of Computational and Graphical Statistics, 26(4), 745–766. https://doi.org/10.1080/10618600.2017.1384734",
+  "problem": "Around 2015 many universities launched data science programmes, often with little role for statisticians. Donoho asks whether data science really differs from statistics, and what a lasting science of data would include.",
+  "key_ideas": [
+   "Big data, new skills and job demand alone do not separate data science from statistics",
+   "Tukey (1962), Chambers and Cleveland long asked statistics to grow beyond mathematical theory",
+   "Greater data science covers every step of learning from data, grouped into six divisions"
+  ],
+  "key_term": {"term": "Greater data science", "definition": "Donoho's name for the full field of learning from data, from gathering and preparing data to studying methods"},
+  "slide2_title": "Modelling Is Only One of Six Divisions",
+  "findings": [
+   "University teaching focuses on data modelling, the division that is easiest to formalise and teach",
+   "Practitioners spend more time exploring and preparing data than modelling, yet few courses teach it",
+   "Shared scripts and workflows, e.g. in R, turned data analysis into something that can be studied"
+  ],
+  "course_link": "Lesson 1-1 presents his six divisions. In Practice 1 you work in the first three: you explore the penguins, count missing values, and save the table as CSV, JSON and Parquet.",
+  "limitation": "Began as a talk and argues a position. Its claims about how practitioners spend their time rest on common estimates, not new measurements.",
+  "note_question": "Name the six divisions. Which one does Donoho say university teaching covers best, and which does he say matters most in practice?",
+  "notes_slide1": "Donoho, a statistician at Stanford, first gave this paper as a talk in 2015 at a workshop for John Tukey's hundredth birthday. At that time universities were announcing large data science initiatives, often led by computer scientists rather than statisticians. Donoho asks what, if anything, makes data science different from statistics. He first rejects three popular answers. Big data is not new: censuses produced very large datasets more than 200 years ago, and statisticians have long studied large data. The new skills, such as Hadoop, are mostly coping skills for cluster computing. Job demand is real but says little about the content of a science. He then goes back to Tukey's 1962 paper, which argued that data analysis is a science, judged by experience with real data, not a branch of mathematics. Later, John Chambers and William Cleveland, both at Bell Labs, asked statistics departments to grow. Software such as S and R made data analysis concrete, because analyses became scripts that others could share, rerun and improve.",
+  "notes_slide2": "In section 8, Donoho describes greater data science: everything a person does to learn from data, from first contact with the data to delivering results. He groups this work into six divisions: data gathering, preparation and exploration; data representation and transformation; computing with data; data modelling; data visualisation and presentation; and science about data science. In data modelling, he says a data scientist uses both of Breiman's cultures: generative models that describe how data were produced, and predictive models judged by accuracy. Science about data science studies data analysis itself, for example which workflows are common and how well they work. His main point is about balance. Academic departments, in statistics and in machine learning, teach mostly modelling, because it is the easiest part to formalise. But practitioners spend more time exploring and cleaning data, and students who only analyse ready-made datasets never learn this. Tools such as Hadoop matter today, he says, but are temporary enablers; the six activities will remain."
+ },
+ {
+  "label": "Breiman 2001",
+  "kind": "Required",
+  "short_title": "Two Cultures: Data Models and Algorithmic Models",
+  "citation": "Breiman, L. (2001). Statistical modeling: The two cultures (with comments and a rejoinder by the author). Statistical Science, 16(3), 199–231. https://doi.org/10.1214/ss/1009213726",
+  "problem": "Most statisticians start by assuming a stochastic model for how the data were generated. Breiman, back at a university after 13 years of consulting, asks whether this habit leads to wrong conclusions and missed problems.",
+  "key_ideas": [
+   "Data modelling culture: assume a stochastic model, e.g. linear regression, and check its fit",
+   "Algorithmic culture: treat nature's process as unknown; judge models by accuracy on new data",
+   "Conclusions from a data model are about the model's mechanism, not necessarily nature's"
+  ],
+  "key_term": {"term": "Predictive accuracy", "definition": "How well a model predicts cases not used to build it, estimated with a test set or cross-validation"},
+  "slide2_title": "Judge Models by How Well They Predict New Data",
+  "findings": [
+   "Goodness-of-fit tests and residual plots rarely detect a poor model when there are many variables",
+   "Rashomon effect: different models can fit almost equally well yet tell different stories",
+   "On hepatitis data, random forests predicted better than logistic regression and still ranked variables"
+  ],
+  "course_link": "Lesson 1-1's two cultures slide comes from this paper. Breiman's advice to live with the data before modelling is what Practice 1 does: describe the penguins before any model.",
+  "limitation": "One-sided by design. In the published discussion, Cox calls its view of statistics partly a caricature; Efron says it overstates prediction.",
+  "note_question": "Breiman says a model's conclusions are about the model, not nature. What does he mean, and why does he trust test-set accuracy?",
+  "notes_slide1": "Breiman pictures data as coming from a black box: input variables x go in and responses y come out. Analysis has two goals: to predict y for new x, and to learn how nature links them. In the data modelling culture, the analyst fills the box with a stochastic model, such as linear or logistic regression, and checks it with goodness-of-fit tests and residuals. Breiman estimates that 98% of statisticians work this way. In the algorithmic modelling culture, the box is complex and unknown; the analyst uses an algorithm, such as a decision tree or neural net, and judges it by predictive accuracy. Breiman's views came from 13 years as a consultant. He describes two projects: predicting ozone levels in Los Angeles, which failed because of too many false alarms, and detecting chlorine from mass spectra, where a decision tree worked well. His lessons included: live with the data before you model it, judge a model by its accuracy on test sets, and treat computers as an essential partner.",
+  "notes_slide2": "Back at Berkeley, Breiman found that almost every journal article began by assuming a data model. He shows the risks. In one study of faculty salaries, a significant gender coefficient in a linear regression was accepted as proof, with no check that the model fitted. Goodness-of-fit tests have little power with many variables, so many different models pass them. He then reports three lessons from machine learning. Rashomon: many models fit almost equally well but tell different stories. Occam: accuracy and simplicity conflict; a single tree is easy to read, while a random forest predicts better but is hard to interpret. Bellman: more variables can help prediction. In section 11 he argues that the goal is not interpretability but accurate information. On a hepatitis dataset, a random forest had a lower test error than logistic regression and identified important variables more reliably. He is not against data models; the problem and the data should decide. Read the comments: Cox and Efron disagree, while Hoadley, a credit-scoring statistician, largely agrees."
+ },
+ {
+  "label": "Tukey 1962",
+  "kind": "Optional",
+  "short_title": "Data Analysis Is a Science, Not Mathematics",
+  "citation": "Tukey, J. W. (1962). The future of data analysis. The Annals of Mathematical Statistics, 33(1), 1–67. https://doi.org/10.1214/aoms/1177704711",
+  "problem": "In 1962, mathematical statistics focused on proofs and optimal procedures. Tukey, a leading statistician, asks whether this serves people who actually analyse data, and what data analysis should become.",
+  "key_ideas": [
+   "Data analysis is wider than inference: it also covers planning data collection and interpretation",
+   "It is a science, judged by experience with real data, not by mathematical proof",
+   "Judgment is essential: theory should guide data analysis, not command it"
+  ],
+  "key_term": {"term": "Data analysis", "definition": "Methods to analyse data and interpret results, ways to plan data gathering, and the statistics that helps"},
+  "slide2_title": "Better an Approximate Answer to the Right Question",
+  "findings": [
+   "Warns that chasing optimal methods under narrow assumptions could leave statistics a dried-up field",
+   "Asks statisticians to look at how data is actually analysed and to face messy, realistic data",
+   "Says teachers of data analysis should admit what the field does not know, as other sciences do"
+  ],
+  "course_link": "Lesson 1-1's timeline starts with this paper. His maxim, an approximate answer to the right question, matches lesson 1-2's first step: clarify the question.",
+  "limitation": "Long (67 pages) and written for mathematical statisticians. After the opening part, it is mostly technical methods, hard for beginners.",
+  "note_question": "Tukey says data analysis must accept being wrong moderately often. Why might a science accept this, while mathematics cannot?",
+  "notes_slide1": "Tukey opens with a confession: he long thought he was a statistician, but his central interest is really data analysis. He defines it broadly: procedures for analysing data, techniques for interpreting the results, ways of planning data gathering, and the parts of mathematical statistics that help. Inference from a sample to a population is only one part. He argues that each piece of mathematical statistics must justify itself either by its use in data analysis or as pure mathematics. He then asks what makes a science. Most people, he says, would require intellectual content, organisation into an understandable form, and reliance on the test of experience as the final standard of validity. Mathematics fails the third test, because it relies on proof. Data analysis passes all three, so it is a science. This has consequences: data analysis should seek scope and usefulness rather than certainty, accept being wrong moderately often, and use mathematics as a basis for judgment, not as proof.",
+  "notes_slide2": "Tukey then criticises the focus of statistics on optimisation. Finding the best procedure for a narrow, precisely stated problem is useful as guidance, but dangerous when taken too seriously; he fears it could produce a dried-up field with little growth. Instead, he wants the field to praise early, rough work on new problems. Judgment, he says, is unavoidable. It comes from knowledge of the subject the data come from, from experience of how techniques work in many fields, and from theoretical results. On teaching, he notes that biochemistry and physics teachers freely say \"I don't know\", and asks why statisticians should not do the same. His most quoted maxim is: \"Far better an approximate answer to the right question, which is often vague, than an exact answer to the wrong question, which can always be made precise.\" The rest of the paper presents technical methods for messy data, such as outliers and two-way tables. It ends by asking who will take the rocky road of real problems."
+ },
+ {
+  "label": "Cleveland 2001",
+  "kind": "Optional",
+  "short_title": "A Plan to Expand Statistics Into Data Science",
+  "citation": "Cleveland, W. S. (2001). Data science: An action plan for expanding the technical areas of the field of statistics. International Statistical Review, 69(1), 21–26. https://doi.org/10.1111/j.1751-5823.2001.tb00477.x",
+  "problem": "University statistics departments worked mainly on models, methods and theory. Cleveland, at Bell Labs, asks how a department should divide research and teaching so that its work helps the practising data analyst.",
+  "key_ideas": [
+   "Judge each technical area by how much it helps the analyst learn from data, directly or indirectly",
+   "Six areas: multidisciplinary work, models and methods, computing, pedagogy, tool evaluation, theory",
+   "Gives each area a share of resources and courses, e.g. 25% for data analysis with other fields"
+  ],
+  "key_term": {"term": "Computing with data", "definition": "Databases, software, hardware and algorithms that make models and methods practical for analysts to use"},
+  "slide2_title": "Computer Science Joins Mathematics as a Foundation",
+  "findings": [
+   "Analysing real data in other fields is the biggest source of new tools, so students must analyse data",
+   "Statisticians need computer scientists' knowledge of computing; data mining needs data analysis skill",
+   "Data science is practised by statisticians and subject-matter analysts alike, not statisticians alone"
+  ],
+  "course_link": "Lesson 1-1's timeline lists this plan. Its view that subject experts also do data science supports lesson 1-3: your domain knowledge is an advantage on a data team.",
+  "limitation": "A six-page plan, not a study: the percentages are proposals, and the paper does not test whether the plan would work.",
+  "note_question": "Cleveland gives 15% of resources to pedagogy and 5% to tool evaluation. Why should a data science department study these?",
+  "notes_slide1": "Cleveland worked in statistics research at Bell Labs, the same research lab where Tukey had worked. In this short paper he proposes enlarging the technical work of statistics so much that the new field deserves a new name: data science. Donoho later suggests it may be the earliest use of the term in exactly its modern sense. The plan is addressed to university departments, though Cleveland says it also fits government and company research labs. Its basic rule is that technical work should be judged by how far it helps the analyst learn from data. Tools help directly; theories that lead to tools help indirectly. He sets out six areas and proposes a share of resources and courses for each: multidisciplinary investigations (25%), models and methods for data (20%), computing with data (15%), pedagogy (15%), tool evaluation (5%) and theory (20%). He argues that real data analysis drives invention, citing Fisher's agricultural experiments, and that students must analyse data as a major part of their programmes.",
+  "notes_slide2": "Several sections explain why some areas need more resources. In models and methods, Cleveland notes that much effort went into estimation, while building the model in the first place gets far less, although it is often the hardest part. In computing with data, he argues that statisticians studied only algorithms and left software systems to companies. He gives John Chambers's S system as proof that statisticians can do excellent computing research; it won the ACM Software System Award in 1998. Computer scientists working on data mining, he says, know little about how to analyse data, so the two knowledge bases should merge. Pedagogy should cover schools, universities and company training, and should teach non-statisticians too. Tool evaluation should survey which tools analysts really use and need. Theory need not be mathematical, but all students need a strong intuition for random variation. His main outcome is that computer science joins mathematics as a foundation of the field, and that data science is practised by subject-matter analysts as well as statisticians."
+ },
+ {
+  "label": "Davenport & Patil 2012",
+  "kind": "Optional",
+  "short_title": "The Data Scientist as a New, Scarce Business Role",
+  "citation": "Davenport, T. H., & Patil, D. J. (2012). Data scientist: The sexiest job of the 21st century. Harvard Business Review, 90(10), 70–76. https://hbr.org/2012/10/data-scientist-the-sexiest-job-of-the-21st-century",
+  "problem": "Companies were collecting large amounts of new data but had few people who could make discoveries from it. The authors describe this new role and advise managers on how to find, attract and keep such people.",
+  "key_ideas": [
+   "A data scientist makes discoveries in big data and helps turn them into products or decisions",
+   "The work mixes coding, analysis, communication with the business and advice to leaders",
+   "Curiosity matters most; data scientists come from varied fields, not only statistics or computing"
+  ],
+  "key_term": {"term": "Data scientist", "definition": "A professional with the training and curiosity to make discoveries in big data and turn them into value"},
+  "slide2_title": "Firms Need Data Scientists but Few Exist Yet",
+  "findings": [
+   "At LinkedIn, Goldman's People You May Know feature showed how data analysis can become a product",
+   "People with this mix of skills were scarce, so firms had to recruit beyond the usual channels",
+   "To keep data scientists, firms must give them real problems and freedom to experiment"
+  ],
+  "course_link": "Supports lesson 1-3. Compare its picture of one person who does everything with the unicorn problem and the separate roles on a modern data team.",
+  "limitation": "A magazine article, not research: it relies on examples, and its title is promotional. Patil was himself a leading data scientist.",
+  "note_question": "Which claims in this article could you check with data, for example with job postings in North Macedonia or the region?",
+  "notes_slide1": "This short Harvard Business Review article did much to make the job title data scientist widely known. Davenport is a professor who studies business analytics; Patil led data teams at LinkedIn and is often credited, with Jeff Hammerbacher of Facebook, with first using data scientist as a job title around 2008. The article opens with Jonathan Goldman, who joined LinkedIn in 2006, when the site had just under eight million accounts. Users were not connecting with other members as much as the company expected. Goldman studied the patterns in the connections between users and built the feature People You May Know, which suggested people a user was likely to know. The feature was a clear success and became a standard part of the site. The authors use this story to show what a data scientist does: explores large, messy data, finds something valuable, and helps turn it into a product or a business decision. They describe the role as a mix of coder, analyst, communicator and trusted adviser.",
+  "notes_slide2": "The second part of the article is advice for managers. The authors argue that data scientists were scarce because the role was new and few training programmes existed. They say the most important trait is intense curiosity: the wish to look beneath the surface of a problem and test new ideas. Good data scientists must also write code and communicate their findings in language that business leaders understand. Many come from scientific fields where they learned to work with data, not only from statistics or computer science. Because there were few such people, companies were advised to look in new places, for example at data competitions, user groups and university programmes, and among people with strong science backgrounds. To keep them, a company must offer interesting problems, freedom to experiment, and a chance to influence real decisions, not only to produce reports. Read the article critically: it is persuasive journalism, not a study."
+ }
+]

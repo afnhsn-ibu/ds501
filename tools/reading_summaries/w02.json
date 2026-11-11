@@ -1,0 +1,122 @@
+[
+ {
+  "label": "Wirth & Hipp 2000",
+  "kind": "Required",
+  "short_title": "A Standard Process for Data Mining Projects",
+  "citation": "Wirth, R., & Hipp, J. (2000). CRISP-DM: Towards a standard process model for data mining. In Proceedings of the 4th International Conference on the Practical Applications of Knowledge Discovery and Data Mining (pp. 29–39).",
+  "problem": "In 2000 there was no standard way to run a data mining project. Success depended on the people doing it, and good practice was hard to repeat. The authors argue for a standard process and test CRISP-DM in practice.",
+  "key_ideas": [
+   "Six phases, from business understanding to deployment; the order between them is not strict",
+   "Four levels: phases, generic tasks, specialised tasks, and process instances (records of real work)",
+   "The Reference Model says what to do; the User Guide gives tips on how to do it"
+  ],
+  "key_term": {"term": "Generic task", "definition": "A task general enough for any data mining project, e.g. build model; a specialised task adapts it to one case"},
+  "slide2_title": "CRISP-DM Works, but Plan for Iterations Explicitly",
+  "findings": [
+   "Using the model to communicate helped more than expected and built trust with users and sponsors",
+   "Skipping planning and documentation to save time cost the expert team more time later",
+   "Data preparation took longer than expected; they suggest planning three iterations, each shorter"
+  ],
+  "course_link": "The source of the six phases and generic tasks in lesson 2-3. In Practice 2 you take Telco churn through the same phases and write the business template before loading data.",
+  "limitation": "An experience report from one company and one application. The authors admit that the claimed gains in speed and cost are hard to evaluate.",
+  "note_question": "The paper lists benefits of a standard process for customers, vendors and analysts. Which one matters most to you, and why?",
+  "notes_slide1": "Rüdiger Wirth of DaimlerChrysler Research and Jochen Hipp of the University of Tübingen wrote this short paper when CRISP-DM was new. CRISP-DM was developed by a consortium of data mining users and suppliers (DaimlerChrysler, SPSS, NCR and OHRA), partly funded by the European Commission. The authors start from a problem: there was no standard framework for data mining projects, so success depended on the particular person or team, and good practice could not be repeated across a company. They argue that a common process model helps everyone. Customers get realistic expectations and can compare offers from different providers, vendors spend less time explaining the basics, and analysts get guidance and checklists. The model has four levels: phases, generic tasks, specialised tasks and process instances. Generic tasks, such as build model, are meant to cover every data mining situation. The six phases are business understanding, data understanding, data preparation, modelling, evaluation and deployment, and the authors stress that their order is not strict.",
+  "notes_slide2": "The second half reports how DaimlerChrysler used CRISP-DM for response modelling: choosing which people on an address list to mail in campaigns aimed at first-time Mercedes buyers. The goal was a repeatable process for marketing staff with little data mining skill. The generic model was too abstract for these users, so the team wrote a specialised process model. They started from the CRISP-DM User Guide, deleted tasks they did not need, renamed and split others, and added checklists, examples from three case studies, and templates for their software tool, Clementine. Their lessons are practical. The model was most useful for planning, documentation and, above all, communication. When the experts skipped planning and documentation to save time, they lost more time later. Managers read the clear diagram as a strict sequence and set tight deadlines, so the authors advise planning iterations explicitly. Data preparation was even more time-consuming and error-prone than expected. Their conclusion: CRISP-DM works, especially for large or repeated projects."
+ },
+ {
+  "label": "Provost & Fawcett 2013",
+  "kind": "Required",
+  "short_title": "Data Science Exists to Improve Decisions",
+  "citation": "Provost, F., & Fawcett, T. (2013). Data science and its relationship to big data and data-driven decision making. Big Data, 1(1), 51–59. https://doi.org/10.1089/big.2013.1508",
+  "problem": "By 2013, data science was a popular term, but people disagreed about what it meant. The authors fear it could become an empty buzzword, so they relate it to big data and to data-driven decision making.",
+  "key_ideas": [
+   "Data science is a set of principles for extracting knowledge from data, not a set of tools",
+   "Its main goal is better decisions: some are one-off discoveries, others repeat at massive scale",
+   "Big data technologies support data science, but much data processing is not data science"
+  ],
+  "key_term": {"term": "Data-analytic thinking", "definition": "Viewing business problems from a data perspective, using the fundamental principles of data science"},
+  "slide2_title": "Learn the Principles; the Tools Will Change",
+  "findings": [
+   "Cites a study: one standard deviation more data-driven decisions went with 4–6% higher productivity",
+   "Lists principles: follow a staged process such as CRISP-DM, evaluate in context, use expected value",
+   "Warns about overfitting, and that causal conclusions need close attention to confounding factors"
+  ],
+  "course_link": "Its MegaTelCo churn example is the problem of Practice 2. Its expected-value principle is the idea behind the €40 offer and €300 lost customer cost analysis in phase 5.",
+  "limitation": "A short essay, not a study. Its evidence on firm performance comes from other authors' working papers; its list of principles is partial.",
+  "note_question": "The authors say results must be evaluated in the context where they will be used. How does Practice 2 do this for the churn model?",
+  "notes_slide1": "Foster Provost of New York University and Tom Fawcett wrote this essay for the first issue of the journal Big Data. They argue that data science has been hard to define for two reasons. It is closely tied to other popular ideas, big data and data-driven decision making, and people tend to define a field by what its practitioners do every day. They define data science as a set of fundamental principles that guide the extraction of information and knowledge from data; data mining is the actual extraction, using technologies built on these principles. Two cases make this concrete. Walmart mined sales data from an earlier hurricane to find which products would be in unusual demand before the next one. A telecom company, MegaTelCo, must decide which customers should get a retention offer before their contracts end. The first is a one-off discovery; the second is a decision repeated for millions of customers, where even small gains in accuracy add up.",
+  "notes_slide2": "Data-driven decision making means basing decisions on the analysis of data rather than only on intuition. The authors cite a study by Brynjolfsson and colleagues: firms one standard deviation higher on a data-driven scale were 4–6% more productive. They separate data science from data processing. Big data technologies such as Hadoop mostly process data in support of data science; they are not data science themselves. They expect a Big Data 2.0 phase, in which firms ask what they can now do that they could not do before. Everyone who works with data scientists needs data-analytic thinking, so that they can judge proposals and use results. The essay ends with a partial list of fundamental concepts. Analysis can follow a process with well-defined stages, such as CRISP-DM. Results must be judged in the context of their use, against chance and a sensible default. Expected value links the business problem to the analysis. Overfitting and confounding factors are constant risks."
+ },
+ {
+  "label": "Fayyad et al. 1996",
+  "kind": "Optional",
+  "short_title": "Data Mining Is One Step in a Longer Process",
+  "citation": "Fayyad, U., Piatetsky-Shapiro, G., & Smyth, P. (1996). From data mining to knowledge discovery in databases. AI Magazine, 17(3), 37–54. https://doi.org/10.1609/aimag.v17i3.1230",
+  "problem": "In the mid-1990s, data grew faster than people could analyse it by hand, and terms such as data mining were used loosely. The authors define knowledge discovery in databases and describe its whole process.",
+  "key_ideas": [
+   "KDD is the whole process of finding useful knowledge; data mining is one step within it",
+   "Found patterns should be valid on new data, novel, potentially useful and understandable",
+   "Mining algorithms combine three parts: model representation, model evaluation and search"
+  ],
+  "key_term": {"term": "Data dredging", "definition": "Blindly applying mining methods until something appears; it easily finds meaningless or invalid patterns"},
+  "slide2_title": "Most of the Work Lies Outside the Algorithm",
+  "findings": [
+   "Describes nine steps, from understanding the domain and goal to acting on the knowledge found",
+   "Most research focused on the mining step, but the other steps matter as much or more in practice",
+   "Much application effort goes into formulating the problem well, not into tuning the algorithm"
+  ],
+  "course_link": "The KDD process in lesson 2-3's comparison of process models. Compare its steps with CRISP-DM's six phases and the ten IBM stages from lessons 2-1 and 2-2.",
+  "limitation": "A 1996 overview for an AI audience. Its survey of methods is now dated, and it gives no guidance on managing a project or a team.",
+  "note_question": "The paper's figure starts at data selection, but its list of steps starts with the goal. Which view does a methodology need?",
+  "notes_slide1": "Usama Fayyad, Gregory Piatetsky-Shapiro and Padhraic Smyth wrote this widely cited overview in 1996. Their starting point is data overload: databases with millions of records and hundreds of fields are too large for analysts to study by hand. They describe applications of the time in astronomy, marketing, fraud detection, manufacturing and telecommunications. Their central point is a distinction. Knowledge discovery in databases (KDD) is the overall process of finding useful knowledge in data; data mining is one step in it, the application of algorithms that extract patterns. The other steps, such as selecting, cleaning and preparing data, using prior knowledge and interpreting results, are essential. Without them, mining becomes what statisticians call data dredging: searching until something appears, which easily finds meaningless patterns. They define KDD as the nontrivial process of identifying patterns that are valid, novel, potentially useful and ultimately understandable. The process is interactive and iterative, and it can loop between any two steps.",
+  "notes_slide2": "The paper lists nine steps. The first is understanding the application domain and the goal from the customer's viewpoint. Then come creating a target data set, cleaning and preprocessing, data reduction and projection, choosing the data mining task, choosing the algorithm, the data mining itself, interpreting the patterns and, finally, acting on the knowledge. Its well-known figure shows a shorter chain: selection, preprocessing, transformation, data mining, and interpretation or evaluation. Most research, the authors note, had studied only the mining step, although the others matter as much or more. They then survey mining methods (classification, regression, clustering, summarisation, dependency modelling and change detection) using a small loan example, and describe every algorithm as model representation, model evaluation and search. They warn that there is no universal method, that much effort goes into asking the right question, and that readers should beware the hype. Challenges include overfitting, missing and noisy data, changing data and privacy."
+ },
+ {
+  "label": "Martínez-Plumed 2021",
+  "kind": "Optional",
+  "short_title": "From One Process to Many Data Science Trajectories",
+  "citation": "Martínez-Plumed, F., et al. (2021). CRISP-DM twenty years later: From data mining processes to data science trajectories. IEEE Trans. Knowl. Data Eng., 33(8), 3048–3061. https://doi.org/10.1109/TKDE.2019.2962680",
+  "problem": "CRISP-DM is about twenty years old and still the most used process model, but data science has become more varied and exploratory. The authors ask whether, and for which projects, CRISP-DM still fits.",
+  "key_ideas": [
+   "Goal-directed projects still fit CRISP-DM; exploratory projects need a more flexible model",
+   "The DST map adds six exploration and four data management activities to CRISP-DM's six phases",
+   "A trajectory is the path one project takes through these activities, in no fixed order"
+  ],
+  "key_term": {"term": "Trajectory", "definition": "The sequence of activities one project follows on the DST map; it may skip, repeat or run steps in parallel"},
+  "slide2_title": "CRISP-DM Still Fits, but Only One Kind of Project",
+  "findings": [
+   "Seven real examples, such as a parking app and a data repository, use only parts of CRISP-DM",
+   "Of 51 NIST big data use cases, 23 involve data management activities only",
+   "Exploration needs senior data scientists and is hard to cost; data management needs engineers"
+  ],
+  "course_link": "Background to the criticisms of CRISP-DM in lesson 2-3. Its three project types can help you describe your own idea for project step 2.",
+  "limitation": "The trajectories are the authors' reconstructions of possible paths, not project records. They say DST does not yet address ethics fully.",
+  "note_question": "Is your project idea goal-directed, exploratory or mainly data management? Which activities outside CRISP-DM might it need?",
+  "notes_slide1": "Fernando Martínez-Plumed and seven colleagues from universities in Spain, Estonia, France and the UK review CRISP-DM twenty years after its release. They agree that it is still the de facto standard, citing polls and many recent applications in health care, education, logistics and other fields. They also review later models, including SEMMA, ASUM-DM, IBM's Foundational Methodology and Microsoft's TDSP, and argue that these remain data mining methodologies that assume a clear goal from the start. Their key distinction is between data mining, which is goal-oriented and process-centred, and data science, which is data-oriented and exploratory. In their metaphor, data mining is like mining a known deposit, while data science is like prospecting for one. They therefore add six exploration activities (goal, data source, data value, result, narrative and product exploration) and four data management activities (data acquisition, simulation, architecting and release). Together with the six CRISP-DM phases, these form the Data Science Trajectories (DST) map, which has no arrows.",
+  "notes_slide2": "A trajectory is the path one project takes through the map. The authors draw seven examples. A tourism recommender starts by exploring goals and the value of location data. A pollution predictor uses simulated traffic data. A data repository and a smart parking app for Dubrovnik barely model at all, yet they are still data science projects. They then classify the seven examples and 51 big data use cases from the US National Institute of Standards and Technology (NIST) by three kinds of activity: exploratory, CRISP-DM (goal-directed) and data management. Nearly half of the NIST cases, 23, fall in the data management region only. The authors argue that this helps planning: exploration needs experienced data scientists and makes time and cost uncertain, while data management needs data engineers and is easier to budget. They keep CRISP-DM as one common trajectory and call DST backwards compatible with it. They note that DST does not yet fully address ethical and legal issues, which arise mostly in the new exploration activities."
+ },
+ {
+  "label": "Sculley et al. 2015",
+  "kind": "Optional",
+  "short_title": "ML Systems Are Cheap to Build, Costly to Maintain",
+  "citation": "Sculley, D., et al. (2015). Hidden technical debt in machine learning systems. Advances in Neural Information Processing Systems, 28. https://proceedings.neurips.cc/paper/2015/hash/86df7dcfd896fcaf2674f757a2463eba-Abstract.html",
+  "problem": "Engineers at Google found that machine learning systems are fast and cheap to build and deploy, but difficult and expensive to maintain over time. The authors explain why, using the idea of technical debt.",
+  "key_ideas": [
+   "Models mix all their inputs, so changing anything changes everything (the CACE principle)",
+   "Data dependencies build up debt like code dependencies, but they are harder to detect",
+   "Model code is a small part of a real ML system; the surrounding infrastructure is vast"
+  ],
+  "key_term": {"term": "Technical debt", "definition": "Future maintenance cost created by moving quickly now; like financial debt, it grows if it is not paid down"},
+  "slide2_title": "Monitor the Live System, Not Only the Model",
+  "findings": [
+   "Feedback loops form when a model's predictions influence the data it is later trained on",
+   "A manually set decision threshold can become invalid when the model is retrained on new data",
+   "Suggests monitoring prediction bias, setting action limits, and checking upstream data producers"
+  ],
+  "course_link": "Explains why lesson 2-3 adds MLOps to CRISP-DM. Useful for the monitoring plan in Practice 2, phase 6, and for the decision threshold you choose in phase 5.",
+  "limitation": "Based on the authors' experience, not on measured data. It names many risks but, as the authors admit, offers no metric for technical debt.",
+  "note_question": "Your churn threshold rests on cost assumptions. What could make it wrong a year after deployment, and how would you notice?",
+  "notes_slide1": "D. Sculley and nine colleagues at Google wrote this paper for practitioners and researchers. They borrow the idea of technical debt from software engineering: moving fast creates future costs, and like financial debt, it must be paid back. Their argument is that machine learning systems have all the debt of ordinary code plus extra kinds, which are harder to see because they live at the level of the whole system. First, models erode boundaries between components. A model mixes all its inputs, so changing one feature, setting or data source can change the effect of all the others: changing anything changes everything. Models built on top of other models, and undeclared consumers that silently use a model's output, tie systems together. Second, data dependencies cost more than code dependencies. An input produced by another team may change without warning, and features that add little value can still make a system fragile. A famous figure shows the model code as a small box inside large surrounding infrastructure.",
+  "notes_slide2": "The rest of the paper lists more sources of debt. Feedback loops arise when a model influences the data it will later learn from, directly or through other systems. Glue code, pipeline jungles and dead experimental code paths make systems hard to change. Configuration can grow larger than the code, and every line can contain a mistake. The external world also changes. A decision threshold chosen by hand may stop being right when the model is retrained, so the authors suggest learning thresholds from held-out validation data. Tests alone cannot show that a live system still works, so they recommend live monitoring with automated responses. Three starting points are prediction bias (do predicted labels match observed labels?), action limits that trigger an alert, and monitoring of upstream data producers. They also name data testing, reproducibility, process management and cultural debt. They admit that debt cannot be measured exactly, and they ask teams to reward simplification, stability and monitoring as much as accuracy gains."
+ }
+]

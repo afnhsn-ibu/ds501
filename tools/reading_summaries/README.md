@@ -3,7 +3,7 @@
 Two slides per paper, placed in the **Papers to Read** section of the weekly deck
 (after "Optional Reading", before "Reading Questions for Discussion").
 
-- `w04.json`, `w05.json`: the text of each summary (two slides per paper, with speaker notes).
+- `w01.json` to `w05.json`: the text of each summary (two slides per paper, with speaker notes).
 - `build_readings_deck.js`: turns one of them into slides in the course template.
 - `merge_into_weekly.ps1`: inserts those slides into the weekly deck, renumbers the
   section footers, saves the deck and exports its PDF (needs PowerPoint on Windows).

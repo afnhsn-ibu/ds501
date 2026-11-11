@@ -74,6 +74,7 @@ weeks:
     dataset: "Palmer Penguins"
     notebook: "W01_Lab_First_Look_at_Data"
     deck: "DS501_W01_What_Is_Data_Science"
+    reading_summaries: true
     required:
       - "Donoho 2017, 50 Years of Data Science (JCGS 26(4))"
       - "Breiman 2001, Statistical Modeling: The Two Cultures (Statistical Science 16(3))"
@@ -93,6 +94,7 @@ weeks:
     dataset: "Telco churn"
     notebook: "W02_Lab_CRISP_DM_Walkthrough"
     deck: "DS501_W02_Data_Science_Methodology"
+    reading_summaries: true
     required:
       - "Wirth & Hipp 2000, CRISP-DM (PADD 2000)"
       - "Provost & Fawcett 2013, Data Science and its Relationship to Big Data and Data-Driven Decision Making (Big Data 1(1))"
@@ -111,6 +113,7 @@ weeks:
     dataset: "Open data portals"
     notebook: "W03_Lab_Acquiring_Data"
     deck: "DS501_W03_Data_Sources_Formats_Acquisition"
+    reading_summaries: true
     required:
       - "Wickham 2014, Tidy Data (J. Statistical Software 59(10))"
       - "Gebru et al. 2021, Datasheets for Datasets (CACM 64(12))"
