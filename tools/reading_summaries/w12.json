@@ -1,0 +1,152 @@
+[
+ {
+  "label": "Barocas & Selbst 2016",
+  "kind": "Required",
+  "course_key": "Barocas & Selbst 2016, Big Data's Disparate Impact (California Law Review 104(3))",
+  "short_title": "Data Mining Can Discriminate Without Intent",
+  "citation": "Barocas, S., & Selbst, A. D. (2016). Big data's disparate impact. California Law Review, 104(3), 671–732. https://doi.org/10.15779/Z38BG31",
+  "problem": "Employers and other organisations use data mining to sort and select people. Even when nobody intends harm, the results can fall hardest on protected groups. The authors ask how this happens and whether US law can respond.",
+  "key_ideas": [
+   "Defining the target, e.g. what a 'good employee' is, is a subjective choice that can harm groups",
+   "Training data can copy past prejudice in its labels, or under- or over-represent some groups",
+   "Coarse features, proxies for group membership and masked intent complete the five mechanisms"
+  ],
+  "key_term": {"term": "Redundant encoding", "definition": "Group membership is carried by other features, so deleting the protected attribute does not remove it"},
+  "slide2_title": "Unintended Bias Slips Through Current US Law",
+  "findings": [
+   "Part I links each of the five mechanisms to one step of building a model, from target to features",
+   "Proxies can harm a group even with clean data, no prejudice and the protected attribute removed",
+   "Under Title VII, a model that predicts job outcomes can often be defended as a business necessity"
+  ],
+  "course_link": "The five mechanisms fill the slide 'Where Bias Enters a Machine Learning System' in Lesson 12-2. In Practice 12, the model without race shows the proxy problem.",
+  "limitation": "It analyses US employment law (Title VII), so Part II does not transfer directly to the GDPR. It names problems but offers few technical fixes.",
+  "note_question": "Choose one mechanism from Part I. At which step could it enter a tool like COMPAS, and what would you check?",
+  "notes_slide1": "Barocas and Selbst are legal scholars, and the paper is written for lawyers as well as engineers. Their starting point is that data mining is always a form of statistical discrimination: its purpose is to treat people differently based on what similar people did. Part I, which you read, explains five ways this can become unfair to protected groups without anyone intending it. First, the target variable must be defined. A 'good employee' might mean high sales, long tenure or good review grades, and each choice affects groups differently. Second, the training data may be labelled by biased past decisions; a UK medical school's admissions program learned to disfavour women and minorities from earlier decisions. The data may also miss or over-count some groups, as a pothole app based on smartphones does in poorer areas. Third, features may be too coarse, as in redlining by neighbourhood. Fourth, legitimate features can act as proxies for group membership.",
+  "notes_slide2": "The fifth mechanism is masking: a decision maker who wants to discriminate can hide that intent behind any of the first four. The authors argue, however, that unintentional discrimination is the more pressing concern, because it is more common and easier to overlook. The proxy problem is the hardest. It can appear even when the data is accurate, the protected attribute is removed and the only goal is accuracy; better data may simply reveal existing inequality more precisely. Part II, which you may skim, tests these cases against Title VII, the US law on employment discrimination. Disparate treatment needs intent, which is usually missing. Disparate impact allows a practice that is justified as a business necessity, and a model that predicts job performance often passes this test. Part III explains why reform is hard: many modelling steps are value judgements in disguise. The authors also note that data mining can reduce discrimination by making decisions more explicit and consistent."
+ },
+ {
+  "label": "Chouldechova 2017",
+  "kind": "Required",
+  "course_key": "Chouldechova 2017, Fair Prediction with Disparate Impact (Big Data 5(2))",
+  "short_title": "Equal PPV and Equal Error Rates Cannot Both Hold",
+  "citation": "Chouldechova, A. (2017). Fair prediction with disparate impact: A study of bias in recidivism prediction instruments. Big Data, 5(2), 153–163. https://doi.org/10.1089/big.2016.0047",
+  "problem": "ProPublica found that COMPAS wrongly labelled Black defendants as high risk far more often than White ones. Northpointe replied that the score predicts equally well for both groups. Can both claims be true at once?",
+  "key_ideas": [
+   "Defines four criteria: calibration, predictive parity, error rate balance and statistical parity",
+   "One identity links prevalence, PPV, false-positive rate and false-negative rate in each group",
+   "If base rates differ, equal PPV forces unequal false-positive or false-negative rates"
+  ],
+  "key_term": {"term": "Predictive parity", "definition": "Among people labelled high risk, the share who reoffend (the PPV) is the same in every group"},
+  "slide2_title": "Unequal Error Rates Can Lead to Unequal Penalties",
+  "findings": [
+   "In the Broward data, 51% of Black and 39% of White defendants reoffended within two years",
+   "COMPAS is roughly calibrated and has equal PPV at cut-offs of 4 or more, but unequal error rates",
+   "In hypothetical sentencing rules, Black defendants get longer average sentences in both outcome groups"
+  ],
+  "course_link": "Her identity drives 'A Worked Example of the Trade-off' in Lesson 12-2. In Practice 12 you compute FPR, FNR and PPV by race and find the same conflict.",
+  "limitation": "It treats re-arrest as if it were reoffending. She notes that many crimes are never solved, so the observed outcome itself may be biased.",
+  "note_question": "Using her identity, explain how COMPAS can have equal PPV and still a higher false-positive rate for Black defendants.",
+  "notes_slide1": "Chouldechova is a statistician, and her paper turns the COMPAS dispute into a precise question. She uses ProPublica's Broward County data with the same filters: 6,150 defendants, of whom 3,696 are African-American and 2,454 are White. She defines four fairness criteria. A score is calibrated if each score value means the same chance of reoffending in both groups. It has predictive parity if, among people labelled high risk, the share who reoffend (the positive predictive value, PPV) is equal. It has error rate balance if false-positive and false-negative rates are equal. Statistical parity asks for equal shares labelled high risk; she sets it aside for this setting. Flores and colleagues showed that COMPAS is calibrated, and Northpointe showed predictive parity; ProPublica tested error rate balance. Her key result is a simple identity: FPR depends on the base rate, the PPV and the FNR. When base rates differ, equal PPV and equal error rates cannot hold together. She stresses that fairness is a social and ethical concept, not only a statistical one.",
+  "notes_slide2": "The empirical part confirms the theory. COMPAS is close to calibrated and meets predictive parity for high-risk cut-offs of 4 or higher, yet its error rates differ at every cut-off, including the stricter cut-off of 7 that some critics proposed. She then asks what the error rates mean for people. Under a simple policy where high-risk defendants get the maximum penalty, the gap in average penalty between groups is proportional to the gap in false-positive rates (for non-reoffenders) or false-negative rates (for reoffenders). Using Pennsylvania sentencing ranges, Black defendants receive longer expected sentences in both groups. The false-positive gap remains among defendants with few prior offences and misdemeanour charges. In a regression on non-reoffenders, the odds of a high-risk label stay 1.72 times higher for Black defendants after adjusting for age, sex, priors and charge. She lists three ways to trade off the criteria, one being group-specific cut-offs. She ends by warning against abandoning data-driven tools, which are often more accurate than human judgement."
+ },
+ {
+  "label": "Mitchell et al. 2019",
+  "kind": "Required",
+  "course_key": "Mitchell et al. 2019, Model Cards (FAT*)",
+  "short_title": "Report Model Results Broken Down by Group",
+  "citation": "Mitchell, M., Wu, S., Zaldivar, A., Barnes, P., Vasserman, L., Hutchinson, B., Spitzer, E., Raji, I. D., & Gebru, T. (2019). Model cards for model reporting. In Proceedings of FAT* '19 (pp. 220–229). ACM. https://doi.org/10.1145/3287560.3287596",
+  "problem": "Models are used in health, hiring, education and policing, yet they are often released with little documentation. Biases, e.g. in face recognition, were found only after release. How should a trained model be documented?",
+  "key_ideas": [
+   "A model card is a short, one-to-two-page document released together with a trained model",
+   "It reports metrics for each group and for intersections of groups, such as older women",
+   "It states intended uses, out-of-scope uses, and the factors that may change performance"
+  ],
+  "key_term": {"term": "Disaggregated evaluation", "definition": "Reporting a model's metrics separately for each group and each combination of groups, not only overall"},
+  "slide2_title": "Nine Card Sections Make a Model's Limits Visible",
+  "findings": [
+   "Proposes nine sections, from model details and intended use to ethics, caveats and recommendations",
+   "The smiling-detector card shows a much higher false discovery rate for older men than other groups",
+   "The toxicity card shows weak results for terms like 'gay' in version 1, improved by version 5"
+  ],
+  "course_link": "Lesson 12-2 presents its template on the slide 'Documenting Models: Model Cards'. Your Practice 12 table of FPR, FNR and PPV by race is a card's quantitative analysis.",
+  "limitation": "A card is only as honest as its authors; the paper admits it cannot stop misleading reports. Its examples are image and text models.",
+  "note_question": "Which model card sections can you fill for your project's model, and for which groups would you report results?",
+  "notes_slide1": "Mitchell and her colleagues, mostly at Google, start from a simple observation: there is no standard way to report how well a trained model works. Many biases, such as face recognition that fails more often for darker-skinned women, were found only after the systems were in use and people were harmed. Other industries already test products by group. Crash tests added female dummies, and since 1998 the US drug regulator asks for trial results by age, race and gender. The paper therefore proposes the model card, a one-to-two-page document released with a model. Its central idea is disaggregated evaluation: report metrics for each relevant group and also for intersections, for example age and gender together, because a model can work for women overall and for older people overall but fail for older women. Section 3 lists who benefits: developers comparing models, organisations deciding whether to adopt a system, policy makers, and the people affected, who can use the card to seek a remedy.",
+  "notes_slide2": "Section 4 lists nine sections: model details, intended use, factors, metrics, evaluation data, training data, quantitative analyses, ethical considerations, and caveats and recommendations. Intended use includes out-of-scope uses, like a warning label. Factors include groups, the instruments used to capture data, such as camera type, and the environment, such as lighting. For classifiers, the card should report false-positive, false-negative, false discovery and false omission rates, with confidence intervals and the decision threshold used. The authors note that equal rates across groups match some fairness definitions, such as equality of odds. Section 5 gives two example cards. A smiling detector trained on celebrity photos makes many more false 'smiling' predictions for older men. A toxicity classifier's first version scored identity terms such as 'gay' poorly; the fifth version improved. The authors admit that a card depends on the honesty of its authors and should be one tool among others, such as external audits."
+ },
+ {
+  "label": "Sweeney 2002",
+  "kind": "Optional",
+  "course_key": "Sweeney 2002, k-Anonymity (IJUFKS 10(5))",
+  "short_title": "Hide Each Person in a Group of at Least k",
+  "citation": "Sweeney, L. (2002). k-anonymity: A model for protecting privacy. International Journal of Uncertainty, Fuzziness and Knowledge-Based Systems, 10(5), 557–570. https://doi.org/10.1142/S0218488502001648",
+  "problem": "Hospitals and other data holders share person-level data with names removed and assume it is anonymous. Other public data can still be linked to it. Sweeney asks how to release useful data with a guarantee against linking.",
+  "key_ideas": [
+   "An earlier study found 87% of the US population likely unique on ZIP code, gender and birth date",
+   "Linking hospital data to a voter list bought for $20 identified the governor of Massachusetts",
+   "Quasi-identifiers are attributes that are harmless alone but identify people in combination"
+  ],
+  "key_term": {"term": "k-anonymity", "definition": "Every combination of quasi-identifier values in a released table appears in at least k rows"},
+  "slide2_title": "k-Anonymity Blocks Linking but Has Weak Spots",
+  "findings": [
+   "A k-anonymous release cannot be linked on its quasi-identifier to fewer than k people",
+   "Releasing two versions in the same row order lets an attacker match rows across them",
+   "Later or updated releases must build on earlier ones, or joining them breaks the protection"
+  ],
+  "course_link": "Lesson 12-1 uses her work on the slides 'Re-identification by Linkage' and 'k-Anonymity: Hiding in a Group'. In Practice 12 you generalise a patient table to 5-anonymity.",
+  "limitation": "It protects identity, not sensitive values: if all k people share a diagnosis, it still leaks. It assumes the holder knows every quasi-identifier.",
+  "note_question": "In Practice 12, what did widening birth years and postcodes cost in usefulness? Was 5-anonymity worth that cost?",
+  "notes_slide1": "Sweeney writes for data holders such as hospitals and banks that want to share person-level data for research. A common practice was to remove names, addresses and phone numbers and then treat the data as anonymous. Section 1 shows why this fails. An earlier study of 1990 US census data found that about 87% of the population was probably unique on just three attributes: 5-digit ZIP code, gender and date of birth. In Massachusetts, a state agency released health data on about 135,000 state employees and their families. For twenty dollars, Sweeney bought the voter list for Cambridge, which also contained ZIP code, birth date and sex. Linking the two files identified the governor, William Weld: only six voters shared his birth date, three were men, and he was the only one in his ZIP code. Section 3 names such attributes quasi-identifiers and defines k-anonymity: each combination of their values must appear in at least k rows of the release.",
+  "notes_slide2": "If a release is k-anonymous, linking it to outside data on the quasi-identifier always matches at least k people, so the link is ambiguous. Sweeney is careful about what this does not cover. It assumes the data holder can list every attribute that appears in outside data, and it does not stop other kinds of inference. Section 4 describes three attacks on k-anonymous tables. In the unsorted matching attack, two releases keep the original row order, so rows can be matched by position; the fix is to shuffle rows. In the complementary release attack, a second release generalises different attributes, and joining the two releases makes some rows unique again. The temporal attack is similar, but the second release comes later, after new rows were added. In both cases, later releases must be built on the earlier one. A companion paper in the same journal issue shows how to reach k-anonymity by generalisation and suppression, the two methods you use in Practice 12."
+ },
+ {
+  "label": "Narayanan & Shmatikov 2008",
+  "kind": "Optional",
+  "course_key": "Narayanan & Shmatikov 2008, De-anonymization of Large Sparse Datasets (IEEE S&P)",
+  "short_title": "A Few Ratings Can Identify a Netflix User",
+  "citation": "Narayanan, A., & Shmatikov, V. (2008). Robust de-anonymization of large sparse datasets. In 2008 IEEE Symposium on Security and Privacy (pp. 111–125). IEEE. https://doi.org/10.1109/SP.2008.33",
+  "problem": "In 2006 Netflix released about 100 million film ratings by 480,189 subscribers for a prize contest, with customer names removed. The authors ask how much an attacker must know about someone to find their record.",
+  "key_ideas": [
+   "Sparse data has many attributes per record, and most records have no similar neighbour",
+   "Their scoring algorithm tolerates wrong or approximate background knowledge and noisy data",
+   "Unlike k-anonymity, it does not assume a fixed, known set of quasi-identifiers"
+  ],
+  "key_term": {"term": "Sparse dataset", "definition": "A dataset with many attributes per record, where a typical record has no close neighbour"},
+  "slide2_title": "Ratings and Purchases Are Very Hard to Anonymise",
+  "findings": [
+   "8 ratings, 2 of them wrong, with dates off by up to 14 days identify 99% of records uniquely",
+   "For 68% of records, 2 ratings with dates known within 3 days are already enough",
+   "Public IMDb ratings from about 50 users matched 2 Netflix records, exposing sensitive interests"
+  ],
+  "course_link": "It extends Lesson 12-1's slide 'Pseudonymisation Versus Anonymisation'. Practice 12 makes a 3-attribute table k-anonymous; this paper shows why that fails on ratings data.",
+  "limitation": "The IMDb test used only about 50 users, so it is a proof of concept. It does not estimate how many Netflix users could be identified this way.",
+  "note_question": "Your project data may hold many columns per person. Which could an outsider already know, and would they single out a row?",
+  "notes_slide1": "Netflix released its Prize dataset to help researchers improve film recommendations. Its FAQ said all customer identifying information had been removed, leaving only ratings and dates. Narayanan and Shmatikov show that this is not enough. Their key observation concerns sparse, high-dimensional data, such as ratings, purchases or browsing histories. Each record has thousands of possible attributes, and people often rate rare films, so a typical record has no other record close to it. A few known facts are therefore enough to single a person out. Section 3 gives a formal model of de-anonymisation. Section 4 gives a scoring algorithm that gives more weight to rare attributes and accepts a match only if the best candidate stands clearly above the second best. It still works when the attacker's knowledge is partly wrong, when dates are approximate and when the published data has been slightly changed. Unlike the k-anonymity model, it does not assume a fixed set of quasi-identifiers chosen in advance.",
+  "notes_slide2": "Section 5 applies the method to the Netflix data. With 8 ratings, 2 of which may be completely wrong, and dates known within 14 days, 99% of records can be identified uniquely. For 68% of records, 2 ratings with dates known within 3 days are enough. The authors also checked Netflix's claim that the data was perturbed: for two people they knew, only 1 of 306 and 5 of 229 ratings were changed. They then compared public IMDb ratings of about 50 users with the Netflix data and found two very strong matches. One person's full Netflix history suggested political and religious views and interest in films with gay themes, information not visible in his public IMDb ratings. Their conclusion is that generalisation and suppression, the k-anonymity techniques, fail on such data, and that enough noise to stop the attack would destroy the data's value for recommendation research. For your own project, this suggests sharing sparse personal data as aggregates, not as records."
+ },
+ {
+  "label": "Angwin et al. 2016",
+  "kind": "Optional",
+  "course_key": "Angwin et al. 2016, Machine Bias (ProPublica)",
+  "short_title": "COMPAS Errors Fell Differently on Black Defendants",
+  "citation": "Angwin, J., Larson, J., Mattu, S., & Kirchner, L. (2016, May 23). Machine bias. ProPublica.",
+  "problem": "US courts use risk scores when deciding on bail, sentences and parole. ProPublica asked whether COMPAS, a score sold by the company Northpointe, predicts well and treats Black and White defendants alike.",
+  "key_ideas": [
+   "Checks the scores of over 7,000 people arrested in Broward County, Florida, in 2013 and 2014",
+   "Outcome: a new criminal charge within two years, the same benchmark the tool's makers used",
+   "Scores come from 137 questions; race is not asked, but the formula itself is not published"
+  ],
+  "key_term": {"term": "False-positive rate", "definition": "The share of people who did not reoffend but were still labelled higher risk by the score"},
+  "slide2_title": "Similar Error Totals, Very Different Kinds of Mistakes",
+  "findings": [
+   "Of those labelled likely to reoffend, 61% were charged again within 2 years; for violent crime, 20%",
+   "Labelled higher risk but did not reoffend: 44.9% of Black and 23.5% of White defendants",
+   "Labelled lower risk but did reoffend: 47.7% of White and 28.0% of Black defendants"
+  ],
+  "course_link": "Lesson 12-2's slides 'The COMPAS Case' and 'COMPAS by the Numbers' rest on this work. Practice 12 loads ProPublica's COMPAS data and applies its filters.",
+  "limitation": "A news article: the method is in a separate piece. Northpointe disputed it, arguing that equal predictive value is the right fairness test.",
+  "note_question": "Compare the cases of Brisha Borden and Vernon Prater. What do such stories show that an error-rate table does not?",
+  "notes_slide1": "This is the investigative article that started the public debate on algorithmic fairness. It opens with two cases. Brisha Borden, an 18-year-old Black woman, took a child's bike and scooter worth $80 and was rated high risk. Vernon Prater, a White man with earlier armed robbery convictions, stole tools worth $86.35 and was rated low risk. Two years later, Borden had no new charges and Prater was in prison for a new crime. The reporters obtained COMPAS scores for more than 7,000 people arrested in Broward County, Florida, in 2013 and 2014, where the score is used in pre-trial release decisions. They counted who was charged with a new crime within two years, the benchmark Northpointe also used. COMPAS is built from 137 questions answered by defendants or taken from records, such as whether a parent was ever in prison. Race is not a question, but Northpointe did not disclose how the answers are combined, so defendants could not see what drove their score.",
+  "notes_slide2": "ProPublica found the score modestly accurate: 61% of those labelled likely to reoffend were charged again within two years, and only 20% of those predicted to commit violent crimes did so. The central finding is about the kind of errors. Overall error rates were similar for Black and White defendants, but among people who did not reoffend, 44.9% of Black and 23.5% of White defendants had been labelled higher risk. Among people who did reoffend, 47.7% of White and 28.0% of Black defendants had been labelled lower risk. A regression controlling for criminal history, age and gender still found Black defendants more likely to receive higher scores. Northpointe disputed the analysis. Its later reply, discussed by Chouldechova, argued that among defendants labelled high risk, the share who reoffend is about the same in both groups. Both sets of numbers can be correct at once: the two sides used different definitions of fairness. The article also describes judges in Wisconsin citing scores in sentencing, and quotes experts who want defendants to be able to challenge them."
+ }
+]

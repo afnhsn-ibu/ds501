@@ -1,0 +1,142 @@
+[
+ {
+  "label": "Dean & Ghemawat 2004",
+  "kind": "Required",
+  "course_key": "Dean & Ghemawat 2004, MapReduce (OSDI)",
+  "short_title": "Write Map and Reduce; the Library Runs the Cluster",
+  "citation": "Dean, J., & Ghemawat, S. (2004). MapReduce: Simplified data processing on large clusters. In Proceedings of OSDI '04 (pp. 137–150). USENIX Association.",
+  "problem": "At Google, many jobs over crawled pages and logs were simple but needed hundreds or thousands of machines. Each team wrote its own code for parallelism, data movement and failures. The authors ask how to hide this work.",
+  "key_ideas": [
+   "Map turns each input record into intermediate key/value pairs, e.g. (word, 1) for each word",
+   "The library groups the values by key; reduce merges each key's values, e.g. sums the counts",
+   "A master splits the input into pieces of 16–64 MB and gives map and reduce tasks to workers"
+  ],
+  "key_term": {
+   "term": "Re-execution",
+   "definition": "MapReduce's main defence against failure: the tasks of a failed worker are simply run again elsewhere"
+  },
+  "slide2_title": "Re-Execution and Locality Make a Simple Model Scale",
+  "findings": [
+   "When groups of 80 machines became unreachable, the master re-ran their work and the job finished",
+   "Map tasks run on or near a machine holding a copy of their input, so most input is read locally",
+   "Backup copies of slow last tasks matter: without them a 1 TB sort took 44% longer"
+  ],
+  "course_link": "Lesson 11-1 traces this word count through map, shuffle and reduce. In Practice 11 you run the same word count in PySpark with flatMap, map and reduceByKey.",
+  "limitation": "Google engineers on their own system, with no comparison to parallel databases. Writing results to disk between jobs makes iterative work slow.",
+  "note_question": "Trace a word count on two short texts through map, shuffle and reduce. What does the programmer write, and what does the library do?",
+  "notes_slide1": "Dean and Ghemawat were engineers at Google. Over five years they and their colleagues had written hundreds of programs that turned raw data, such as crawled web pages and request logs, into derived data, such as an inverted index. Each program was simple, but the code for parallelism, data distribution and failures hid the simple logic. Their answer, inspired by functional programming, is a model with two user functions. Map takes one input record and emits intermediate key/value pairs. The library groups all values with the same key, and reduce merges them. Word count is the standard example: map emits (word, 1) for each word, and reduce adds the ones. Section 2 also shows distributed grep, counting URL accesses, reversing web links and building an inverted index. Section 3 describes the implementation on clusters of ordinary PCs with 2–4 GB of memory and cheap disks. The input is split into M pieces of 16–64 MB. A master assigns map tasks; map output is written to local disk in R parts, which reduce workers fetch, sort by key and process.",
+  "notes_slide2": "The rest of section 3 explains why the system works at scale. The master pings every worker. If a worker fails, its tasks are run again on another machine, including finished map tasks, because their output was on the failed machine's disk. In one job, network maintenance made groups of 80 machines unreachable for minutes, and the job still finished. When map and reduce are deterministic, the result is the same as a run without failures. Input is stored in the Google File System in 64 MB blocks with usually 3 copies, and the master schedules map tasks near a copy. Near the end of a job, backup copies of the last tasks are started, because one slow machine can delay everything; without them a sort took 44% longer. On about 1,800 machines, the system scanned 1 TB in about 150 seconds and sorted 1 TB in 891 seconds. In August 2004 Google ran 29,423 MapReduce jobs. Rewriting the search indexing with MapReduce cut one phase from about 3,800 to about 700 lines of C++."
+ },
+ {
+  "label": "Zaharia et al. 2016",
+  "kind": "Required",
+  "course_key": "Zaharia et al. 2016, Apache Spark: A Unified Engine (CACM 59(11))",
+  "short_title": "One Engine for SQL, Streaming, ML and Graphs",
+  "citation": "Zaharia, M., Xin, R. S., Wendell, P., Das, T., Armbrust, M., Dave, A., Meng, X., Rosen, J., Venkataraman, S., Franklin, M. J., Ghodsi, A., Gonzalez, J., Shenker, S., & Stoica, I. (2016). Apache Spark: A unified engine for big data processing. Communications of the ACM, 59(11), 56–65. https://doi.org/10.1145/2934664",
+  "problem": "After MapReduce, separate engines appeared for SQL, streaming, graphs and machine learning. Real pipelines need several of them and must copy data between them. The authors ask whether one general engine can do all of this well.",
+  "key_ideas": [
+   "An RDD is a fault-tolerant collection, split into partitions and processed in parallel",
+   "Transformations such as filter are lazy; an action such as count makes Spark plan and run the job",
+   "RDDs can stay in memory for reuse; lost partitions are rebuilt from lineage, not from copies"
+  ],
+  "key_term": {
+   "term": "RDD",
+   "definition": "Resilient distributed dataset: Spark's partitioned collection, which can be cached in memory and rebuilt"
+  },
+  "slide2_title": "Sharing Data in Memory Lets One Engine Do Everything",
+  "findings": [
+   "Logistic regression on 100 GB: Hadoop took 110 s per iteration; Spark took 1 s after the first load",
+   "In 2014 Spark sorted 100 TB 3× faster than the Hadoop record holder, with 10× fewer machines",
+   "In a 2015 survey of 1,400 users, 88% used at least two Spark components and 60% used DataFrames"
+  ],
+  "course_link": "Lesson 11-2 covers Spark's job execution, lazy evaluation and DataFrames. In Practice 11 you call explain() on a groupBy and see a plan before any result is computed.",
+  "limitation": "Written by Spark's creators, several at Databricks, with few independent tests. It admits Spark is slower on some graph tasks such as PageRank.",
+  "note_question": "What do the authors see as the main difference between Spark and MapReduce, and why does it matter for iterative algorithms?",
+  "notes_slide1": "The Spark project started at the University of California, Berkeley, in 2009. At that time, MapReduce handled batch jobs, while other systems handled interactive SQL, streaming or graphs. A typical pipeline needs several of these, so data had to be written out by one engine and read by the next. Spark keeps the MapReduce style but adds a way to share data: the resilient distributed dataset, or RDD. Users build RDDs with transformations such as map, filter and groupBy, and get results with actions such as count. Transformations are lazy, so Spark sees the whole chain before it runs and can, for example, merge several filters into one pass. Users can persist an RDD in memory and query it again, which can be up to 100 times faster for iterative and interactive work. If a node fails, Spark rebuilds the lost partitions from their lineage, the list of steps that produced them. On this core the team built four libraries: Spark SQL and DataFrames, Spark Streaming, GraphX for graphs and MLlib for machine learning.",
+  "notes_slide2": "Because the libraries share one engine, a program can mix them, for example by reading old tweets with SQL, training k-means with MLlib and applying the model to a live stream. Spark can also optimise across library boundaries. The authors report performance close to specialised systems such as Impala, Storm and GraphLab. Use cases include batch ETL, the most common one; interactive queries from business intelligence tools and notebooks; streaming; and science, such as brain imaging at up to 1 TB per hour. The largest published cluster had 8,000 nodes and took in 1 PB per day. They then explain why the model is general. MapReduce can in principle emulate any distributed computation, but it shares data between steps slowly, through replicated storage, and its steps have high latency. RDDs fix both problems. The last part describes DataFrames, added in 2015: tables with a schema whose operations Spark's query planner optimises. The authors argue that composable libraries over one engine are the key lesson."
+ },
+ {
+  "label": "Armbrust et al. 2021",
+  "kind": "Required",
+  "course_key": "Armbrust et al. 2021, Lakehouse (CIDR)",
+  "short_title": "Replace the Lake Plus Warehouse With a Lakehouse",
+  "citation": "Armbrust, M., Ghodsi, A., Xin, R., & Zaharia, M. (2021). Lakehouse: A new generation of open platforms that unify data warehousing and advanced analytics. In Proceedings of CIDR '21.",
+  "problem": "Most firms keep raw data in a cheap data lake and copy a curated part into a data warehouse for BI. The authors, from Databricks, ask whether one system on open files can serve both BI and machine learning.",
+  "key_ideas": [
+   "Two tiers cause problems: unreliable ETL, stale data, weak ML support and paying twice for storage",
+   "A lakehouse keeps data in open files, e.g. Parquet, in low-cost object storage such as Amazon S3",
+   "A metadata layer, e.g. Delta Lake, records which files form each table version, giving transactions"
+  ],
+  "key_term": {
+   "term": "Lakehouse",
+   "definition": "A system on low-cost, directly readable open-format storage that adds warehouse features such as transactions"
+  },
+  "slide2_title": "Open Files Can Reach Warehouse Speed With Extra Layers",
+  "findings": [
+   "A survey they cite found 86% of analysts use out-of-date data; lake-to-warehouse ETL adds delay",
+   "Caching, per-file statistics for skipping data, and better data layout speed up SQL on Parquet",
+   "On TPC-DS, their Delta Engine matched or beat four cloud warehouses at a lower cost"
+  ],
+  "course_link": "Lesson 11-2's slides on warehouses, lakes and the lakehouse follow this paper. In Practice 11 you write partitioned Parquet and see Spark read only the Ohrid folder.",
+  "limitation": "A position paper by Databricks staff. The benchmark is the authors' own, against unnamed warehouses, and was not independently reproduced.",
+  "note_question": "Which problems of running both a data lake and a data warehouse does the lakehouse address, and how does the metadata layer help?",
+  "notes_slide1": "The authors describe three generations of analytics platforms. First-generation data warehouses collected data from operational databases for business intelligence. Data were written with a fixed schema, and storage and compute were sold together, so costs grew with data. They could not hold video, audio or text. The second generation put all raw data into a data lake: cheap storage, first HDFS and from about 2015 cloud object stores such as S3, holding open files such as Parquet. The schema is applied when the data are read. A curated subset is then loaded into a warehouse. This two-tier design is now standard, and section 2 lists its problems. Keeping lake and warehouse consistent needs constant ETL work, and each step can add bugs. Warehouse data are stale; a survey they cite found 86% of analysts use out-of-date data. Machine learning tools such as TensorFlow and PyTorch cannot read warehouse data efficiently. Firms pay twice for storage and are locked into proprietary formats.",
+  "notes_slide2": "Section 3 defines a lakehouse: a system on low-cost, directly accessible storage that also offers warehouse features such as ACID transactions, versioning, auditing, indexing, caching and query optimisation. The design has three parts. First, a transactional metadata layer over the object store records which files belong to each version of a table. Delta Lake, Apache Iceberg and Apache Hudi work this way, and they also allow rollback to old versions and schema enforcement. Second, SQL speed comes from techniques that leave the Parquet files unchanged: caching hot data on SSDs, keeping minimum and maximum values per file to skip data, and ordering records so related rows sit together. Third, declarative DataFrame APIs let ML libraries benefit from the same optimisations. The authors report a TPC-DS benchmark in which their Delta Engine was competitive with four cloud warehouses at lower cost. They admit a trade-off: the file format becomes a public interface, which gives up some data independence. Remember that they sell this design."
+ },
+ {
+  "label": "Ghemawat et al. 2003",
+  "kind": "Optional",
+  "course_key": "Ghemawat et al. 2003, GFS (SOSP)",
+  "short_title": "Design Storage for Failures, Huge Files and Appends",
+  "citation": "Ghemawat, S., Gobioff, H., & Leung, S.-T. (2003). The Google file system. In Proceedings of SOSP '03 (pp. 29–43). ACM. https://doi.org/10.1145/945445.945450",
+  "problem": "Google needed to store very large files on thousands of cheap machines that fail often. Earlier file systems had other workloads in mind. The authors ask what a file system built for Google's own applications should look like.",
+  "key_ideas": [
+   "Component failures are normal, so monitoring and automatic recovery must be part of the design",
+   "Files are split into 64 MB chunks, each stored by default as three replicas on chunkservers",
+   "One master keeps all metadata in memory; clients move data directly to and from chunkservers"
+  ],
+  "key_term": {
+   "term": "Chunkserver",
+   "definition": "A machine that stores file chunks as local Linux files and sends their data directly to clients"
+  },
+  "slide2_title": "Simple Designs Work When You Know the Workload",
+  "findings": [
+   "Large chunks keep metadata small: under 64 bytes per 64 MB chunk, so it fits in the master's memory",
+   "Record append lets hundreds of clients add to one file at the same time without extra locking",
+   "A relaxed consistency model keeps the system simple; applications deal with duplicates and padding"
+  ],
+  "course_link": "Lesson 11-1's HDFS slide on blocks, replication and data locality comes from this design. In Practice 11 Spark runs in local mode; on a cluster it would read such blocks.",
+  "limitation": "Tuned for Google's 2003 batch workloads. One master limits the number of files, and small files and low latency are not well served.",
+  "note_question": "Which of the GFS design assumptions still hold for cloud storage today, and which would you change?",
+  "notes_slide1": "Ghemawat, Gobioff and Leung built the Google File System (GFS) for Google's data processing. At the time, the largest cluster had over 1,000 storage nodes and over 300 TB of disk, used by hundreds of clients. Section 1 explains why they rethought traditional design choices. First, failures of disks, memory, networks, power and software are normal with thousands of cheap machines, so the system must detect them and recover by itself. Second, files are huge: multi-GB files are common. Third, most files are changed by appending new data, not by overwriting, and are then read, often in sequence. Fourth, Google writes both the applications and the file system, so it can design them together. Section 2.1 lists the detailed assumptions: a few million files of typically 100 MB or more; large streaming reads and small random reads; many large appends, often by many clients at once; and high sustained bandwidth matters more than low latency. GFS offers create, read, write and delete, plus snapshot and record append, but not the standard POSIX interface.",
+  "notes_slide2": "The architecture has one master, many chunkservers and many clients. Each file is split into fixed 64 MB chunks. Each chunk has a unique 64-bit handle and is stored as three replicas by default. The master holds all metadata in memory: the namespace, the mapping from files to chunks and the chunk locations. It talks to chunkservers through regular HeartBeat messages. A client asks the master where a chunk is, caches the answer, and then reads data straight from a chunkserver, so the master does not become a bottleneck. The large chunk size reduces requests to the master and the size of its metadata. Small files can become hot spots: an executable stored as one chunk was overloaded when hundreds of machines started it at once. Changes to metadata are written to an operation log that is replicated on other machines, with checkpoints for fast recovery. The consistency model is relaxed: record append writes data at least once, so readers must handle duplicates. Hadoop's HDFS later copied this design with its NameNode, DataNodes and blocks."
+ },
+ {
+  "label": "Bommasani et al. 2021",
+  "kind": "Optional",
+  "course_key": "Bommasani et al. 2021, Foundation Models (arXiv:2108.07258)",
+  "short_title": "Foundation Models Spread Both Power and Flaws",
+  "citation": "Bommasani, R., Hudson, D. A., Adeli, E., et al. (2021). On the opportunities and risks of foundation models. arXiv:2108.07258. https://doi.org/10.48550/arXiv.2108.07258",
+  "problem": "By 2021, models such as BERT and GPT-3 were trained once on huge data and then adapted to many tasks. Over 100 Stanford researchers ask what to call these models, what they can do, and what risks they bring.",
+  "key_ideas": [
+   "A foundation model is trained on broad data, mostly by self-supervision, then adapted to many tasks",
+   "Transfer learning makes them possible; scale in hardware, Transformers and data makes them powerful",
+   "Emergence: abilities such as learning a task from a prompt appear with scale, without being built"
+  ],
+  "key_term": {
+   "term": "Homogenisation",
+   "definition": "Many AI systems built on the same few base models, so improvements spread widely, and so do flaws"
+  },
+  "slide2_title": "Judge the Whole Ecosystem, Not Only the Model",
+  "findings": [
+   "GPT-3 has 175 billion parameters and does many tasks from a prompt, though not trained for them",
+   "Social impact depends on five stages: data creation, curation, training, adaptation and deployment",
+   "Risks include unfair bias, misuse, environmental cost and legal issues; most building is in industry"
+  ],
+  "course_link": "Lesson 11-3 explains how a large language model writes and how to verify its work. In Practice 11 Part C you find four analytical mistakes in AI-written code that runs without errors.",
+  "limitation": "A 2021 preprint of over 200 pages, not peer reviewed. It predates ChatGPT and later models, so many of its examples are now dated.",
+  "note_question": "If you use an AI assistant in your project, at which stage of the ecosystem are you, and what must you check?",
+  "notes_slide1": "This report from a Stanford research centre on foundation models introduced the term foundation model: a model trained on broad data, usually with self-supervision at scale, that can be adapted to many downstream tasks. BERT, GPT-3 and CLIP are its examples. Section 1 tells a short history. With machine learning, how to do a task emerged from examples, and one algorithm, such as logistic regression, served many tasks. With deep learning, from about 2010, the features themselves emerged from raw data, and one architecture served many tasks. With foundation models, whole abilities emerge, and one trained model is the base for many systems. Transfer learning makes this possible, and scale makes it powerful: faster GPUs, the Transformer architecture and much more data. Self-supervision, such as predicting a hidden word in a sentence, needs no human labels. GPT-3, with 175 billion parameters against 1.5 billion for GPT-2, can learn a task from a prompt, an ability nobody trained it for. The authors chose the word foundation because these models are incomplete but serve as a base.",
+  "notes_slide2": "The two key words are emergence and homogenisation, and they interact in a worrying way. When almost every system is adapted from a few base models, an improvement helps everyone, but every flaw, such as a social bias, is inherited by every adapted model. Because abilities emerge rather than being designed, the models are hard to understand and can fail in unexpected ways. Section 1.2 places the model in an ecosystem with people at both ends: data creation, data curation, training, adaptation and deployment. Social impact comes from deployment, such as Google search using BERT, so different questions belong to different stages. The authors ask for documentation and test results that downstream users can rely on. They also note that these models are built almost only in large companies, and they call for academics from many disciplines to take part. The later sections cover capabilities, applications in health care, law and education, technology, and society: fairness, misuse, environment, law, economics and ethics. Read section 1 and one later section."
+ }
+]

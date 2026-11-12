@@ -1,0 +1,142 @@
+[
+ {
+  "label": "Wasserstein & Lazar 2016",
+  "kind": "Required",
+  "course_key": "Wasserstein & Lazar 2016, The ASA Statement on p-Values (The American Statistician 70(2))",
+  "short_title": "Six Principles for Using p-Values Well",
+  "citation": "Wasserstein, R. L., & Lazar, N. A. (2016). The ASA's statement on p-values: Context, process, and purpose. The American Statistician, 70(2), 129–133. https://doi.org/10.1080/00031305.2016.1154108",
+  "problem": "p-values were widely misused, many findings could not be reproduced, and one journal banned p-values. The ASA asks what statisticians broadly agree a p-value can and cannot tell a researcher.",
+  "key_ideas": [
+   "A p-value is the probability, under a model, of a statistic at least as extreme as observed",
+   "It shows how incompatible the data are with a model, not the chance that a hypothesis is true",
+   "Decisions should not rest only on p < 0.05; report all analyses and look at effect sizes"
+  ],
+  "key_term": {
+   "term": "p-value",
+   "definition": "The probability, under a stated model, of a summary of the data at least as extreme as the observed one"
+  },
+  "slide2_title": "A p-Value Alone Is Weak Evidence",
+  "findings": [
+   "The ASA had never before issued a statement on a specific matter of statistical practice",
+   "About 20 experts met in October 2015; the ASA approved the final statement on 29 January 2016",
+   "Other tools can supplement p-values: intervals, Bayesian methods, likelihood ratios, FDR"
+  ],
+  "course_link": "Lesson 7-2's slides on what a p-value is not and on the ASA statement come from it. In Practice 7 you report Cohen's d beside the t-test and explain the ASA warning.",
+  "limitation": "A consensus text: it leaves out alternative hypotheses, error types and power, and gives no replacement rule. Not every expert agreed with it.",
+  "note_question": "Pick two of the six principles. How will each one change the way you report a test in your project?",
+  "notes_slide1": "This short article has two parts. The first, by Ronald Wasserstein, then Executive Director of the American Statistical Association, and Nicole Lazar, then editor of The American Statistician, explains the context. In 2014 George Cobb pointed out a circular habit: universities teach p < 0.05 because scientists use it, and scientists use it because they were taught it. At the same time, news articles attacked significance testing, concern about irreproducible research was growing, and one psychology journal banned p-values. The ASA had never taken a position on a specific matter of statistical practice, so this was a new step. More than two dozen experts with very different views were invited. About 20 of them met for two days in October 2015, and after several drafts the ASA approved the statement on 29 January 2016. The authors say plainly that nothing in it is new; statisticians had warned about these problems for decades.",
+  "notes_slide2": "The second part is the statement itself. It gives an informal definition: a p-value is the probability, under a specified statistical model, that a summary of the data would be equal to or more extreme than the value observed. Then come six principles. A p-value can show how incompatible the data are with a model. It does not measure the probability that a hypothesis is true, or that chance alone produced the data. Decisions should not depend only on whether p passes a threshold. Proper inference needs full reporting, because choosing which results to show makes p-values hard to interpret. A p-value does not measure the size or importance of an effect; a tiny effect gives a small p in a large sample. Finally, a p-value alone is weak evidence; near 0.05 it is only weak evidence against the null. A short section lists other approaches, such as confidence intervals, Bayesian methods and false discovery rates, which also rely on assumptions."
+ },
+ {
+  "label": "Kohavi et al. 2009",
+  "kind": "Required",
+  "course_key": "Kohavi et al. 2009, Controlled Experiments on the Web (DMKD 18)",
+  "short_title": "Randomised Experiments Beat Expert Opinion",
+  "citation": "Kohavi, R., Longbotham, R., Sommerfield, D., & Henne, R. M. (2009). Controlled experiments on the web: Survey and practical guide. Data Mining and Knowledge Discovery, 18(1), 140–181. https://doi.org/10.1007/s10618-008-0114-1",
+  "problem": "Web teams often decide on changes by opinion, especially the HiPPO, the highest paid person's opinion. The authors, with experience at Amazon and Microsoft, explain how to test changes reliably on live users.",
+  "key_ideas": [
+   "Random assignment to Control or Treatment means a difference in the metric is caused by the change",
+   "Agree one overall evaluation criterion (OEC) in advance; it should reflect long-term goals",
+   "Rule of thumb: n = 16σ²/Δ² users per variant gives 80% power at a 95% confidence level"
+  ],
+  "key_term": {
+   "term": "OEC",
+   "definition": "Overall evaluation criterion: the one agreed metric, such as conversion rate, that decides an experiment"
+  },
+  "slide2_title": "Small Changes Surprise, So Test Them Carefully",
+  "findings": [
+   "A redesigned checkout page lost 90% of revenue, mainly because it added a coupon-code box",
+   "Using conversion instead of revenue as the OEC cut the users needed from 409,000 to under 122,000",
+   "Run A/A tests, split users 50/50, and run for at least one or two full weeks"
+  ],
+  "course_link": "Lesson 7-3's A/B test design and sample size slides follow it. In Practice 7 you analyse a test with 4,800 and 4,750 visitors and compute the visitors needed for 80% power.",
+  "limitation": "Experiments show which variant wins, not why, and measure effects over weeks, not years. Its systems and examples date from about 2008.",
+  "note_question": "Why does random assignment allow a causal claim, and which of their practical lessons would you apply to the Practice 7 A/B test?",
+  "notes_slide1": "Ron Kohavi and his co-authors were at Microsoft and had run many experiments at Amazon and Microsoft. Section 1 opens with an Amazon story: a manager forbade shopping-cart recommendations, an engineer tested them anyway, and they won by a wide margin. Section 2 gives more surprises. A checkout page was upgraded and lost 90% of its revenue, mainly because a new coupon-code box made buyers think they were paying too much. A new 5-star rating widget for Office help reduced the number of ratings by about 90%. Section 3 explains the method. Users are randomly assigned to the Control, the existing version, or to a Treatment. If the experiment is run correctly, the only consistent difference between the groups is the change, so a difference in the metric is caused by it. The metric is the OEC, agreed in advance. The section also defines factor, variant, experimental unit, A/A test and power.",
+  "notes_slide2": "The rest of section 3 shows how power depends on the confidence level, the standard error and the effect size. A useful formula gives the users needed per variant for 80% power: 16 times the variance divided by the square of the change you want to detect. The examples show that the choice of OEC matters. Detecting a 5% change in revenue per user needed over 409,000 users, but a 5% change in conversion rate needed fewer than 122,000. Analysing only users who reached the changed page reduces the number further. The authors also list limits: experiments show which variant is better but not why, measure effects over a few weeks, and need the feature to be built first. Section 6 gives lessons learned. Run A/A tests to check the system. Ramp up a new treatment slowly and stop it automatically if it fails. Split users 50/50 for the most power, and run for whole weeks to cover day-of-week effects."
+ },
+ {
+  "label": "Greenland et al. 2016",
+  "kind": "Optional",
+  "course_key": "Greenland et al. 2016, Statistical Tests, P Values … Misinterpretations (Eur. J. Epidemiology 31)",
+  "short_title": "Twenty-Five Common Misreadings of Statistics",
+  "citation": "Greenland, S., Senn, S. J., Rothman, K. J., Carlin, J. B., Poole, C., Goodman, S. N., & Altman, D. G. (2016). Statistical tests, P values, confidence intervals, and power: A guide to misinterpretations. European Journal of Epidemiology, 31(4), 337–350. https://doi.org/10.1007/s10654-016-0149-3",
+  "problem": "Misreadings of tests, p-values, confidence intervals and power have been criticised for decades, yet remain common. The authors give careful definitions and list 25 errors so that readers can spot them.",
+  "key_ideas": [
+   "A p-value tests the whole model: every assumption, including how results were chosen to report",
+   "Read p as a continuous measure of compatibility between the data and the model, from 0 to 1",
+   "A 95% confidence level describes the method over many uses, not one particular interval"
+  ],
+  "key_term": {
+   "term": "Statistical model",
+   "definition": "The full set of assumptions used to compute a p-value, not only the hypothesis being tested"
+  },
+  "slide2_title": "Not Significant Does Not Mean No Effect",
+  "findings": [
+   "Items 1 to 14 cover single p-values, e.g. p is not the probability that the null is true",
+   "Two 95% intervals can overlap while the difference between them still has p = 0.03",
+   "Power of 90% does not mean a non-significant result has a 10% chance of being wrong"
+  ],
+  "course_link": "Lesson 7-2's 'What a p-value is not' slide draws on its list. Lesson 7-1's point that the 95% belongs to the method, not to one interval, is item 19.",
+  "limitation": "Long and dense for beginners. It explains what is wrong more fully than what to do instead, and most examples come from health research.",
+  "note_question": "Which item on the list have you seen in a news story, report or paper, and how would you correct it?",
+  "notes_slide1": "Sander Greenland and six co-authors, all well-known statisticians and epidemiologists, wrote this essay as a companion to the ASA statement. They argue that there is no definition of p-values, confidence intervals or power that is at the same time simple, intuitive, correct and foolproof. Short-cut definitions have spread, and many of them are wrong. The essay first builds careful definitions. A statistical model is the whole set of assumptions used to compute a p-value. This includes the test hypothesis, but also assumptions about how the data were collected and how the analysis was chosen. A p-value is the probability that the test statistic would be at least as large as observed if every one of these assumptions were correct. So a small p-value does not tell us which assumption failed. The authors suggest reading p as a continuous measure of compatibility between data and model, not as a pass or fail at 0.05.",
+  "notes_slide2": "The main part is a numbered list of 25 misinterpretations, each followed by an emphatic No! and a short explanation. Items 1 to 14 concern single p-values. For example, p is not the probability that the test hypothesis is true, a large p-value is not evidence for the null, and statistical significance does not mean that an effect is important. Items 15 to 18 concern comparisons across studies; for instance, one significant and one non-significant study are not necessarily in conflict. Items 19 to 23 cover confidence intervals: a specific 95% interval does not have a 95% chance of containing the true value, and overlapping intervals do not prove that two groups are similar. Items 24 and 25 cover power. The essay ends with guidelines: look at effect sizes, confidence limits and exact p-values, examine all assumptions, never treat non-significance as support for the null, and describe every step that led to the results."
+ },
+ {
+  "label": "Ioannidis 2005",
+  "kind": "Optional",
+  "course_key": "Ioannidis 2005 (PLoS Medicine 2(8))",
+  "short_title": "Low Prior Odds Make Most Findings False",
+  "citation": "Ioannidis, J. P. A. (2005). Why most published research findings are false. PLoS Medicine, 2(8), e124. https://doi.org/10.1371/journal.pmed.0020124",
+  "problem": "Many published findings are later refuted. Ioannidis asks how likely a claimed finding with p < 0.05 is to be true, given how often a field tests true relationships, the study's power and its bias.",
+  "key_ideas": [
+   "PPV, the chance that a significant finding is true, depends on prior odds R, power and α",
+   "With α = 0.05, a finding is more likely true than false only if power times R exceeds 0.05",
+   "Bias in design or reporting, and many teams testing one question, both lower the PPV"
+  ],
+  "key_term": {
+   "term": "PPV",
+   "definition": "Positive predictive value: the probability that a statistically significant finding is in fact true"
+  },
+  "slide2_title": "Small Studies and Flexible Analyses Lower the PPV",
+  "findings": [
+   "A well-powered randomised trial with 1:1 prior odds and little bias is true about 85% of the time",
+   "Discovery research with 1:1,000 prior odds, e.g. gene screens, has a PPV of about 0.001",
+   "Six corollaries: small studies, small effects, many tests, flexibility, interests, hot fields"
+  ],
+  "course_link": "Lesson 7-2's type I and II errors and power are the inputs of his model. In Practice 7, about 5 of 100 null features look 'significant' by chance, his many-tests problem.",
+  "limitation": "Its inputs, such as prior odds and bias, are assumed rather than measured, so the PPVs are illustrations, not estimates for real fields.",
+  "note_question": "Think of a project that screens many features. What prior odds would you guess, and what would that mean for its PPV?",
+  "notes_slide1": "John Ioannidis, a medical researcher, wrote this short essay in 2005. He notes that many research findings are later contradicted, and he argues that this should not surprise us. His model treats research like a diagnostic test. In a field, let R be the ratio of true relationships to false ones among all relationships tested. A study claims a finding when p falls below α, usually 0.05. Using power, α and R, a two-by-two table gives the positive predictive value, PPV: the probability that a claimed finding is really true. A finding is more likely true than false only when power times R is greater than α. Then he adds bias, u, the share of analyses that become findings only because of choices in design, analysis or reporting. Bias lowers the PPV. So does testing by many independent teams, because the chance that at least one team finds something significant rises, even when nothing is there.",
+  "notes_slide2": "From the model, Ioannidis draws six corollaries. A finding is less likely to be true when studies are small, when effects are small, when many relationships are tested with little preselection, when designs, definitions, outcomes and analyses are flexible, when there are financial or other interests and prejudice, and when many teams compete in a hot field. A table gives example PPVs. An adequately powered randomised trial with 1:1 prior odds and little bias is true about 85% of the time. An underpowered early trial is true about one time in four or five. Discovery research that tests thousands of genes, with prior odds of 1:1,000, has a PPV of about 0.001. He also argues that in a field with no true effects, the reported effects simply measure its bias. To improve matters he suggests larger studies, looking at the totality of evidence, registering studies in advance, and thinking about prior odds before testing."
+ },
+ {
+  "label": "Simmons et al. 2011",
+  "kind": "Optional",
+  "course_key": "Simmons, Nelson & Simonsohn 2011 (Psychological Science 22(11))",
+  "short_title": "Flexible Analyses Can Make Anything Significant",
+  "citation": "Simmons, J. P., Nelson, L. D., & Simonsohn, U. (2011). False-positive psychology: Undisclosed flexibility in data collection and analysis allows presenting anything as significant. Psychological Science, 22(11), 1359–1366. https://doi.org/10.1177/0956797611417632",
+  "problem": "Researchers make many small choices when they collect and analyse data, and often report only what worked. The authors ask how much this undisclosed flexibility raises the rate of false-positive findings.",
+  "key_ideas": [
+   "Researcher degrees of freedom: when to stop, which measures, covariates or conditions to report",
+   "Each choice seems harmless, but trying several and reporting the best one inflates false positives",
+   "Their own real experiment 'showed' that a Beatles song made listeners younger"
+  ],
+  "key_term": {
+   "term": "False positive",
+   "definition": "Concluding that an effect exists when it does not; the authors argue it is the costliest error"
+  },
+  "slide2_title": "Disclose Every Choice to Keep the 5% Honest",
+  "findings": [
+   "In simulations, combining four common choices raised the false-positive rate from 5% to about 61%",
+   "Six rules for authors, e.g. fix the stopping rule in advance and report all measures and conditions",
+   "Four guidelines for reviewers, e.g. ask for results with and without excluded data or covariates"
+  ],
+  "course_link": "Lesson 7-2's slide on p-hacking and researcher degrees of freedom draws on it. In Practice 7 you explain why checking an A/B test daily until p < 0.05 is a problem.",
+  "limitation": "The simulations cover only a few choices in simple experiments. The paper shows how false positives can arise, not how often they occur.",
+  "note_question": "List three analysis choices in your own project that you could write down and fix before you look at the results.",
+  "notes_slide1": "Joseph Simmons, Leif Nelson and Uri Simonsohn are researchers in psychology and marketing. They argue that a false positive, claiming an effect that does not exist, is especially costly because such findings persist and waste later effort. During a study, researchers face many decisions: how many people to test, when to stop, which measures to analyse, which observations to exclude, which covariates to control for and which conditions to compare. The authors call these researcher degrees of freedom. Each choice can be defended, and it is tempting to pick the one that gives p below 0.05. To show the danger, they report two real experiments with students. In one, after flexible analysis, listening to the Beatles song When I'm Sixty-Four appeared to make participants younger, which is impossible. The point is not the song but how easily standard methods produced a significant result for a false claim.",
+  "notes_slide2": "The authors then use computer simulations in which no true effect exists, so the false-positive rate should be 5%. Each flexible choice alone raises it a little: analysing two related outcome measures, adding more participants after a first test, controlling for a covariate, or dropping one of three conditions. Combined, the four choices raise the false-positive rate to about 61%. Their solution is disclosure, not a new test. They propose six requirements for authors, including deciding the stopping rule in advance, collecting enough observations per cell, listing all variables and conditions, and reporting results with and without excluded observations or covariates. They add four guidelines for reviewers, such as asking authors to show that results do not depend on arbitrary choices. In data science the same risk appears whenever many segments, metrics or models are tried. Writing the analysis plan before looking at results is the simplest defence."
+ }
+]

@@ -1,0 +1,142 @@
+[
+ {
+  "label": "Kohavi 1995",
+  "kind": "Required",
+  "course_key": "Kohavi 1995, Cross-Validation and Bootstrap for Accuracy Estimation (IJCAI)",
+  "short_title": "Use Stratified 10-Fold CV to Choose Between Models",
+  "citation": "Kohavi, R. (1995). A study of cross-validation and bootstrap for accuracy estimation and model selection. In Proceedings of IJCAI-95, Vol. 2 (pp. 1137–1144). Morgan Kaufmann.",
+  "problem": "A classifier's accuracy on its own training data is too optimistic, so it must be estimated on data it has not seen. Kohavi asks which method, hold-out, k-fold cross-validation or the bootstrap, works best on real datasets.",
+  "key_ideas": [
+   "Hold-out trains on part of the data, often 2/3, so its estimate is pessimistic and depends on the split",
+   "k-fold CV trains k times and tests each row once; stratified folds keep the class proportions",
+   "The .632 bootstrap trains on samples drawn with replacement and mixes in the training accuracy"
+  ],
+  "key_term": {
+   "term": "Stratified CV",
+   "definition": "k-fold cross-validation in which every fold has about the same class proportions as the whole dataset"
+  },
+  "slide2_title": "Ten Stratified Folds Balance Bias and Variance",
+  "findings": [
+   "With 2 or 5 folds, CV was clearly pessimistic; at 10 folds it was good, at 20 almost unbiased",
+   "The .632 bootstrap had low variance but large bias on some data, e.g. 9.8% for C4.5 on vehicle",
+   "Stratified folds had slightly lower bias and slightly lower variance than plain folds"
+  ],
+  "course_link": "Lesson 10-1's k-fold and splitting-strategy slides rest on this paper. In Practice 10 you compare three Telco churn models with StratifiedKFold and report mean ± std.",
+  "limitation": "Tests only two learners, C4.5 and naive Bayes, on seven datasets with independent rows. It does not cover grouped, repeated or time-ordered data.",
+  "note_question": "Why does Kohavi prefer stratified 10-fold CV to leave-one-out and the bootstrap when the goal is to choose a model?",
+  "notes_slide1": "Kohavi, then at Stanford, starts from two uses of an accuracy estimate. To predict how well a final classifier will do, we need low bias and low variance. To choose between classifiers, some bias is acceptable if it affects all of them in the same way, so low variance matters more. Section 2 describes the methods and shows that each one can fail. Hold-out keeps about one third of the data for testing, so the model learns from less data and the estimate is pessimistic. In k-fold cross-validation the data are split into k folds; the model is trained k times and each row is tested once. Stratified folds keep the class proportions of the full data. Leave-one-out uses k equal to n. On the iris data, which has 50 flowers per class, a majority-class rule should score about 33%, but leave-one-out reports 0%. The .632 bootstrap trains on samples drawn with replacement. On random labels, a model that memorises its training data gets an estimate of about 68.4% instead of 50%.",
+  "notes_slide2": "Sections 4 and 5 report the experiment. Kohavi used two very different learners, the C4.5 decision tree and naive Bayes, on six UC Irvine datasets and one dataset with random labels. In total he made over half a million runs. For each dataset he took a small training sample, estimated its accuracy with each method, and compared the estimate with the accuracy on the rest of the data. Cross-validation with 2 or 5 folds was clearly too pessimistic. At 10 folds most estimates were good, and at 20 folds they were almost unbiased. Variance was high at 2 folds, and for C4.5 it was also high at leave-one-out on three of the seven datasets. Stratification reduced both bias and variance a little. The bootstrap had low variance, but on some datasets it was strongly optimistic. His summary recommends stratified 10-fold cross-validation for model selection, even when there is time for more folds. He also notes that one run of cross-validation varies more than his averages, so repeated runs can help."
+ },
+ {
+  "label": "Saito & Rehmsmeier 2015",
+  "kind": "Required",
+  "course_key": "Saito & Rehmsmeier 2015, Precision-Recall vs ROC (PLoS ONE 10(3))",
+  "short_title": "Use Precision–Recall Plots When Positives Are Rare",
+  "citation": "Saito, T., & Rehmsmeier, M. (2015). The precision-recall plot is more informative than the ROC plot when evaluating binary classifiers on imbalanced datasets. PLOS ONE, 10(3), e0118432. https://doi.org/10.1371/journal.pone.0118432",
+  "problem": "Binary classifiers are usually shown with ROC curves. In biology many datasets have far more negatives than positives. The authors ask whether ROC plots can mislead on such imbalanced data, and which plot shows performance better.",
+  "key_ideas": [
+   "ROC plots recall against the false positive rate; neither changes when the class ratio changes",
+   "Precision is the share of positive predictions that are correct, so it falls when negatives dominate",
+   "The random baseline of a precision–recall plot is P/(P+N): 0.5 only when classes are balanced"
+  ],
+  "key_term": {
+   "term": "Precision (PPV)",
+   "definition": "The share of cases predicted positive that are truly positive: TP / (TP + FP)"
+  },
+  "slide2_title": "ROC Can Look Good While Precision Is Close to Random",
+  "findings": [
+   "Simulation with 1,000 positives and 10,000 negatives: ROC curves unchanged, PR curves much lower",
+   "In 33 imbalanced genome-wide SVM studies, 22 used ROC and only 4 used precision–recall",
+   "On a test set with 111 positives and 13,444 negatives, ROC AUC was 0.71–0.89, PR AUC 0.015–0.106"
+  ],
+  "course_link": "Lesson 10-1's slide on ROC and precision–recall curves uses this idea. In Practice 10 you draw both curves for Telco churn, where about 27% of customers churn, and compare them.",
+  "limitation": "Its examples come from bioinformatics, and the literature review covers only 58 PubMed articles. PR curves also depend on the test set's class ratio.",
+  "note_question": "Why does the ROC curve stay the same when negatives become ten times more common, while the precision–recall curve changes?",
+  "notes_slide1": "Saito and Rehmsmeier work in computational biology at the University of Bergen. Their concern is the final evaluation of a classifier, not model selection during training. They begin with the confusion matrix and a small example of 20 cases. In a balanced sample of 10 positives and 10 negatives, and in an imbalanced sample of 5 positives and 15 negatives, accuracy, sensitivity and specificity are all 0.6. Precision, however, falls from 0.6 to 0.33: only one positive prediction in three is correct. Single numbers need a threshold, so the authors turn to threshold-free plots. The ROC plot shows the true positive rate against the false positive rate at every threshold; a random classifier lies on the diagonal, with an AUC of 0.5. The precision–recall (PR) plot shows precision against recall. Its random baseline is the share of positives, for example 0.09 when positives and negatives are 1 to 10. They also review two less common plots, concentrated ROC and cost curves, and warn that PR points need non-linear interpolation.",
+  "notes_slide2": "The results have three parts. First, a simulation with five levels of classifier quality, on balanced data (1,000 positives, 1,000 negatives) and imbalanced data (1,000 positives, 10,000 negatives), repeated 1,000 times. ROC, concentrated ROC and cost curves did not change between the two cases; only the PR plot did. At one point the same classifier finds 500 true positives with 160 false positives on balanced data but 1,600 on imbalanced data, so precision drops from 75% to 25%. Second, a PubMed review: of 33 studies with binary classifiers on large imbalanced data, 22 used ROC and only 4 used PR. Third, a re-analysis of MiRFinder, a tool that finds microRNA genes, and four other tools. On a test set with 111 positives and 13,444 negatives, the ROC plot made the tools look reasonable, but the PR plot showed that all except MiRFinder were close to random in precision. The authors conclude that PR plots should be preferred whenever the classes are strongly imbalanced."
+ },
+ {
+  "label": "Jain 2010",
+  "kind": "Required",
+  "course_key": "Jain 2010, Data Clustering: 50 Years Beyond K-means (Pattern Recognition Letters 31(8))",
+  "short_title": "No Clustering Algorithm Is Best for Every Problem",
+  "citation": "Jain, A. K. (2010). Data clustering: 50 years beyond K-means. Pattern Recognition Letters, 31(8), 651–666. https://doi.org/10.1016/j.patrec.2009.09.011",
+  "problem": "K-means was proposed over 50 years ago, and thousands of clustering algorithms have appeared since. Yet k-means is still one of the most used. Jain asks why clustering remains so hard and where research should go next.",
+  "key_ideas": [
+   "Clustering groups data without labels; it is exploratory, and its output only suggests hypotheses",
+   "K-means minimises squared distance to cluster means but may stop at a local, not global, minimum",
+   "K-means needs three user choices: the number of clusters K, the starting centres and the distance"
+  ],
+  "key_term": {
+   "term": "Cluster validity",
+   "definition": "Formal checks of whether found clusters are real, using internal, relative or external criteria"
+  },
+  "slide2_title": "Clustering Always Finds Groups, Even When None Exist",
+  "findings": [
+   "K-means with K = 3 split points spread uniformly in a square into three clusters, though none existed",
+   "Weighting features of 16 animals differently gave either mammals vs birds or predators vs non-predators",
+   "With a better representation of the data, k-means separated two rings that it failed to split before"
+  ],
+  "course_link": "Lesson 10-2 covers k-means, its limits and choosing k. In Practice 10 you cluster the penguins for k = 2 to 8, compare elbow and silhouette, then compare clusters with species.",
+  "limitation": "A survey from a 2008 prize lecture, not a comparison study. It gives no step-by-step method and predates newer work such as deep clustering.",
+  "note_question": "Jain lists basic questions every clustering must answer. Which two did you face with the penguins, and how did you answer them?",
+  "notes_slide1": "This paper is based on the lecture Jain gave in 2008 when he received the King-Sun Fu Prize in pattern recognition. Section 1 places clustering among learning problems: classification uses labels, clustering uses none, and semi-supervised clustering uses weaker hints such as must-link and cannot-link pairs. Section 2 gives a working definition: find K groups so that objects in the same group are similar and objects in different groups are not. But what is a cluster? Clusters differ in shape, size and density, so a cluster is in the end a subjective idea that needs domain knowledge. Clustering is used to find structure, to build natural classifications and to compress data. K-means was discovered independently several times between 1956 and 1967. It minimises the squared distance between points and their cluster mean. Finding the best solution is NP-hard even for K = 2, so k-means can stop at a local minimum; running it from several starts helps. With Euclidean distance it finds round clusters. Jain also reviews variants and other families, such as DBSCAN, mixture models and spectral clustering.",
+  "notes_slide2": "Section 3, the user's dilemma, is the core of the reading. Jain repeats nine basic questions from his 1988 book with Dubes: what is a cluster, which features to use, whether to normalise, whether there are outliers, how to measure similarity, how many clusters exist, which method to use, whether the data have any tendency to cluster, and whether the result is valid. He illustrates them. Two rings defeat k-means in the raw coordinates but separate easily after a change of representation. Sixteen animals group as mammals and birds, or as predators and non-predators, depending on which features get more weight. Data drawn from six Gaussian components can be fitted with two, five or six components, and each fit looks reasonable. Uniform random points still produce three clusters with k-means. Different algorithms also give different partitions of the same data. Validity can be checked against the data alone, against other clusterings, or against known labels, and stability across subsamples is a useful test. His summary: there is no best algorithm, and clustering must start from the user's purpose."
+ },
+ {
+  "label": "Kaufman et al. 2012",
+  "kind": "Optional",
+  "course_key": "Kaufman et al. 2012, Leakage in Data Mining (ACM TKDD 6(4))",
+  "short_title": "Leakage Makes Models Look Better Than They Are",
+  "citation": "Kaufman, S., Rosset, S., Perlich, C., & Stitelman, O. (2012). Leakage in data mining: Formulation, detection, and avoidance. ACM Transactions on Knowledge Discovery from Data, 6(4), 1–21. https://doi.org/10.1145/2382577.2382579",
+  "problem": "Models often score well in testing and then fail in use. A common cause is leakage: the data contain information about the target that the model should not have. The authors ask how to define, avoid and detect it.",
+  "key_ideas": [
+   "Leakage is information about the target that the model should not legitimately be able to use",
+   "Leaking features: e.g. an account number, which is only given after the customer opens an account",
+   "Leaking training examples: rows or outside data that reveal the test targets, as in some contests"
+  ],
+  "key_term": {
+   "term": "Learn-predict separation",
+   "definition": "Building training data so that each prediction uses only legitimate inputs, often those before a time cut"
+  },
+  "slide2_title": "Tag Data by Time, Then Separate Learning From Prediction",
+  "findings": [
+   "INFORMS 2010: about 30 teams passed 0.9 AUC by using future stock data, so the results were not valid",
+   "KDD Cup 2008: patient ID predicted cancer, because data sources were merged without hiding them",
+   "Leakage can be found by exploring the data, by surprising model results and by early field tests"
+  ],
+  "course_link": "Lesson 10-1's slides on two kinds of leakage and on pipelines cover this. In Practice 10 the pipeline fits scaling and encoding inside each fold, so validation data do not leak.",
+  "limitation": "Most cases come from competitions. It focuses on leakage from data collection and says little about preprocessing the full data before splitting.",
+  "note_question": "The authors suggest that contests ask for predictions of real future events. Why does this stop leakage, and what does it cost?",
+  "notes_slide1": "Kaufman, Rosset, Perlich and Stitelman have worked on industry projects and have won and organised data mining competitions. A trivial leak uses the target itself as input, and concludes that it rains on rainy days. Real leaks are subtle and come from how data are collected, combined and prepared. They make a model look better in testing than it will be in use, and the client finds out only after deployment. The paper collects many cases. When predicting whether a customer will open a bank account, an account number is only assigned after the account exists. In one churn project, the interviewer's name predicted churn, because one salesperson handled customers who had already said they would leave. In web data, total session length was added to every page view after the visit ended. In the KDD Cup 2008 cancer data, patient IDs carried the data source. In INFORMS 2010, competitors used future stock prices. In the IJCNN 2011 contest, the winners identified the network as Flickr and looked up most of the answers.",
+  "notes_slide2": "The authors then define leakage through legitimacy. Each problem decides which inputs are acceptable for predicting a target. In prediction the usual rule is the no-time-machine rule: a feature must be observable before the target. Sometimes a gap is needed. To predict big spenders, a diamond purchase is a trigger of the target, not a cause, so the question is better asked about future migrators. Leakage can come from features or from training examples. To avoid it, they propose tagging every observation with legitimacy information, usually a timestamp, and then building training data with a learn-predict separation, a cut in time. Many databases overwrite records without timestamps, and this loss is a main source of leakage. To detect leakage when data are already given, use exploratory analysis, look for features that are surprisingly strong in the fitted model, and test early in the field. Fixing leakage is hard: removing one obvious leak can make hidden ones stronger."
+ },
+ {
+  "label": "Jolliffe & Cadima 2016",
+  "kind": "Optional",
+  "course_key": "Jolliffe & Cadima 2016, PCA: A Review (Phil. Trans. R. Soc. A 374)",
+  "short_title": "PCA Keeps the Most Variance in Fewer Variables",
+  "citation": "Jolliffe, I. T., & Cadima, J. (2016). Principal component analysis: A review and recent developments. Philosophical Transactions of the Royal Society A, 374(2065), 20150202. https://doi.org/10.1098/rsta.2015.0202",
+  "problem": "Large datasets often have many correlated variables and are hard to interpret. PCA is one of the oldest ways to reduce them. The authors explain what PCA does and cannot do, its key choices, and variants built on it.",
+  "key_ideas": [
+   "Components are uncorrelated linear combinations of the variables that successively maximise variance",
+   "They are eigenvectors of the covariance matrix, or come from the SVD of the centred data matrix",
+   "Loadings are the weights on each variable; scores are each case's values on a component"
+  ],
+  "key_term": {
+   "term": "Correlation matrix PCA",
+   "definition": "PCA on standardised variables; use it when variables have different units or very different variances"
+  },
+  "slide2_title": "Standardise First When the Units of Variables Differ",
+  "findings": [
+   "For 88 fossil teeth, PC1 (78.8% of variance) measured overall size and PC2 (16.7%) tooth shape",
+   "Covariance PCA changes when units change; correlation PCA does not, but gives different components",
+   "Sparse PCA forces many loadings to exactly zero, which makes components easier to interpret"
+  ],
+  "course_link": "Lesson 10-3's slides on explained variance and loadings follow this logic. In Practice 10 you run PCA on four standardised penguin measurements and interpret PC1 from the loadings.",
+  "limitation": "PCA is linear and sensitive to outliers. The 70% variance cut-off it mentions is subjective, and section 3 needs good linear algebra.",
+  "note_question": "The penguin data mix millimetres and grams. What would happen in covariance PCA without standardising, and why?",
+  "notes_slide1": "Ian Jolliffe wrote the standard textbook on PCA, and Jorge Cadima works on its mathematics. The method goes back to Pearson in 1901 and Hotelling in 1933, but it became practical only with computers. The aim is simple: reduce the number of variables while keeping as much variability as possible. Section 2 gives the definition. We look for a weighted sum of the variables with the largest variance, with weights of unit length. The answer is the first eigenvector of the covariance matrix, and its eigenvalue is the variance of the new variable. The next components do the same under the condition that they are uncorrelated with the earlier ones. The weights are called loadings, and each case's values are called scores. The signs of the loadings are arbitrary. PCA is the same as a singular value decomposition of the centred data, and the first q components give the best q-dimensional view of the data. The share of total variance explained helps decide how many components to keep. PCA is descriptive and needs no assumption of normality.",
+  "notes_slide2": "The fossil example makes this concrete. Nine measurements were taken on 88 teeth of Kuehneotherium, an early mammal. The first component, 78.8% of the variance, has loadings of the same sign and measures overall size. The second, 16.7%, contrasts length with height and width, so it measures shape. In the plot of these two components, one compact group is thought to be one species. Next comes a key choice. Variance depends on units, so covariance PCA changes if one variable is rescaled. Standardising each variable first gives correlation matrix PCA, which is the right choice when units differ. The teeth share one unit, so both versions agree there. The authors also explain biplots, which show cases and variables in one plot, and when not to centre the data. Section 3 reviews adaptations: functional PCA for curves, simplified components through rotation or sparse PCA, robust PCA for data with outliers, and PCA for symbolic data such as intervals. The conclusion stresses how widely PCA and its variants are used."
+ }
+]

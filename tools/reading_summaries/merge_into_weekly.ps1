@@ -1,11 +1,11 @@
 # Insert reading-summary slides into a weekly deck's "Papers to Read" section, then export the PDF.
 #
-#   powershell -File merge_into_weekly.ps1 -Weekly <weekly.pptx> -Summary <paper-slides.pptx> -After <slideNo>
+#   powershell -File merge_into_weekly.ps1 -Weekly <weekly.pptx> -Summary <paper-slides.pptx> -After <slideNo> [-NoPdf]
 #
 # <paper-slides.pptx> comes from: node build_readings_deck.js <json> <week> <title> <out> <start> <total>
 # The section footers already in the weekly deck ("k / old") are renumbered to the new total, and their
 # progress bars are resized. Run it once per deck: on an already-merged deck it would insert again.
-param([string]$Weekly, [string]$Summary, [int]$After)
+param([string]$Weekly, [string]$Summary, [int]$After, [switch]$NoPdf)
 
 $Weekly = (Resolve-Path $Weekly).Path
 $Summary = (Resolve-Path $Summary).Path
@@ -53,7 +53,7 @@ foreach ($i in @($first..$After) + @(($After + $added + 1)..$newLast)) {
 }
 
 $p.Save()
-$p.SaveAs([System.IO.Path]::ChangeExtension($Weekly, ".pdf"), 32)
+if (-not $NoPdf) { $p.SaveAs([System.IO.Path]::ChangeExtension($Weekly, ".pdf"), 32) }
 $p.Close()
 $ppt.Quit()
 "Inserted $added slides after slide $After; section '$label' is now $newTotal slides (slides $first-$newLast)."

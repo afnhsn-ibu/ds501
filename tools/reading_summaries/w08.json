@@ -1,0 +1,142 @@
+[
+ {
+  "label": "Cleveland & McGill 1984",
+  "course_key": "Cleveland & McGill 1984, Graphical Perception (JASA 79(387))",
+  "kind": "Required",
+  "short_title": "Position Is Read More Accurately Than Angle",
+  "citation": "Cleveland, W. S., & McGill, R. (1984). Graphical perception: Theory, experimentation, and application to the development of graphical methods. Journal of the American Statistical Association, 79(387), 531–554. https://doi.org/10.1080/01621459.1984.10478080",
+  "problem": "In 1984, graph design rested on intuition, habit and rules of thumb, not on theory or experiment. Two Bell Labs statisticians ask which visual tasks people use to read graphs, and which tasks they do most accurately.",
+  "key_ideas": [
+   "Readers decode graphs with ten elementary perceptual tasks, e.g. judging position, length or angle",
+   "The tasks are ranked: position on a common scale first; area, volume and shading near the bottom",
+   "Good design uses tasks as high in the ranking as possible; experiments then test the predictions"
+  ],
+  "key_term": {
+   "term": "Perceptual task",
+   "definition": "An elementary visual judgement, such as comparing positions, lengths or angles, used to read numbers from a graph"
+  },
+  "slide2_title": "Replace Pies and Divided Bars With Dot Charts",
+  "findings": [
+   "Length judgements had 1.4 to 2.5 times the error of position judgements (51 subjects)",
+   "Angle errors in pie charts were 1.96 times position errors; pies won in only 3 of 40 cases",
+   "Dot charts, grouped dot charts and framed rectangles should replace pies, divided bars and shaded maps"
+  ],
+  "course_link": "Lesson 8-1's slide on which encodings we read most accurately comes from this paper. In Practice 8 you redraw the default chart as a sorted horizontal bar chart starting at 0.",
+  "limitation": "Only two small experiments, 51 usable subjects each, on simple bar and pie charts. Angle was not compared with length in the same task format.",
+  "note_question": "Use the ranking of tasks to explain why a sorted dot chart beats a pie chart. Which experimental result supports your answer?",
+  "notes_slide1": "William Cleveland and Robert McGill were statisticians at AT&T Bell Laboratories. They open by quoting Kruskal and Cox: graph design had little theory and no systematic experiments, only intuition and rules of thumb. Their answer has two parts. First, Section 2 lists ten elementary perceptual tasks that a reader performs to extract numbers from a graph: position along a common scale, position along non-aligned scales, length, direction, angle, area, volume, curvature, shading and colour saturation. It shows which task each common graph uses: a bar chart uses position, a pie chart mainly angle, a shaded map shading. Second, Section 3 ranks the tasks from most to least accurate. The ranking draws on psychophysics: people judge length with little bias, but underestimate differences in area, and volume even more. The authors stress that accuracy is not the only purpose of a graph. Their premise is that more accurate judgements help readers see patterns correctly.",
+  "notes_slide2": "Section 4 tests part of the ranking. In the position-length experiment, subjects judged what percentage one marked bar was of another, on grouped and divided bar charts. In the position-angle experiment, they judged the same kind of ratio on bar charts and pie charts. After removing people who did not follow the instructions, 51 subjects remained in each experiment. Errors were measured on a log scale, and confidence intervals came from the bootstrap. Errors for length were 1.4 to 2.5 times those for position, and errors for angle 1.96 times those for position. Length and angle judgements were also biased: mid-range values tended to be underestimated. Section 5 applies the ranking. Pie charts and divided bar charts should give way to dot charts and grouped dot charts; curve-difference charts to a direct plot of the difference; shaded maps to framed-rectangle charts. Section 6 calls the theory a first step and admits that laboratory judgements may differ from everyday reading."
+ },
+ {
+  "label": "Segel & Heer 2010",
+  "course_key": "Segel & Heer 2010, Narrative Visualization (IEEE TVCG 16(6))",
+  "kind": "Required",
+  "short_title": "Data Stories Balance Author and Reader Control",
+  "citation": "Segel, E., & Heer, J. (2010). Narrative visualization: Telling stories with data. IEEE Transactions on Visualization and Computer Graphics, 16(6), 1139–1148. https://doi.org/10.1109/TVCG.2010.179",
+  "problem": "Newsrooms such as the New York Times were mixing interactive graphics with stories, but few had described how such data stories are built. Segel and Heer ask which design choices let a visualisation tell a story.",
+  "key_ideas": [
+   "A design space built from 58 examples: 71% journalism, 20% business, 9% visualisation research",
+   "Seven genres, from magazine style and annotated chart to comic strip, slide show and film",
+   "Visual tactics (structure, highlighting, transitions) and narrative ones (order, interaction, messages)"
+  ],
+  "key_term": {
+   "term": "Martini glass structure",
+   "definition": "A story that starts with a short author-driven narrative, then opens up for the reader to explore freely"
+  },
+  "slide2_title": "Guide the Reader First, Then Let Them Explore",
+  "findings": [
+   "Every interactive example mixed author-driven and reader-driven elements; none was purely one",
+   "Three common hybrids: the martini glass, the interactive slideshow and the drill-down story",
+   "Tacit tutorials, stimulating default views and final summaries were rarely used"
+  ],
+  "course_link": "Lesson 8-3's story structures, including the martini glass, build on this paper. In Practice 8 you animate the Gapminder chart and write a 120-word data story about Albania.",
+  "limitation": "The authors chose and coded the 58 examples themselves and admit some subjectivity. They did not test how readers understood the stories.",
+  "note_question": "What separates author-driven from reader-driven stories? Name the three hybrid structures and say which one fits a Plotly animation.",
+  "notes_slide1": "Edward Segel and Jeffrey Heer were at Stanford University. They noticed that news organisations such as the New York Times, the Washington Post and the Guardian were publishing interactive graphics that tell stories. Most visualisation tools, however, supported exploration and analysis, not storytelling. The paper first borrows ideas from film, comics and journalism, such as establishing shots, highlighting and transitions between scenes. Section 3 presents five case studies, including a New York Times poster on Barry Bonds's home runs, an interactive slideshow on US budget forecasts, and Gapminder's Human Development Trends. One case failed: Minnesota Public Radio's employment explorer invited readers to find their own stories, but few local readers took part, partly because the graphic was not tied to a narrative. Section 4 builds a design space from 58 examples. It has three parts: genre; visual narrative tactics, such as a consistent visual platform, highlighting and animated transitions; and narrative structure tactics, namely ordering, interactivity and messaging.",
+  "notes_slide2": "The seven genres are magazine style, annotated chart, partitioned poster, flow chart, comic strip, slide show and film or video. They differ in the number of frames and in how strictly the viewing order is set, and they can be combined. Section 4.4 holds the key idea. A purely author-driven story has a fixed linear order, heavy messaging and no interaction, like a film. A purely reader-driven visualisation has no set order, no messages and free interaction, like an analysis tool. Most narrative visualisations lie in between. The martini glass begins with a narrow author-driven stem and then opens up for free exploration. The interactive slideshow allows interaction within each slide. The drill-down story presents a general theme and lets the reader choose which details to open. The analysis also found under-used techniques: tacit tutorials, which teach the controls by animating them during the story, stimulating default views, and closing summaries. The authors suggest that good data stories allow limited interaction at checkpoints within a narrative."
+ },
+ {
+  "label": "Wickham 2010",
+  "course_key": "Wickham 2010, A Layered Grammar of Graphics (JCGS 19(1))",
+  "kind": "Optional",
+  "short_title": "A Chart Is Built From Independent Layers",
+  "citation": "Wickham, H. (2010). A layered grammar of graphics. Journal of Computational and Graphical Statistics, 19(1), 3–28. https://doi.org/10.1198/jcgs.2009.07098",
+  "problem": "Charts are usually named by type: scatterplot, histogram, pie chart. Wickham asks how to describe any statistical graphic by its parts, building on Wilkinson's grammar of graphics and his own R package ggplot2.",
+  "key_ideas": [
+   "A layer has data, aesthetic mappings, a stat, a geometric object and a position adjustment",
+   "Scales, a coordinate system and facets complete the plot; each part can be changed on its own",
+   "Defaults keep commands short: every geom has a default stat, and every stat a default geom"
+  ],
+  "key_term": {
+   "term": "Aesthetic mapping",
+   "definition": "A rule linking a data variable to a visual property, such as x position, colour, shape or size"
+  },
+  "slide2_title": "A Pie Chart Is a Stacked Bar in Polar Coordinates",
+  "findings": [
+   "A histogram is a binning stat drawn with bars; draw the same stat with lines for a frequency polygon",
+   "Pie, bullseye and Coxcomb charts are bar charts drawn in polar coordinates",
+   "Transforming the data, the scale or the coordinate system gives different results"
+  ],
+  "course_link": "Practice 8 uses this grammar through Plotly Express: px.scatter maps gdpPercap, lifeExp, pop and continent to x, y, size and colour, and facet_col draws small multiples.",
+  "limitation": "Describes ggplot2 as it was in 2010; its syntax has since changed. The grammar covers static plots and says little about interaction.",
+  "note_question": "Describe the Practice 8 bubble chart as a layer: which data, mappings, geom, stat, scales and coordinate system does it use?",
+  "notes_slide1": "Hadley Wickham wrote this paper while building ggplot2, which became one of the most used plotting packages in R. A grammar, he says, describes the parts of a graphic and how they fit together, so that we can see the structure behind named charts. He builds on Leland Wilkinson's book The Grammar of Graphics. Section 2 draws a scatterplot of a tiny four-row dataset step by step. Variables are mapped to aesthetics, things we can perceive, such as x position, y position and shape. Points, lines and bars are geometric objects, or geoms. Scales convert data values into pixels, shapes or colours, and also draw the axes and legends. A statistical transformation, or stat, can summarise the data first, for example by binning. Faceting splits the data into subsets and draws small multiples with shared scales. Section 3 defines the layered grammar: a default dataset and mappings, one or more layers, one scale per aesthetic, a coordinate system and a facet specification.",
+  "notes_slide2": "Section 4 shows the hierarchy of defaults. The full specification of a scatterplot of diamond price against carat is long, but because every geom has a default stat and Cartesian coordinates are the default, it shrinks to one line. Section 5 discusses embedding the grammar in R: plots can be built piece by piece and stored in variables, as in his reconstruction of Minard's map of Napoleon's march. Section 6 shows what the grammar makes easy. A histogram is not a basic element: it is a binning stat drawn with bars, and drawing the same stat with lines or points gives other charts. A pie chart is a stacked bar drawn in polar coordinates, and a bar chart in polar coordinates becomes a Coxcomb plot. Transforming the scale and transforming the coordinate system give different results, because stats are computed before the coordinate transformation. Section 7 notes that good grammar is not good writing. It suggests warnings for too many variables, overplotting, alphabetical ordering and polar coordinates."
+ },
+ {
+  "label": "Heer & Bostock 2010",
+  "course_key": "Heer & Bostock 2010, Crowdsourcing Graphical Perception (CHI)",
+  "kind": "Optional",
+  "short_title": "Online Workers Reproduce Lab Perception Results",
+  "citation": "Heer, J., & Bostock, M. (2010). Crowdsourcing graphical perception: Using Mechanical Turk to assess visualization design. In Proceedings of CHI '10 (pp. 203–212). ACM. https://doi.org/10.1145/1753326.1753357",
+  "problem": "Laboratory studies of chart perception are slow and costly, and use few participants. Heer and Bostock ask whether paid online workers on Amazon Mechanical Turk give results that can be trusted.",
+  "key_ideas": [
+   "Repeats Cleveland and McGill's ratio judgements, with 50 workers per chart paid US$0.05 each",
+   "Also repeats a lab study of how dark chart gridlines should be, then compares the results",
+   "Then runs new tests: rectangle areas as in treemaps, chart height and gridline spacing"
+  ],
+  "key_term": {
+   "term": "Crowdsourcing",
+   "definition": "Paying many online workers small amounts for short tasks, here to take part in perception experiments"
+  },
+  "slide2_title": "Online Tests Are Cheap, Fast and Largely Valid",
+  "findings": [
+   "The ranking held: position beat length, and angle and circle area were clearly worse than position",
+   "Accuracy stopped improving above 80 pixels of chart height; gridlines need at least 8 pixels between them",
+   "The studies cost US$367.77, about one sixth of a lab study; qualification tasks kept answers usable"
+  ],
+  "course_link": "Supports Lesson 8-1's ranking of encodings with a second, online test. Practice 8's default chart turns on gridlines; this paper shows how light and far apart they should be.",
+  "limitation": "No control over screens, lighting or viewing distance, and response times were unreliable. The authors admit they paid below minimum wage.",
+  "note_question": "What can an online experiment test well, and what can it not test? Think of colour vision, screen settings and timing.",
+  "notes_slide1": "Jeffrey Heer and Michael Bostock, who later co-created the D3 library, worked at Stanford. Perception experiments in a laboratory need recruitment, scheduling and payment, so they are slow and use few subjects. Amazon Mechanical Turk lets researchers post small paid tasks to thousands of online workers. But online experiments lose control over screens, lighting and viewing distance. The authors therefore first repeat two laboratory studies. Experiment 1A repeats Cleveland and McGill's task: workers saw a chart with two marked values and estimated what percentage the smaller was of the larger. It used the original five position and length judgement types, plus one angle type (a pie chart) and one circle-area type (a bubble chart). Each of the 70 charts was judged by 50 workers, paid US$0.05 per judgement. Experiment 2 repeats Stone and Bartram's study, in which people adjust how dark the gridlines of a chart should be. Both replications largely matched the laboratory results.",
+  "notes_slide2": "The paper then uses crowdsourcing for new questions. In Experiment 1B, workers compared rectangle areas, as in treemaps. Surprisingly, comparing squares, with an aspect ratio of 1, gave the largest errors, which suggests that people compare side lengths. Experiment 3 varied chart height and gridline spacing in bar and line charts. Errors were clearly higher at 40 pixels tall, little changed above 80 pixels, and gridlines closer than about 8 pixels hurt accuracy. The last section studies the platform itself. In total 186 workers took part. Qualification tasks, short tests that check that workers understood the instructions, mattered: without them over 10% of pilot answers were unusable. Higher pay sped up completion but did not improve accuracy. The studies cost US$367.77, against about US$2,190 for laboratory studies. Response times were unreliable, and the authors admit they paid below minimum wage. They recommend combining crowdsourced and laboratory studies so that each checks the other."
+ },
+ {
+  "label": "Borkin et al. 2013",
+  "course_key": "Borkin et al. 2013, What Makes a Visualization Memorable? (IEEE TVCG 19(12))",
+  "kind": "Optional",
+  "short_title": "Colour, Pictograms and Novelty Aid Memory",
+  "citation": "Borkin, M. A., Vo, A. A., Bylinskii, Z., Isola, P., Sunkavalli, S., Oliva, A., & Pfister, H. (2013). What makes a visualization memorable? IEEE Transactions on Visualization and Computer Graphics, 19(12), 2306–2315. https://doi.org/10.1109/TVCG.2013.234",
+  "problem": "Experts disagree about chart junk: Tufte says remove it, while some studies say decoration helps people remember. Borkin and colleagues ask which features make a visualisation memorable, using thousands of real charts.",
+  "key_ideas": [
+   "Collected 5,693 real visualisations from news, government, science and infographics; 2,070 single-panel",
+   "Tested 410 target images in an online memory game with 261 workers, showing each image for 1 second",
+   "People agree on what is memorable: two random halves of workers ranked images alike (r = 0.81)"
+  ],
+  "key_term": {
+   "term": "Memorability (d-prime)",
+   "definition": "How well people recognise an image seen before, corrected for false claims of having seen it"
+  },
+  "slide2_title": "Memorable Is Not the Same as Understood",
+  "findings": [
+   "Charts with pictograms of recognisable objects were remembered much better than charts without them",
+   "More colours, high visual density and a low data-ink ratio went with higher memorability",
+   "Unusual types such as diagrams, trees and networks beat common bar, line and point charts"
+  ],
+  "course_link": "A counterpoint to Lesson 8-1's slide on Tufte's data-ink principle. For the Practice 8 data story, decide which single element of your chart the reader should remember.",
+  "limitation": "Measures recognition of a chart as an image after 1 second, not understanding of its data. The attributes were rated, not varied in experiments.",
+  "note_question": "Does this paper contradict the data-ink rule in Lesson 8-1? Think about what was measured and what each rule is for.",
+  "notes_slide1": "Borkin and colleagues, from Harvard and MIT, start from the chart junk debate. Tufte and Few argue that charts should show the data with no decoration; some studies suggested that embellishment helps people remember charts. The authors ask a simpler question: what makes a visualisation memorable? They first built a taxonomy of static visualisations with twelve main types, such as bar, line, map, diagram, table, and trees and networks. They collected 5,693 visualisations from news media, government and world organisations, scientific journals and an infographic site, and kept 2,070 single-panel ones. Students labelled the types, and three researchers rated attributes such as the number of colours, data-ink ratio, visual density and recognisable objects. The experiment was a memory game on Mechanical Turk. Images appeared for 1 second each, and workers pressed a key when they saw a repeat. 261 workers passed the practice round, giving about 87 responses for each of the 410 target images.",
+  "notes_slide2": "Memorability was measured with d-prime, which rewards correct recognitions and penalises false alarms. Visualisations were remembered less well than natural scenes, and about as well as faces. People agreed on which charts were memorable. Pictograms had the largest effect: almost all of the twelve most memorable images contained one. Charts with seven or more colours scored higher than charts with one colour. Higher visual density and a poorer data-ink ratio also went with higher scores, which rejected two of the authors' own hypotheses. Unusual types, such as diagrams, grids and matrices, and trees and networks, beat common bar, line and point charts, perhaps because all bar charts look alike. Infographics were the most memorable source and government reports the least. The authors are clear about the limits: they measured memory of a chart as an image, not understanding of its data. Their aim is to make the important message stick, not the decoration, and they plan to study comprehension next."
+ }
+]

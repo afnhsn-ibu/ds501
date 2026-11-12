@@ -1,0 +1,114 @@
+[
+ {
+  "label": "Domingos 2012",
+  "course_key": "Domingos 2012, A Few Useful Things to Know about Machine Learning (CACM 55(10))",
+  "kind": "Required",
+  "short_title": "Generalisation, Not Training Accuracy, Counts",
+  "citation": "Domingos, P. (2012). A few useful things to know about machine learning. Communications of the ACM, 55(10), 78–87. https://doi.org/10.1145/2347736.2347755",
+  "problem": "Textbooks explain learning algorithms, but much practical knowledge is missing from them, so projects take longer or end with weaker results. Domingos collects twelve lessons that practitioners usually learn the hard way.",
+  "key_ideas": [
+   "Every learner combines a representation, an evaluation function and an optimisation method",
+   "The goal is to generalise to new cases, so keep test data apart; tuning on it contaminates results",
+   "Data alone is not enough: a learner needs assumptions, such as smoothness, to generalise"
+  ],
+  "key_term": {
+   "term": "Bias and variance",
+   "definition": "Bias: learning the same wrong thing every time. Variance: learning random quirks of the training data"
+  },
+  "slide2_title": "Features and More Data Often Matter Most",
+  "findings": [
+   "Overfitting has many faces; with little data, strong false assumptions can beat weak true ones",
+   "In high dimensions intuition fails, and for nearest-neighbour methods all cases look equally close",
+   "Feature engineering is the key, and a simple algorithm with lots of data often beats a clever one"
+  ],
+  "course_link": "Lesson 9-1's slides on overfitting and the bias-variance trade-off follow his lessons. In Practice 9 you plot train and test accuracy for tree depths 1 to 15.",
+  "limitation": "Practical wisdom with few new experiments, mainly about classification. It predates deep learning, which now automates much feature engineering.",
+  "note_question": "Choose three of Domingos's lessons. Link each one to a slide or a result from this week, such as the tree-depth chart.",
+  "notes_slide1": "Pedro Domingos, a computer scientist at the University of Washington, wrote this short article for practitioners. He focuses on classification but says the lessons apply across machine learning. He first shows that every learner combines three parts: a representation, which fixes the set of models it can learn; an evaluation function, which scores models; and an optimisation method, which searches for the best one. The first lesson is that generalisation counts. Doing well on training data is easy, and testing on it gives an illusion of success, so keep data aside and use cross-validation. Second, data alone is not enough: as the no free lunch theorems show, a learner must make assumptions to say anything about unseen cases. Learning, he says, is like farming: knowledge and data together grow programs. Third, overfitting has many faces. He explains it through bias and variance with a dartboard picture, and shows that naive Bayes can beat a rule learner even when the true model is a set of rules.",
+  "notes_slide2": "Fourth, intuition fails in high dimensions: with many features a fixed training set covers a tiny part of the space, and for nearest-neighbour methods all examples start to look equally close. Fifth, theoretical guarantees are usually very loose; they help understanding more than practical decisions. Sixth, feature engineering is the key: most effort in a project goes into gathering, cleaning and transforming data, and good features matter most. Seventh, more data beats a cleverer algorithm, so he advises trying simple learners first. Eighth, combining many models, as in bagging, boosting and stacking, usually works better than choosing one; the leading Netflix Prize teams used ensembles of over 100 learners. The last lessons warn that simplicity does not imply accuracy, that a model which can represent a function may still fail to learn it, and that correlation does not imply causation. If you can obtain experimental data, he says, do so."
+ },
+ {
+  "label": "Shmueli 2010",
+  "course_key": "Shmueli 2010, To Explain or to Predict? (Statistical Science 25(3))",
+  "kind": "Required",
+  "short_title": "Explaining and Predicting Are Different Goals",
+  "citation": "Shmueli, G. (2010). To explain or to predict? Statistical Science, 25(3), 289–310. https://doi.org/10.1214/10-STS330",
+  "problem": "In economics, psychology and other fields, models are built almost only to test causal theories, and a model that explains well is assumed to predict well. Shmueli asks how the two goals differ at each modelling step.",
+  "key_ideas": [
+   "Explanatory modelling tests causal hypotheses; predictive modelling forecasts new observations",
+   "Four differences: causation-association, theory-data, retrospective-prospective, bias-variance",
+   "Explanatory models aim at low bias; predictive models accept some bias to reduce variance"
+  ],
+  "key_term": {
+   "term": "Predictive power",
+   "definition": "How accurately a model predicts new data it was not fitted on, e.g. its RMSE on a holdout set"
+  },
+  "slide2_title": "Every Modelling Step Changes With the Goal",
+  "findings": [
+   "A predictor is only useful if its value is known at the moment the prediction is made",
+   "Explanatory models are checked against theory and fit; predictive models on holdout data",
+   "A high in-sample R² does not show predictive power, a mistake she finds in many published studies"
+  ],
+  "course_link": "Lesson 9-2 says a coefficient is a comparison, not a promise. In Practice 9 you interpret the log-carat coefficient, then report the diamond model's test RMSE in US$.",
+  "limitation": "Written mainly for social science and information systems researchers. It names causal inference methods but does not teach them.",
+  "note_question": "State Shmueli's four differences between explaining and predicting. Which goal does the Practice 9 diamond model serve?",
+  "notes_slide1": "Galit Shmueli, then a statistician at the University of Maryland's business school, starts from an observation. In fields such as economics, psychology and information systems, statistical models are used almost only to test causal theories, and high explanatory power is assumed to mean high predictive power. Section 1 defines three kinds of modelling. Explanatory modelling uses statistical models to test causal hypotheses about theoretical constructs, such as trust or ease of use, measured through variables. Predictive modelling applies a model or algorithm to predict new or future observations. Descriptive modelling summarises the structure of the data compactly. She argues that prediction also has scientific value: it can reveal new relationships, test whether theories are relevant, and set benchmarks of predictability. In a search of 1,072 papers in two top information systems journals, only 52 made predictive claims, and only 7 tested them properly. She then names four differences: causation versus association, theory versus data, retrospective versus prospective, and bias versus variance.",
+  "notes_slide2": "Section 2 follows both goals through each step of a study. In design, explanation needs enough data for statistical power, while prediction often needs more, partly for holdout sets. Splitting data into training and holdout sets is standard for prediction but rare for explanation. An explanatory model chooses variables from causal theory; a predictive model needs variables that are strongly associated with the outcome and available when the prediction is made. Her wine example: barrel features can explain quality, but cannot predict it while the grapes are still on the vine. Prediction can use uninterpretable algorithms, shrinkage such as ridge regression, and ensembles. Explanatory power is judged by in-sample fit, such as R², and predictive power on new data. Section 3 contrasts the Netflix Prize with explanatory research on eBay auctions. Section 4 shows published studies that claimed predictive power from R², and asks statisticians to teach both kinds of modelling."
+ },
+ {
+  "label": "Hand 2006",
+  "course_key": "Hand 2006, Classifier Technology and the Illusion of Progress (Statistical Science 21(1))",
+  "kind": "Optional",
+  "short_title": "Simple Classifiers Capture Most of the Gain",
+  "citation": "Hand, D. J. (2006). Classifier technology and the illusion of progress. Statistical Science, 21(1), 1–14. https://doi.org/10.1214/088342306000000060",
+  "problem": "Each year brings new classifiers, and comparative studies report that sophisticated methods beat simple ones. Hand, a statistician, asks whether these gains are real and whether they survive in real applications.",
+  "key_ideas": [
+   "Model building has diminishing returns: the first simple model gives the largest improvement",
+   "On ten data sets, linear discriminant analysis gained at least 85% of the best method's improvement",
+   "Flat maximum effect: weights that are roughly right score almost as well as optimal weights"
+  ],
+  "key_term": {
+   "term": "Population drift",
+   "definition": "Change over time in the population a classifier is applied to, so that it no longer matches the training data"
+  },
+  "slide2_title": "Real Problems Erase Small Laboratory Gains",
+  "findings": [
+   "On 92,258 UK bank loans, a tree first beat a linear classifier, but its lead faded as customers changed",
+   "Biased samples, label errors and arbitrary class definitions also make fine-tuned models fragile",
+   "Comparisons depend on data sets, criteria and the tester's skill, so small differences mean little"
+  ],
+  "course_link": "Lesson 9-3 compares three classifiers with a baseline. In Practice 9, logistic regression, a depth-3 tree and k-NN reach similar test accuracy on the Titanic.",
+  "limitation": "Argues mainly from credit scoring and benchmark tables. It predates deep learning, where complex models gave large gains on images and text.",
+  "note_question": "Hand gives several reasons why laboratory gains disappear in practice. Which of them could affect a loan or Titanic model?",
+  "notes_slide1": "David Hand, a statistician at Imperial College London, notes the huge number of classification methods, from linear discriminant analysis to neural networks and support vector machines, and the many studies that compare them. He argues that much of the progress they report is an illusion. Section 2 explains why. Model building is a series of refinements: the first simple steps give the biggest gains, and later steps fit ever smaller details. He shows this with a regression example and with a table of ten data sets. There, linear discriminant analysis, one of the oldest methods, achieved at least 85% of the improvement that the best known method made over simply predicting the largest class, and over 90% in most cases. On sonar data, the first small neural network or tree gave a large drop in error, and more complexity added little. The flat maximum effect adds to this: when predictors are correlated, roughly chosen weights score almost as well as optimal ones.",
+  "notes_slide2": "Sections 3 and 4 explain why small laboratory gains often vanish in practice. Classical theory assumes that future cases come from the same distribution as the design data, but populations drift. In data on 92,258 personal loans from a UK bank, a tree model first beat linear discriminant analysis, yet its lead faded as the customers changed. Samples can also be selective: a bank learns whether a customer repays only if it accepted them. Class labels may contain errors, class definitions such as three months in arrears are arbitrary, and the criterion used to fit a model often differs from the one that matters. Section 5 adds that comparative studies depend on the data sets chosen, the performance measure, and the skill of the person tuning each method; inventors tend to find their own method best. Hand concludes that simple models are often the safer choice, and they are easier to interpret. He does not deny real advances, such as resampling methods."
+ },
+ {
+  "label": "Breiman 2001",
+  "course_key": "Breiman 2001, Random Forests (Machine Learning 45)",
+  "kind": "Optional",
+  "short_title": "Many Random Trees Vote Better Than One",
+  "citation": "Breiman, L. (2001). Random forests. Machine Learning, 45(1), 5–32. https://doi.org/10.1023/A:1010933404324",
+  "problem": "Single decision trees are unstable and overfit, while ensembles such as bagging and AdaBoost improve accuracy. Breiman asks how to build tree ensembles that are accurate, fast, robust to noise and open to inspection.",
+  "key_ideas": [
+   "Grow many unpruned trees, each on a bootstrap sample, trying a random subset of features at each split",
+   "Each tree casts one vote; adding trees does not overfit, because the error converges to a limit",
+   "Forest error depends on the strength of each tree and on the correlation between the trees"
+  ],
+  "key_term": {
+   "term": "Out-of-bag estimate",
+   "definition": "Error measured on the roughly one third of cases left out of each tree's bootstrap sample"
+  },
+  "slide2_title": "Accurate, Robust to Noise, and Self-Checking",
+  "findings": [
+   "Error rates on 20 data sets matched AdaBoost and were sometimes lower; one random feature often sufficed",
+   "With 5% of training labels changed at random, AdaBoost got much worse while forests changed little",
+   "Shuffling one variable in the out-of-bag cases and measuring the rise in error shows its importance"
+  ],
+  "course_link": "Builds on Lesson 9-3's Titanic tree and Gini splits. In Practice 9 one deep tree overfits; a forest combines many deep trees and checks its error without a test set.",
+  "limitation": "The error bound is loose, and the importance measure is only a start: correlated variables share credit, as the paper itself shows.",
+  "note_question": "Why does adding more trees to a forest not cause overfitting, while making a single tree deeper does?",
+  "notes_slide1": "Leo Breiman, a statistician at Berkeley, defines a random forest as a collection of tree classifiers, each grown with an independent random vector, which vote for the most popular class. Bagging, which grows each tree on a bootstrap sample of the training data, is one example. His version adds a second source of randomness: at each node only a small random group of input variables is tried for the split, and the trees are grown to full size without pruning. Section 2 gives the theory. By the law of large numbers, the forest's error converges to a limit as more trees are added, so adding trees does not cause overfitting. An upper bound shows that the error depends on two things: the strength of the individual trees and the correlation between them. Good randomness lowers the correlation while keeping the strength. Section 3 introduces out-of-bag estimates. About one third of the cases are left out of each bootstrap sample, so they can test the trees that did not see them.",
+  "notes_slide2": "Sections 4 and 5 test two versions: Forest-RI picks random input variables, and Forest-RC uses random linear combinations of inputs. On 20 data sets, error rates were as good as AdaBoost and sometimes better, and they changed little with the number of variables tried. Even one random variable per split worked surprisingly well, and forests were much faster to grow than AdaBoost. Section 8 shows robustness: when 5% of the training labels were changed at random, AdaBoost's error rose sharply, while forests changed little, because they do not focus on misclassified cases. On a simulated problem with 1,000 weak inputs, a forest reached 2.8% error, against a best possible 1.0%. Section 10 begins to open the black box: shuffling one variable in the out-of-bag cases and measuring the rise in error gives its importance. Correlated variables share this credit, so the results need care. Section 11 extends forests to regression, where the trees' predictions are averaged."
+ }
+]

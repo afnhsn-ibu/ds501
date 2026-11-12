@@ -1,0 +1,114 @@
+[
+ {
+  "label": "Anscombe 1973",
+  "kind": "Required",
+  "course_key": "Anscombe 1973, Graphs in Statistical Analysis (The American Statistician 27(1))",
+  "short_title": "Look at the Data, Not Only at the Statistics",
+  "citation": "Anscombe, F. J. (1973). Graphs in statistical analysis. The American Statistician, 27(1), 17–21. https://doi.org/10.1080/00031305.1973.10478966",
+  "problem": "In 1973 most textbooks and statistics programs produced numbers but rarely graphs. Many analysts trusted the printed regression output without looking at the data. Anscombe asks what such numbers can hide.",
+  "key_ideas": [
+   "He rejects three habits: numbers are exact, graphs are rough, and looking at data is cheating",
+   "Four invented datasets of 11 (x, y) pairs give the same regression output but different plots",
+   "After every fit, plot the residuals against the fitted values, on the same scale"
+  ],
+  "key_term": {
+   "term": "Residual plot",
+   "definition": "A scatter plot of residuals against fitted values, used to check whether the model fits the data"
+  },
+  "slide2_title": "Same Regression Output, Four Different Stories",
+  "findings": [
+   "All four sets have mean x 9.0, mean y 7.5, the line y = 3 + 0.5x and R squared 0.667",
+   "Only set 1 suits a straight line: set 2 is a curve, set 3 has an outlier, set 4 rests on one point",
+   "In a study of 50 states and DC, Alaska alone shaped the fit; he reports it with and without Alaska"
+  ],
+  "course_link": "Lesson 6-3's rule is: show the distribution, not just its average. In Practice 6 you draw four views of tip_pct and flag outliers with z-scores and the IQR rule.",
+  "limitation": "Written for regression in the line-printer era. It covers only scatter plots, and its four datasets are invented to make the point.",
+  "note_question": "Which habit of analysts does Anscombe criticise, and what does his quartet show that the regression output cannot?",
+  "notes_slide1": "Francis Anscombe was a statistician at Yale. In this five-page paper he argues that graphs are essential to good statistical analysis. He starts with three beliefs that he says many of us were taught: numerical calculations are exact but graphs are rough; for each kind of data there is one correct set of calculations; and doing intricate calculations is virtuous, while looking at the data is cheating. His answer is that a computer should produce both calculations and graphs, and that both should be studied. Graphs help us see the broad features of the data and also what lies behind them. Most calculations rest on assumptions, and graphs show whether those assumptions are reasonable. To make the point he invents four small datasets, each with eleven pairs of x and y. A typical regression program gives exactly the same output for all four: the same means, the same fitted line, the same sums of squares and the same R squared.",
+  "notes_slide2": "The plots tell four different stories. Dataset 1 looks like a noisy straight line, so the linear model fits. Dataset 2 lies on a smooth curve, so a straight line is the wrong model. In dataset 3 all points but one lie on a different straight line, and one outlier pulls the fit away. In dataset 4 every point has the same x value except one, so the slope depends entirely on that single observation. Anscombe then gives practical advice. After a regression, plot the residuals against the fitted values, on the same scale. Look for a few very large residuals, a curved pattern, spread that grows with the fitted value, and skewed residuals. He also gives a real example: in a study of school spending in the 50 states and the District of Columbia, Alaska had a large effect on the regression. He suggests reporting the result with all the data and saying what changes without Alaska. The paper ends by asking statistical software to make graphs easy."
+ },
+ {
+  "label": "Efron 1979",
+  "kind": "Required",
+  "course_key": "Efron 1979, Bootstrap Methods (Annals of Statistics 7(1))",
+  "short_title": "Resample the Sample to Measure Uncertainty",
+  "citation": "Efron, B. (1979). Bootstrap methods: Another look at the jackknife. The Annals of Statistics, 7(1), 1–26. https://doi.org/10.1214/aos/1176344552",
+  "problem": "To judge an estimate we need its sampling distribution, but the population is unknown and formulas exist only for simple statistics. Efron asks how to estimate this distribution from one observed sample alone.",
+  "key_ideas": [
+   "Treat the sample as a stand-in for the population: give each observed value probability 1/n",
+   "Draw new samples of size n from it with replacement, and recompute the statistic each time",
+   "The spread of the recomputed values estimates the statistic's sampling distribution"
+  ],
+  "key_term": {
+   "term": "Bootstrap sample",
+   "definition": "A sample of size n drawn with replacement from the observed data, so some values repeat"
+  },
+  "slide2_title": "The Bootstrap Works Where the Jackknife Fails",
+  "findings": [
+   "It estimates the variance of the sample median correctly in large samples; the jackknife does not",
+   "With 13 normal values, the plain bootstrap did as well as smoothed versions for the median",
+   "Simulation is easy to program: in 1979, 100 resamples took about 0.15 s and cost about 40 cents"
+  ],
+  "course_link": "Practice 6 ends with Efron's idea: 5,000 resamples of 100 diamond prices give a bootstrap SE close to the formula σ/√n. Lesson 7-1 reuses it for intervals.",
+  "limitation": "It argues through examples, with little general theory. It does not show when the bootstrap fails, for example with dependent data or extreme values.",
+  "note_question": "What does Efron's bootstrap estimate, and how close was your Practice 6 bootstrap SE to the formula σ/√n?",
+  "notes_slide1": "Bradley Efron gave this paper as the 1977 Rietz Lecture and published it in 1979. Section 1 starts from the jackknife, an older method that estimates the bias and variance of a statistic by recomputing it n times, each time leaving out one observation. Efron says he will explain the jackknife through a more basic method, which he calls the bootstrap. Section 2 states the problem. We observe a random sample from an unknown distribution F, and we want the sampling distribution of some statistic, such as a mean, a median or a correlation. The bootstrap has three steps. First, build the sample distribution, which puts probability 1/n on each observed value. Second, draw a sample of size n from it with replacement; this is a bootstrap sample. Third, use the distribution of the statistic over such samples as an estimate of its true sampling distribution. The logic is that the observed sample is our best picture of F.",
+  "notes_slide2": "Efron lists three ways to compute the bootstrap distribution: exact theory, Monte Carlo simulation, and Taylor series approximation. The second, drawing many bootstrap samples on a computer, is the one we use today. The third, he shows, is essentially the jackknife, so the jackknife is a linear approximation to the bootstrap. Section 3 gives the first strong result. For the sample median, the bootstrap gives the correct variance in large samples, while the jackknife does not. In a small simulation with 13 normal values, the plain bootstrap did about as well as more complex smoothed versions. Later sections apply the bootstrap to error rates in discriminant analysis, where it beat cross-validation, and to regression. Efron also notes the cost: one run of 100 resamples took about 0.15 seconds and cost about 40 cents on Stanford's computer. You repeated his idea in Practice 6 with 5,000 resamples of 100 diamond prices."
+ },
+ {
+  "label": "Matejka & Fitzmaurice 2017",
+  "kind": "Optional",
+  "course_key": "Matejka & Fitzmaurice 2017, Same Stats, Different Graphs (CHI)",
+  "short_title": "Any Shape Can Hide Behind the Same Statistics",
+  "citation": "Matejka, J., & Fitzmaurice, G. (2017). Same stats, different graphs: Generating datasets with varied appearance and identical statistics through simulated annealing. In Proceedings of CHI '17 (pp. 1290–1294). ACM. https://doi.org/10.1145/3025453.3025912",
+  "problem": "Anscombe's quartet is famous, but he never said how he made it, and earlier methods gave shapeless data. The authors want a general way to make datasets with the same statistics and a chosen look.",
+  "key_ideas": [
+   "Move points by tiny random steps; keep a step only if the statistics stay equal to two decimals",
+   "Simulated annealing pulls points towards a target shape but sometimes accepts worse moves",
+   "Any statistics can be held fixed: means and SDs, or medians, IQRs and Spearman's correlation"
+  ],
+  "key_term": {
+   "term": "Simulated annealing",
+   "definition": "A search that sometimes accepts worse solutions, less often as a temperature falls, to avoid local optima"
+  },
+  "slide2_title": "A Dinosaur, a Star and Identical Box Plots",
+  "findings": [
+   "From Cairo's Datasaurus they make many shapes, all with the same means, SDs and r of -0.06",
+   "Six very different one-dimensional distributions all produce exactly the same Tukey box plot",
+   "Simpson's paradox: overall r is +0.81, yet each subgroup has a negative correlation"
+  ],
+  "course_link": "Lesson 6-3 warns that a box plot hides the number of peaks; their six distributions with one box plot prove it. Practice 6's four views of tip_pct are the remedy.",
+  "limitation": "A short note. Shapes far from the seed data, such as a star, come out poorly, and the algorithm settings were found by trial, not optimised.",
+  "note_question": "Which of Practice 6's four views (histogram, box plot, ECDF, QQ plot) would best separate their six box-plot datasets?",
+  "notes_slide1": "Justin Matejka and George Fitzmaurice work at Autodesk Research. They start from Anscombe's quartet. Its strength is not only that four datasets share the same statistics, but that each one has a clear and different structure. Yet nobody knows how Anscombe built his data, and an earlier method from 2007 produced datasets that looked random. Their key insight is simple. Creating a dataset with given statistics from nothing is hard, but changing an existing dataset a little while keeping its statistics is easy. So the algorithm repeats one small step many times. It moves one or more points a small random distance. If the means, standard deviations and correlation still agree with the original to two decimal places, the change is kept. To steer the points towards a target shape, such as a set of lines, it uses simulated annealing. Moves that bring points closer to the shape are accepted, and early on some worse moves are accepted too, so the search does not get stuck.",
+  "notes_slide2": "The paper shows several results. Starting from a dot cloud, the method produces shapes such as lines, circles, a star and a cross, all with the same summary statistics. Starting from Alberto Cairo's Datasaurus, a dinosaur drawn in points, it creates a whole family of shapes that share the dinosaur's statistics. One run took 200,000 iterations, about ten minutes on a laptop. The method also works for other statistics: a second set of shapes shares the medians, the interquartile ranges and Spearman's rank correlation. Another example builds Simpson's paradox, where the whole dataset has a correlation of +0.81 but every subgroup slopes downwards. The most useful example for this week shows six one-dimensional distributions, some with several peaks, that give exactly the same box plot. The authors admit limits: target shapes far from the starting data come out badly, and points can clump on the shape. Their code and data are freely available."
+ },
+ {
+  "label": "Bickel et al. 1975",
+  "kind": "Optional",
+  "course_key": "Bickel, Hammel & O'Connell 1975, Sex Bias in Graduate Admissions (Science 187)",
+  "short_title": "Pooled Rates Can Reverse Within Groups",
+  "citation": "Bickel, P. J., Hammel, E. A., & O'Connell, J. W. (1975). Sex bias in graduate admissions: Data from Berkeley. Science, 187(4175), 398–404. https://doi.org/10.1126/science.187.4175.398",
+  "problem": "In autumn 1973 Berkeley admitted about 44% of 8,442 male and 35% of 4,321 female graduate applicants. The authors ask whether this gap shows that admission decisions were biased against women.",
+  "key_ideas": [
+   "Each department makes its own admission decisions, so compare men and women within departments",
+   "Pooling departments with different admission rates and applicant mixes can create a false gap",
+   "Women applied more often to departments that were hard to enter and admitted few applicants"
+  ],
+  "key_term": {
+   "term": "Simpson's paradox",
+   "definition": "A relation seen in pooled data disappears or reverses when the data are split into groups"
+  },
+  "slide2_title": "The Bias Lay Before Admission, Not in It",
+  "findings": [
+   "Department by department, few showed a clear bias, and about as many favoured women as men",
+   "In the largest department, 82% of 108 women and 62% of 825 men were admitted",
+   "They place the cause earlier: women were steered towards crowded, less well funded fields"
+  ],
+  "course_link": "Lesson 6-2's conditional probability applies directly: P(admitted | woman) differs from P(admitted | woman, department). Practice 1's penguins show the same reversal.",
+  "limitation": "It assumes men and women in a department were equally qualified, which the data cannot check, and it cannot explain why women chose those fields.",
+  "note_question": "Which conditional probabilities would you compare to judge bias in admissions, and why do the overall rates mislead?",
+  "notes_slide1": "Peter Bickel, a statistician, Eugene Hammel, a demographer and associate dean, and J. W. O'Connell studied graduate admissions at the University of California, Berkeley, for autumn 1973. Overall, about 44% of the 8,442 men and about 35% of the 4,321 women who applied were admitted. If men and women were equally qualified, this gap looks like clear evidence of bias against women. The authors show why this conclusion is too quick. Admission decisions at Berkeley were made separately by each department, so the right comparison is between men and women who applied to the same department. They illustrate the problem with an invented university with two departments, in which neither department favours men, yet the pooled figures do. The reason is that the two departments have very different admission rates, and men and women apply to them in different proportions. Pooling mixes the effect of sex with the effect of the department chosen.",
+  "notes_slide2": "When the authors look at each department separately, the picture changes. Few departments show a clear difference, and about as many of those favour women as favour men. In the largest department, for example, about 82% of 108 women applicants were admitted, against 62% of 825 men. Women had applied mostly to departments that admitted a small share of all applicants, often with more applicants per place, while many men applied to departments that were easier to enter. The authors therefore argue that the gap does not come from the admission committees. It comes earlier, from the paths that led women towards more crowded and less well funded fields of study. This is a famous real example of Simpson's paradox. In lesson 6-2 terms, the overall rate P(admitted | woman) is not the same as P(admitted | woman, department). The analysis assumes that applicants of both sexes were equally qualified within each department, which the data cannot show."
+ }
+]
